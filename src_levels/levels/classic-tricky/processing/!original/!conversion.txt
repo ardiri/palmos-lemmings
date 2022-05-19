@@ -1,0 +1,1 @@
+alchemy -g ---f -8 -f palette-xxxx.gif -d 0 -o level-xx-original.bmp

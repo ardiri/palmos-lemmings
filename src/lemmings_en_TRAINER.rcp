@@ -1,0 +1,197 @@
+/*
+ * @(#)lemmigns_en_TRAINER.rcp
+ *
+ * Copyright 2001-2002, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "TRAINER" 0x00
+
+// the number of levels?
+HEX  "levl" ID 0 "7" 0x00
+
+//
+// music
+//
+
+HEX  "musc" ID 0 "1" 0x00
+DATA "musc" ID 1 "music/lemm_cancan.mus"
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "Just dig!" 0x00
+PALETTE ID 1 "levels/trainer/level-01.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/trainer/level-01-data.cmp"
+DATA "mask" ID 1 "levels/trainer/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/trainer/level-01-data.bin"
+DATA "mask" ID 1 "levels/trainer/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "278" 0x00
+HEX  "yofs" ID 1 "25"  0x00 // (278,25) = start position
+HEX  "_exx" ID 1 "425" 0x00
+HEX  "_exy" ID 1 "105" 0x00 // (425,105) = exit position
+HEX  "easy" ID 1 "@@@:50 0  0  0  0  0  0  0  10 10 1  300:@@@" 0x00
+HEX  "_f1x" ID 1 "403" 0x00
+HEX  "_f1y" ID 1 "76"  0x00
+HEX  "_f2x" ID 1 "431" 0x00
+HEX  "_f2y" ID 1 "76"  0x00 // exit "fires" (403, 76) and (431, 76)
+
+/*
+ * level 2:
+ */
+HEX  "titl" ID 2 "Only Floaters can survive this" 0x00
+PALETTE ID 2 "levels/trainer/level-02.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/trainer/level-02-data.cmp"
+DATA "mask" ID 2 "levels/trainer/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/trainer/level-02-data.bin"
+DATA "mask" ID 2 "levels/trainer/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "179" 0x00
+HEX  "yofs" ID 2 "16"  0x00 // (179,16) = start position
+HEX  "_exx" ID 2 "420" 0x00
+HEX  "_exy" ID 2 "116" 0x00 // (420,116) = exit position
+HEX  "easy" ID 2 "@@@:50 0  10 0  0  0  0  0  0  10 1  300:@@@" 0x00
+HEX  "_f1x" ID 2 "398" 0x00
+HEX  "_f1y" ID 2 "87"  0x00
+HEX  "_f2x" ID 2 "426" 0x00
+HEX  "_f2y" ID 2 "87"  0x00 // exit "fires" (398, 87) and (426, 87)
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "Tailor made for Blockers" 0x00
+PALETTE ID 3 "levels/trainer/level-03.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/trainer/level-03-data.cmp"
+DATA "mask" ID 3 "levels/trainer/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/trainer/level-03-data.bin"
+DATA "mask" ID 3 "levels/trainer/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "266" 0x00
+HEX  "yofs" ID 3 "17"  0x00 // (266,17) = start position
+HEX  "_exx" ID 3 "252" 0x00
+HEX  "_exy" ID 3 "118" 0x00 // (252,118) = exit position
+HEX  "easy" ID 3 "@@@:50 0  0  0  10 0  0  0  0  50 5  300:@@@" 0x00
+HEX  "_f1x" ID 3 "230" 0x00
+HEX  "_f1y" ID 3 "89"  0x00
+HEX  "_f2x" ID 3 "258" 0x00
+HEX  "_f2y" ID 3 "89"  0x00 // exit "fires" (230, 89) and (258, 89)
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "Now use Miners and Climbers" 0x00
+PALETTE ID 4 "levels/trainer/level-04.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/trainer/level-04-data.cmp"
+DATA "mask" ID 4 "levels/trainer/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/trainer/level-04-data.bin"
+DATA "mask" ID 4 "levels/trainer/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "256" 0x00
+HEX  "yofs" ID 4 "26"  0x00 // (256,26) = start position
+HEX  "_exx" ID 4 "419" 0x00
+HEX  "_exy" ID 4 "45"  0x00 // (419,45) = exit position
+HEX  "easy" ID 4 "@@@:50 10 0  0  0  0  0  1  0  10 10 300:@@@" 0x00
+HEX  "_f1x" ID 4 "397" 0x00
+HEX  "_f1y" ID 4 "17"  0x00
+HEX  "_f2x" ID 4 "425" 0x00
+HEX  "_f2y" ID 4 "17"  0x00 // exit "fires" (397, 17) and (425, 17)
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "You need Bashers this time" 0x00
+PALETTE ID 5 "levels/trainer/level-05.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/trainer/level-05-data.cmp"
+DATA "mask" ID 5 "levels/trainer/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/trainer/level-05-data.bin"
+DATA "mask" ID 5 "levels/trainer/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "87"  0x00
+HEX  "yofs" ID 5 "32"  0x00 // (87,32) = start position
+HEX  "_exx" ID 5 "506" 0x00
+HEX  "_exy" ID 5 "120" 0x00 // (506,120) = exit position
+HEX  "easy" ID 5 "@@@:50 0  0  0  0  0  50 0  0  50 5  300:@@@" 0x00
+HEX  "_f1x" ID 5 "484" 0x00
+HEX  "_f1y" ID 5 "91"  0x00
+HEX  "_f2x" ID 5 "512" 0x00
+HEX  "_f2y" ID 5 "91"  0x00 // exit "fires" (484, 91) and (512, 91)
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "A task for Blockers and Bombers" 0x00
+PALETTE ID 6 "levels/trainer/level-06.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/trainer/level-06-data.cmp"
+DATA "mask" ID 6 "levels/trainer/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/trainer/level-06-data.bin"
+DATA "mask" ID 6 "levels/trainer/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "204" 0x00
+HEX  "yofs" ID 6 "24"  0x00 // (204,24) = start position
+HEX  "_exx" ID 6 "443" 0x00
+HEX  "_exy" ID 6 "91"  0x00 // (443,91) = exit position
+HEX  "easy" ID 6 "@@@:50 0  0  5  5  0  0  0  0  50 10 300:@@@" 0x00
+HEX  "_f1x" ID 6 "431" 0x00
+HEX  "_f1y" ID 6 "52"  0x00
+HEX  "_f2x" ID 6 "438" 0x00
+HEX  "_f2y" ID 6 "52"  0x00 // exit "fires" (431, 52) and (438, 52)
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "Builders will help you here" 0x00
+PALETTE ID 7 "levels/trainer/level-07.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/trainer/level-07-data.cmp"
+DATA "mask" ID 7 "levels/trainer/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/trainer/level-07-data.bin"
+DATA "mask" ID 7 "levels/trainer/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "56"  0x00
+HEX  "yofs" ID 7 "76"  0x00 //  (56,76) = start position
+HEX  "_exx" ID 7 "603" 0x00
+HEX  "_exy" ID 7 "75"  0x00 // (603,75) = exit position
+HEX  "easy" ID 7 "@@@:50 0  0  0  0  20 0  0  0  50 25 300:@@@" 0x00
+HEX  "_f1x" ID 7 "581" 0x00
+HEX  "_f1y" ID 7 "47"  0x00
+HEX  "_f2x" ID 7 "609" 0x00
+HEX  "_f2y" ID 7 "47"  0x00 // exit "fires" (581, 47) and (609, 47)

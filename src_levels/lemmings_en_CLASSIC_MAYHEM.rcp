@@ -1,0 +1,726 @@
+/*
+ * @(#)lemmings_en_CLASSIC_MAYHEM.rcp
+ *
+ * Copyright 2001-2003, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "../src/resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "CLASSIC:MAYHEM" 0x00
+
+// pack bitmap
+BITMAPFAMILYSPECIAL "logo" 0
+  "" "levels/\classic-mayhem/logo2bpp.bmp" "levels/\classic-mayhem/logo4bpc.bmp" COMPRESS
+
+// the number of levels?
+HEX  "levl" ID 0 "30" 0x00
+
+// user info [for encryption]
+HEX  "_key" ID 0 "DATA=xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 256 bytes of data
+HEX  "xxxx" ID 0 "|HaCkMe|" 0x00
+
+//
+// music
+//
+
+HEX  "musc" ID 0 "3" 0x00
+DATA "musc" ID 1 "music/lemm_mountain.mus"
+DATA "musc" ID 2 "music/lemm_tenbottles.mus"
+DATA "musc" ID 3 "music/lemm_cancan.mus"
+#ifdef PALM_MIDI_ANY
+HEX  "midi" ID 0 "3" 0x00
+DATA "midi" ID 1 "music/midi/high_quality/lemm_mountain.mid"
+DATA "midi" ID 2 "music/midi/high_quality/lemm_tenbottles.mid"
+DATA "midi" ID 3 "music/midi/high_quality/lemm_cancan.mid"
+#endif
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "Steel Works" 0x00
+PALETTE ID 1 "levels/\classic-mayhem/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/\classic-mayhem/level-01-data.cmp"
+DATA "mask" ID 1 "levels/\classic-mayhem/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/\classic-mayhem/level-01-data.bin"
+DATA "mask" ID 1 "levels/\classic-mayhem/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "64" 0x00
+HEX  "yofs" ID 1 "20" 0x00 // (000,000) = start position
+HEX  "_exx" ID 1 "599" 0x00
+HEX  "_exy" ID 1 "22" 0x00 // (000,000) = exit position
+HEX  "easy" ID 1 "@@@:50 02 08 02 01 30 00 00 02 40 39 570:@@@" 0x00
+HEX  "_f1x" ID 1 "577" 0x00
+HEX  "_f1y" ID 1 "-6" 0x00
+HEX  "_f2x" ID 1 "604" 0x00
+HEX  "_f2y" ID 1 "-6" 0x00 // exit "fires" (000,000) and (000,000)
+
+/*
+ * level 2
+ */
+HEX  "titl" ID 2 "The Boiler Room" 0x00
+PALETTE ID 2 "levels/\classic-mayhem/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/classic-mayhem/level-02-data.cmp"
+DATA "mask" ID 2 "levels/classic-mayhem/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/classic-mayhem/level-02-data.bin"
+DATA "mask" ID 2 "levels/classic-mayhem/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "472" 0x00
+HEX  "yofs" ID 2 "62" 0x00 // (472,62) = start position
+HEX  "_exx" ID 2 "181" 0x00
+HEX  "_exy" ID 2 "52" 0x00 // (180, 42) = exit position
+HEX  "easy" ID 2 "@@@:70 00 00 02 02 40 03 00 02 40 39 300:@@@" 0x00
+HEX  "_f1x" ID 2 "164" 0x00
+HEX  "_f1y" ID 2 "12" 0x00
+HEX  "_f2x" ID 2 "183" 0x00
+HEX  "_f2y" ID 2 "12" 0x00 // exit "fires" (000,000) and (000,000)
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "It's hero time!" 0x00
+PALETTE ID 3 "levels/\classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/\classic-mayhem/level-03-data.cmp"
+DATA "mask" ID 3 "levels/\classic-mayhem/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/\classic-mayhem/level-03-data.bin"
+DATA "mask" ID 3 "levels/\classic-mayhem/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "267" 0x00
+HEX  "yofs" ID 3 "15"  0x00 // (267, 15) = start position
+HEX  "_exx" ID 3 "457" 0x00
+HEX  "_exy" ID 3 "123" 0x00 // (457,123) = exit position
+HEX  "easy" ID 3 "@@@:25 01 01 05 00 01 00 00 01 30 28 120:@@@" 0x00
+HEX  "_f1x" ID 3 "435" 0x00
+HEX  "_f1y" ID 3 "95"  0x00
+HEX  "_f2x" ID 3 "463" 0x00
+HEX  "_f2y" ID 3 "95"  0x00 // exit "fires" (435, 95) and (463, 95)
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "The Crossroads" 0x00
+PALETTE ID 4 "levels/\classic-mayhem/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/\classic-mayhem/level-04-data.cmp"
+DATA "mask" ID 4 "levels/\classic-mayhem/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/\classic-mayhem/level-04-data.bin"
+DATA "mask" ID 4 "levels/\classic-mayhem/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "137" 0x00
+HEX  "yofs" ID 4 "85"  0x00 // (137,85) = start position
+HEX  "_exx" ID 4 "487" 0x00
+HEX  "_exy" ID 4 "125" 0x00 // (487,125) = exit position
+HEX  "easy" ID 4 "@@@:5  00 00 00 00 00 15 00 00 50 50 120:@@@" 0x00
+HEX  "_f1x" ID 4 "465" 0x00
+HEX  "_f1y" ID 4 "96"  0x00
+HEX  "_f2x" ID 4 "493" 0x00
+HEX  "_f2y" ID 4 "96"  0x00 // exit "fires" (465, 96) and (493, 96)
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "Down, along, up. In that order" 0x00
+PALETTE ID 5 "levels/\classic-mayhem/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/\classic-mayhem/level-05-data.cmp"
+DATA "mask" ID 5 "levels/\classic-mayhem/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/\classic-mayhem/level-05-data.bin"
+DATA "mask" ID 5 "levels/\classic-mayhem/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "444" 0x00
+HEX  "yofs" ID 5 "18"  0x00 // (444,18) = start position
+HEX  "_exx" ID 5 "139" 0x00
+HEX  "_exy" ID 5 "61"  0x00 // (139,61) = exit position
+HEX  "easy" ID 5 "@@@:80 01 01 03 01 07 01 02 02 50 50 150:@@@" 0x00
+HEX  "_f1x" ID 5 "127" 0x00
+HEX  "_f1y" ID 5 "22"  0x00
+HEX  "_f2x" ID 5 "134" 0x00
+HEX  "_f2y" ID 5 "22"  0x00 // exit "fires" (127, 22) and (134, 22)
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "One way or another" 0x00
+PALETTE ID 6 "levels/\classic-mayhem/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/\classic-mayhem/level-06-data.cmp"
+DATA "mask" ID 6 "levels/\classic-mayhem/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/\classic-mayhem/level-06-data.bin"
+DATA "mask" ID 6 "levels/\classic-mayhem/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "293" 0x00
+HEX  "yofs" ID 6 "20"  0x00 // (293, 20) = start position
+HEX  "_exx" ID 6 "381" 0x00
+HEX  "_exy" ID 6 "111" 0x00 // (381,111) = exit position
+HEX  "easy" ID 6 "@@@:50 00 00 00 00 08 01 00 00 50 50 225:@@@" 0x00
+HEX  "_f1x" ID 6 "359" 0x00
+HEX  "_f1y" ID 6 "82"  0x00
+HEX  "_f2x" ID 6 "386" 0x00
+HEX  "_f2y" ID 6 "82"  0x00 // exit "fires" (359, 82) and (386, 82)
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "Poles Apart" 0x00
+PALETTE ID 7 "levels/\classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/\classic-mayhem/level-07-data.cmp"
+DATA "mask" ID 7 "levels/\classic-mayhem/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/\classic-mayhem/level-07-data.bin"
+DATA "mask" ID 7 "levels/\classic-mayhem/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "136" 0x00
+HEX  "yofs" ID 7 "22"  0x00 // (136,22) = start position
+HEX  "_exx" ID 7 "475" 0x00
+HEX  "_exy" ID 7 "77"  0x00 // (475,77) = exit position
+HEX  "easy" ID 7 "@@@:90 01 00 00 00 03 10 00 01 50 50 120:@@@" 0x00
+HEX  "_f1x" ID 7 "453" 0x00
+HEX  "_f1y" ID 7 "49"  0x00
+HEX  "_f2x" ID 7 "481" 0x00
+HEX  "_f2y" ID 7 "49"  0x00 // exit "fires" (453, 49) and (481, 49)
+
+/*
+ * level 8
+ */
+HEX  "titl" ID 8 "Last one out is a rotten egg!" 0x00
+PALETTE ID 8 "levels/\classic-mayhem/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 8 "levels/\classic-mayhem/level-08-data.cmp"
+DATA "mask" ID 8 "levels/\classic-mayhem/level-08-mask.cmp"
+#else
+DATA "_gfx" ID 8 "levels/\classic-mayhem/level-08-data.bin"
+DATA "mask" ID 8 "levels/\classic-mayhem/level-08-mask.bin"
+#endif
+HEX  "xofs" ID 8 "85" 0x00
+HEX  "yofs" ID 8 "50" 0x00 // (85, 50) = start position
+HEX  "_exx" ID 8 "436" 0x00
+HEX  "_exy" ID 8 "117" 0x00 // (436,117) = exit position
+HEX  "easy" ID 8 "@@@:45 05 00 05 05 10 01 05 05 50 49 255:@@@" 0x00
+HEX  "_f1x" ID 8 "420" 0x00
+HEX  "_f1y" ID 8 "74" 0x00
+HEX  "_f2x" ID 8 "438" 0x00
+HEX  "_f2y" ID 8 "74" 0x00 // exit "fires" (426,86) and (446,86)
+
+/*
+ * level 9
+ */
+HEX  "titl" ID 9 "Curse of the Pharaohs" 0x00
+PALETTE ID 9 "levels/\classic-mayhem/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 9 "levels/\classic-mayhem/level-09-data.cmp"
+DATA "mask" ID 9 "levels/\classic-mayhem/level-09-mask.cmp"
+#else
+DATA "_gfx" ID 9 "levels/\classic-mayhem/level-09-data.bin"
+DATA "mask" ID 9 "levels/\classic-mayhem/level-09-mask.bin"
+#endif
+HEX  "xofs" ID 9 "595" 0x00
+HEX  "yofs" ID 9 "50"  0x00 // (595,50) = start position
+HEX  "_exx" ID 9 "37"  0x00
+HEX  "_exy" ID 9 "35"  0x00 // ( 37,35) = exit position
+HEX  "easy" ID 9 "@@@:20 00 00 10 01 30 20 00 01 50 50 480:@@@" 0x00
+HEX  "_f1x" ID 9 "15"  0x00
+HEX  "_f1y" ID 9 "9"   0x00
+HEX  "_f2x" ID 9 "42"  0x00
+HEX  "_f2y" ID 9 "9"   0x00 // exit "fires" ( 15,  9) and ( 42,  9)
+
+/*
+ * level 10
+ */
+HEX  "titl" ID 10 "Pillars of Hercules" 0x00
+PALETTE ID 10 "levels/\classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 10 "levels/\classic-mayhem/level-10-data.cmp"
+DATA "mask" ID 10 "levels/\classic-mayhem/level-10-mask.cmp"
+#else
+DATA "_gfx" ID 10 "levels/\classic-mayhem/level-10-data.bin"
+DATA "mask" ID 10 "levels/\classic-mayhem/level-10-mask.bin"
+#endif
+HEX  "xofs" ID 10 "270" 0x00
+HEX  "yofs" ID 10 "11" 0x00 // (000,000) = start position
+HEX  "_exx" ID 10 "560" 0x00
+HEX  "_exy" ID 10 "38" 0x00 // (000,000) = exit position
+HEX  "easy" ID 10 "@@@:99 02 03 04 02 20 04 00 02 50 40 300:@@@" 0x00
+HEX  "_f1x" ID 10 "539" 0x00
+HEX  "_f1y" ID 10 "10" 0x00
+HEX  "_f2x" ID 10 "568" 0x00
+HEX  "_f2y" ID 10 "10" 0x00 // exit "fires" 
+
+/*
+ * level 11
+ */
+HEX  "titl" ID 11 "We all fall down" 0x00
+PALETTE ID 11 "levels/\classic-mayhem/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 11 "levels/\classic-mayhem/level-11-data.cmp"
+DATA "mask" ID 11 "levels/\classic-mayhem/level-11-mask.cmp"
+#else
+DATA "_gfx" ID 11 "levels/\classic-mayhem/level-11-data.bin"
+DATA "mask" ID 11 "levels/\classic-mayhem/level-11-mask.bin"
+#endif
+HEX  "xofs" ID 11 "142" 0x00
+HEX  "yofs" ID 11 "20"  0x00 // (142,20) = start position
+HEX  "_exx" ID 11 "596" 0x00
+HEX  "_exy" ID 11 "105" 0x00 // (596,105) = exit position
+HEX  "easy" ID 11 "@@@:40 00 00 00 00 00 00 00 50 50 50 180:@@@" 0x00
+HEX  "_f1x" ID 11 "584" 0x00
+HEX  "_f1y" ID 11 "66"  0x00
+HEX  "_f2x" ID 11 "591" 0x00
+HEX  "_f2y" ID 11 "66"  0x00 // exit "fires" (584, 66) and (591, 66)
+
+/*
+ * level 12
+ */
+HEX  "titl" ID 12 "The Far Side" 0x00
+PALETTE ID 12 "levels/classic-mayhem/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 12 "levels/classic-mayhem/level-12-data.cmp"
+DATA "mask" ID 12 "levels/classic-mayhem/level-12-mask.cmp"
+#else
+DATA "_gfx" ID 12 "levels/classic-mayhem/level-12-data.bin"
+DATA "mask" ID 12 "levels/classic-mayhem/level-12-mask.bin"
+#endif
+HEX  "xofs" ID 12 "295" 0x00
+HEX  "yofs" ID 12 "13" 0x00 // (295, 13) = start position
+HEX  "_exx" ID 12 "361" 0x00
+HEX  "_exy" ID 12 "40" 0x00 // (361, 40) = exit position
+HEX  "easy" ID 12 "@@@:50 02 01 00 00 20 07 03 03 50 50 450:@@@" 0x00
+HEX  "_f1x" ID 12 "340" 0x00
+HEX  "_f1y" ID 12 "11" 0x00
+HEX  "_f2x" ID 12 "367" 0x00
+HEX  "_f2y" ID 12 "11" 0x00 // exit "fires" 
+
+/*
+ * level 13
+ */
+HEX  "titl" ID 13 "The Great Lemming Caper" 0x00
+PALETTE ID 13 "levels/classic-mayhem/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 13 "levels/classic-mayhem/level-13-data.cmp"
+DATA "mask" ID 13 "levels/classic-mayhem/level-13-mask.cmp"
+#else
+DATA "_gfx" ID 13 "levels/classic-mayhem/level-13-data.bin"
+DATA "mask" ID 13 "levels/classic-mayhem/level-13-mask.bin"
+#endif
+HEX  "xofs" ID 13 "237" 0x00
+HEX  "yofs" ID 13 "16"  0x00 // (237,16) = start position
+HEX  "_exx" ID 13 "511" 0x00
+HEX  "_exy" ID 13 "88"  0x00 // (511,88) = exit position
+HEX  "easy" ID 13 "@@@:70 01 01 02 02 02 10 10 10 02 02 150:@@@" 0x00
+HEX  "_f1x" ID 13 "489" 0x00
+HEX  "_f1y" ID 13 "59"  0x00
+HEX  "_f2x" ID 13 "516" 0x00
+HEX  "_f2y" ID 13 "59"  0x00 // exit "fires" (489, 59) and (516, 59)
+
+/*
+ * level 14
+ */
+HEX  "titl" ID 14 "Pea Soup" 0x00
+PALETTE ID 14 "levels/classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 14 "levels/classic-mayhem/level-14-data.cmp"
+DATA "mask" ID 14 "levels/classic-mayhem/level-14-mask.cmp"
+#else
+DATA "_gfx" ID 14 "levels/classic-mayhem/level-14-data.bin"
+DATA "mask" ID 14 "levels/classic-mayhem/level-14-mask.bin"
+#endif
+HEX  "xofs" ID 14 "56" 0x00
+HEX  "yofs" ID 14 "79" 0x00 // (56,79) = start position
+HEX  "_exx" ID 14 "571" 0x00
+HEX  "_exy" ID 14 "113" 0x00 // (570,117) = exit position
+HEX  "easy" ID 14 "@@@:30 00 00 10 10 30 00 00 21 50 46 360:@@@" 0x00
+HEX  "_f1x" ID 14 "549" 0x00
+HEX  "_f1y" ID 14 "84" 0x00
+HEX  "_f2x" ID 14 "578" 0x00
+HEX  "_f2y" ID 14 "84" 0x00 // exit "fires" 
+
+/*
+ * level 15
+ */
+HEX  "titl" ID 15 "The Fast Food Kitchen" 0x00
+PALETTE ID 15 "levels/\classic-mayhem/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 15 "levels/\classic-mayhem/level-15-data.cmp"
+DATA "mask" ID 15 "levels/\classic-mayhem/level-15-mask.cmp"
+#else
+DATA "_gfx" ID 15 "levels/\classic-mayhem/level-15-data.bin"
+DATA "mask" ID 15 "levels/\classic-mayhem/level-15-mask.bin"
+#endif
+HEX  "xofs" ID 15 "151" 0x00
+HEX  "yofs" ID 15 "61"  0x00 // (151, 61) = start position
+HEX  "_exx" ID 15 "454" 0x00
+HEX  "_exy" ID 15 "60"  0x00 // (454, 60) = exit position
+HEX  "easy" ID 15 "@@@:40 01 00 00 00 07 02 01 02 50 47 225:@@@" 0x00
+HEX  "_f1x" ID 15 "441" 0x00
+HEX  "_f1y" ID 15 "22"  0x00
+HEX  "_f2x" ID 15 "448" 0x00
+HEX  "_f2y" ID 15 "22"  0x00 // exit "fires" (441, 22) and (448, 22)
+
+/*
+ * level 16
+ */
+HEX  "titl" ID 16 "Just a Minute (Part I)" 0x00
+PALETTE ID 16 "levels/\classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 16 "levels/\classic-mayhem/level-16-data.cmp"
+DATA "mask" ID 16 "levels/\classic-mayhem/level-16-mask.cmp"
+#else
+DATA "_gfx" ID 16 "levels/\classic-mayhem/level-16-data.bin"
+DATA "mask" ID 16 "levels/\classic-mayhem/level-16-mask.bin"
+#endif
+HEX  "xofs" ID 16 "229" 0x00
+HEX  "yofs" ID 16 "26" 0x00 // (000,000) = start position
+HEX  "_exx" ID 16 "472" 0x00
+HEX  "_exy" ID 16 "78" 0x00 // (000,000) = exit position
+HEX  "easy" ID 16 "@@@:90 00 01 05 00 00 05 00 05 50 50 180:@@@" 0x00
+HEX  "_f1x" ID 16 "451" 0x00
+HEX  "_f1y" ID 16 "50" 0x00
+HEX  "_f2x" ID 16 "479" 0x00
+HEX  "_f2y" ID 16 "50" 0x00 // exit "fires" 
+
+/*
+ * level 17
+ */
+HEX  "titl" ID 17 "Stepping Stones" 0x00
+PALETTE ID 17 "levels/\classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 17 "levels/\classic-mayhem/level-17-data.cmp"
+DATA "mask" ID 17 "levels/\classic-mayhem/level-17-mask.cmp"
+#else
+DATA "_gfx" ID 17 "levels/\classic-mayhem/level-17-data.bin"
+DATA "mask" ID 17 "levels/\classic-mayhem/level-17-mask.bin"
+#endif
+HEX  "xofs" ID 17 "121" 0x00
+HEX  "yofs" ID 17 "30" 0x00 // (000,000) = start position
+HEX  "_exx" ID 17 "509" 0x00
+HEX  "_exy" ID 17 "58" 0x00 // (000,000) = exit position
+HEX  "easy" ID 17 "@@@:50 05 02 00 02 12 05 05 05 50 45 240:@@@" 0x00
+HEX  "_f1x" ID 17 "488" 0x00
+HEX  "_f1y" ID 17 "30" 0x00
+HEX  "_f2x" ID 17 "516" 0x00
+HEX  "_f2y" ID 17 "30" 0x00 // exit "fires" (000,000) and (000,000)
+
+/*
+ * level 18
+ */
+HEX  "titl" ID 18 "And then there was one ..." 0x00
+PALETTE ID 18 "levels/\classic-mayhem/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 18 "levels/\classic-mayhem/level-18-data.cmp"
+DATA "mask" ID 18 "levels/\classic-mayhem/level-18-mask.cmp"
+#else
+DATA "_gfx" ID 18 "levels/\classic-mayhem/level-18-data.bin"
+DATA "mask" ID 18 "levels/\classic-mayhem/level-18-mask.bin"
+#endif
+HEX  "xofs" ID 18 "253" 0x00
+HEX  "yofs" ID 18 "89" 0x00 // (000,000) = start position
+HEX  "_exx" ID 18 "304" 0x00
+HEX  "_exy" ID 18 "59" 0x00 // (000,000) = exit position
+HEX  "easy" ID 18 "@@@:45 02 00 20 10 30 01 02 01 50 50 330:@@@" 0x00
+HEX  "_f1x" ID 18 "283" 0x00
+HEX  "_f1y" ID 18 "30" 0x00
+HEX  "_f2x" ID 18 "310" 0x00
+HEX  "_f2y" ID 18 "30" 0x00 // exit "fires" 
+
+/*
+ * level 19
+ */
+HEX  "titl" ID 19 "Time to get up!" 0x00
+PALETTE ID 19 "levels/\classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 19 "levels/\classic-mayhem/level-19-data.cmp"
+DATA "mask" ID 19 "levels/\classic-mayhem/level-19-mask.cmp"
+#else
+DATA "_gfx" ID 19 "levels/\classic-mayhem/level-19-data.bin"
+DATA "mask" ID 19 "levels/\classic-mayhem/level-19-mask.bin"
+#endif
+HEX  "xofs" ID 19 "317" 0x00
+HEX  "yofs" ID 19 "90"  0x00 // (317, 90) = start position
+HEX  "_exx" ID 19 "496" 0x00
+HEX  "_exy" ID 19 "33"  0x00 // (496, 33) = exit position
+HEX  "easy" ID 19 "@@@:80 02 00 05 00 20 00 00 00 50 45 360:@@@" 0x00
+HEX  "_f1x" ID 19 "474" 0x00
+HEX  "_f1y" ID 19 "5"   0x00
+HEX  "_f2x" ID 19 "502" 0x00
+HEX  "_f2y" ID 19 "5"   0x00 // exit "fires" (474,  5) and (502,  5)
+
+/*
+ * level 20
+ */
+HEX  "titl" ID 20 "No added colours or Lemmings" 0x00
+PALETTE ID 20 "levels/classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 20 "levels/classic-mayhem/level-20-data.cmp"
+DATA "mask" ID 20 "levels/classic-mayhem/level-20-mask.cmp"
+#else
+DATA "_gfx" ID 20 "levels/classic-mayhem/level-20-data.bin"
+DATA "mask" ID 20 "levels/classic-mayhem/level-20-mask.bin"
+#endif
+HEX  "xofs" ID 20 "256" 0x00
+HEX  "yofs" ID 20 "26"  0x00 // (256,26) = start position
+HEX  "_exx" ID 20 "419" 0x00
+HEX  "_exy" ID 20 "45"  0x00 // (419,45) = exit position
+HEX  "easy" ID 20 "@@@:15 02 00 00 01 01 01 02 00 50 50 300:@@@" 0x00
+HEX  "_f1x" ID 20 "397" 0x00
+HEX  "_f1y" ID 20 "17"  0x00
+HEX  "_f2x" ID 20 "425" 0x00
+HEX  "_f2y" ID 20 "17"  0x00 // exit "fires" (397, 17) and (425, 17)
+
+/*
+ * level 21
+ */
+HEX  "titl" ID 21 "With a twist of Lemming please" 0x00
+PALETTE ID 21 "levels/classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 21 "levels/classic-mayhem/level-21-data.cmp"
+DATA "mask" ID 21 "levels/classic-mayhem/level-21-mask.cmp"
+#else
+DATA "_gfx" ID 21 "levels/classic-mayhem/level-21-data.bin"
+DATA "mask" ID 21 "levels/classic-mayhem/level-21-mask.bin"
+#endif
+HEX  "xofs" ID 21 "171" 0x00
+HEX  "yofs" ID 21 "14"  0x00 // (171, 14) = start position
+HEX  "_exx" ID 21 "430" 0x00
+HEX  "_exy" ID 21 "77"  0x00 // (430, 77) = exit position
+HEX  "easy" ID 21 "@@@:95 01 05 00 00 04 01 00 01 50 49 150:@@@" 0x00
+HEX  "_f1x" ID 21 "408" 0x00
+HEX  "_f1y" ID 21 "49"  0x00
+HEX  "_f2x" ID 21 "436" 0x00
+HEX  "_f2y" ID 21 "49"  0x00 // exit "fires" (408, 49) and (436, 49)
+
+/*
+ * level 22
+ */
+HEX  "titl" ID 22 "A Beast II of a level" 0x00
+PALETTE ID 22 "levels/\classic-mayhem/palette-darkdeath.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 22 "levels/\classic-mayhem/level-22-data.cmp"
+DATA "mask" ID 22 "levels/\classic-mayhem/level-22-mask.cmp"
+#else
+DATA "_gfx" ID 22 "levels/\classic-mayhem/level-22-data.bin"
+DATA "mask" ID 22 "levels/\classic-mayhem/level-22-mask.bin"
+#endif
+HEX  "xofs" ID 22 "32" 0x00
+HEX  "yofs" ID 22 "61" 0x00 // (000,000) = start position
+HEX  "_exx" ID 22 "617" 0x00
+HEX  "_exy" ID 22 "107" 0x00 // (000,000) = exit position
+HEX  "easy" ID 22 "@@@:50 10 10 10 10 18 10 10 10 50 50 360:@@@" 0x00
+HEX  "_f1x" ID 22 "596" 0x00
+HEX  "_f1y" ID 22 "77" 0x00
+HEX  "_f2x" ID 22 "623" 0x00
+HEX  "_f2y" ID 22 "77" 0x00 // exit "fires" (000,000) and (000,000)
+
+/*
+ * level 23
+ */
+HEX  "titl" ID 23 "Going up ..." 0x00
+PALETTE ID 23 "levels/classic-mayhem/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 23 "levels/classic-mayhem/level-23-data.cmp"
+DATA "mask" ID 23 "levels/classic-mayhem/level-23-mask.cmp"
+#else
+DATA "_gfx" ID 23 "levels/classic-mayhem/level-23-data.bin"
+DATA "mask" ID 23 "levels/classic-mayhem/level-23-mask.bin"
+#endif
+HEX  "xofs" ID 23 "551" 0x00
+HEX  "yofs" ID 23 "95" 0x00 // (000,000) = start position
+HEX  "_exx" ID 23 "51" 0x00
+HEX  "_exy" ID 23 "124" 0x00 // (000,000) = exit position
+HEX  "easy" ID 23 "@@@:30 00 01 20 20 40 30 00 00 50 49 599:@@@" 0x00
+HEX  "_f1x" ID 23 "29" 0x00
+HEX  "_f1y" ID 23 "94" 0x00
+HEX  "_f2x" ID 23 "58" 0x00
+HEX  "_f2y" ID 23 "94" 0x00 // exit "fires" (29,94) and (58,94)
+
+/*
+ * level 24
+ */
+HEX  "titl" ID 24 "All or Nothing" 0x00
+PALETTE ID 24 "levels/classic-mayhem/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 24 "levels/classic-mayhem/level-24-data.cmp"
+DATA "mask" ID 24 "levels/classic-mayhem/level-24-mask.cmp"
+#else
+DATA "_gfx" ID 24 "levels/classic-mayhem/level-24-data.bin"
+DATA "mask" ID 24 "levels/classic-mayhem/level-24-mask.bin"
+#endif
+HEX  "xofs" ID 24 "293" 0x00
+HEX  "yofs" ID 24 "14"  0x00 // (293,14) = start position
+HEX  "_exx" ID 24 "244" 0x00
+HEX  "_exy" ID 24 "124" 0x00 // (244,124) = exit position
+HEX  "easy" ID 24 "@@@:05 00 00 00 00 00 03 00 00 50 50 060:@@@" 0x00
+HEX  "_f1x" ID 24 "232" 0x00
+HEX  "_f1y" ID 24 "85"  0x00
+HEX  "_f2x" ID 24 "239" 0x00
+HEX  "_f2y" ID 24 "85"  0x00 // exit "fires" (232, 85) and (239, 85)
+
+/*
+ * level 25
+ */
+HEX  "titl" ID 25 "Have a nice day!" 0x00
+PALETTE ID 25 "levels/classic-mayhem/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 25 "levels/classic-mayhem/level-25-data.cmp"
+DATA "mask" ID 25 "levels/classic-mayhem/level-25-mask.cmp"
+#else
+DATA "_gfx" ID 25 "levels/classic-mayhem/level-25-data.bin"
+DATA "mask" ID 25 "levels/classic-mayhem/level-25-mask.bin"
+#endif
+HEX  "xofs" ID 25 "172" 0x00
+HEX  "yofs" ID 25 "22"  0x00 // (172, 22) = start position
+HEX  "_exx" ID 25 "446" 0x00
+HEX  "_exy" ID 25 "54"  0x00 // (446, 54) = exit position
+HEX  "easy" ID 25 "@@@:95 02 02 00 02 25 01 01 01 50 45 300:@@@" 0x00
+HEX  "_f1x" ID 25 "424" 0x00
+HEX  "_f1y" ID 25 "25"  0x00
+HEX  "_f2x" ID 25 "451" 0x00
+HEX  "_f2y" ID 25 "25"  0x00 // exit "fires" (424, 25) and (451, 25)
+
+/*
+ * level 26
+ */
+HEX  "titl" ID 26 "The Steel Mines of Kessel" 0x00
+PALETTE ID 26 "levels/\classic-mayhem/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 26 "levels/\classic-mayhem/level-26-data.cmp"
+DATA "mask" ID 26 "levels/\classic-mayhem/level-26-mask.cmp"
+#else
+DATA "_gfx" ID 26 "levels/\classic-mayhem/level-26-data.bin"
+DATA "mask" ID 26 "levels/\classic-mayhem/level-26-mask.bin"
+#endif
+HEX  "xofs" ID 26 "71"  0x00
+HEX  "yofs" ID 26 "15"  0x00 // ( 71,15) = start position
+HEX  "_exx" ID 26 "614" 0x00
+HEX  "_exy" ID 26 "104" 0x00 // (614,104) = exit position
+HEX  "easy" ID 26 "@@@:50 00 00 10 10 10 00 00 00 50 45 480:@@@" 0x00
+HEX  "_f1x" ID 26 "593" 0x00
+HEX  "_f1y" ID 26 "75"  0x00
+HEX  "_f2x" ID 26 "620" 0x00
+HEX  "_f2y" ID 26 "75"  0x00 // exit "fires" (593, 75) and (620, 75)
+
+/*
+ * level 27
+ */
+HEX  "titl" ID 27 "Just a Minute (part II)" 0x00
+PALETTE ID 27 "levels/classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 27 "levels/classic-mayhem/level-27-data.cmp"
+DATA "mask" ID 27 "levels/classic-mayhem/level-27-mask.cmp"
+#else
+DATA "_gfx" ID 27 "levels/classic-mayhem/level-27-data.bin"
+DATA "mask" ID 27 "levels/classic-mayhem/level-27-mask.bin"
+#endif
+HEX  "xofs" ID 27 "229" 0x00
+HEX  "yofs" ID 27 "26" 0x00 // (000,000) = start position
+HEX  "_exx" ID 27 "472" 0x00
+HEX  "_exy" ID 27 "78" 0x00 // (000,000) = exit position
+HEX  "easy" ID 27 "@@@:90 00 00 02 00 02 02 01 01 50 50 180:@@@" 0x00
+HEX  "_f1x" ID 27 "450" 0x00
+HEX  "_f1y" ID 27 "50" 0x00
+HEX  "_f2x" ID 27 "480" 0x00
+HEX  "_f2y" ID 27 "50" 0x00 // exit "fires" (000,000) and (000,000) 
+
+/*
+ * level 28
+ */
+HEX  "titl" ID 28 "Mind the step" 0x00
+PALETTE ID 28 "levels/classic-mayhem/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 28 "levels/classic-mayhem/level-28-data.cmp"
+DATA "mask" ID 28 "levels/classic-mayhem/level-28-mask.cmp"
+#else
+DATA "_gfx" ID 28 "levels/classic-mayhem/level-28-data.bin"
+DATA "mask" ID 28 "levels/classic-mayhem/level-28-mask.bin"
+#endif
+HEX  "xofs" ID 28 "521" 0x00
+HEX  "yofs" ID 28 "19" 0x00 // (000,000) = start position
+HEX  "_exx" ID 28 "60" 0x00
+HEX  "_exy" ID 28 "92" 0x00 // (000,000) = exit position
+HEX  "easy" ID 28 "@@@:95 00 00 00 00 25 10 00 15 01 01 420:@@@" 0x00
+HEX  "_f1x" ID 28 "39" 0x00
+HEX  "_f1y" ID 28 "64" 0x00
+HEX  "_f2x" ID 28 "69" 0x00
+HEX  "_f2y" ID 28 "64" 0x00 // exit "fires" 
+
+/*
+ * level 29
+ */
+HEX  "titl" ID 29 "Save Me" 0x00
+PALETTE ID 29 "levels/classic-mayhem/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 29 "levels/classic-mayhem/level-29-data.cmp"
+DATA "mask" ID 29 "levels/classic-mayhem/level-29-mask.cmp"
+#else
+DATA "_gfx" ID 29 "levels/classic-mayhem/level-29-data.bin"
+DATA "mask" ID 29 "levels/classic-mayhem/level-29-mask.bin"
+#endif
+HEX  "xofs" ID 29 "537" 0x00
+HEX  "yofs" ID 29 "89" 0x00 // (000,000) = start position
+HEX  "_exx" ID 29 "54" 0x00
+HEX  "_exy" ID 29 "109" 0x00 // (000,000) = exit position
+HEX  "easy" ID 29 "@@@:60 00 00 00 06 15 02 00 02 50 42 360:@@@" 0x00
+HEX  "_f1x" ID 29 "62" 0x00
+HEX  "_f1y" ID 29 "80" 0x00
+HEX  "_f2x" ID 29 "34" 0x00
+HEX  "_f2y" ID 29 "80" 0x00 // exit "fires" (000,000) and (000,000)
+
+/*
+ * level 30
+ */
+HEX  "titl" ID 30 "Rendezvous at the Mountain" 0x00
+PALETTE ID 30 "levels/classic-mayhem/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 30 "levels/classic-mayhem/level-30-data.cmp"
+DATA "mask" ID 30 "levels/classic-mayhem/level-30-mask.cmp"
+#else
+DATA "_gfx" ID 30 "levels/classic-mayhem/level-30-data.bin"
+DATA "mask" ID 30 "levels/classic-mayhem/level-30-mask.bin"
+#endif
+HEX  "xofs" ID 30 "35" 0x00
+HEX  "yofs" ID 30 "61" 0x00 // (000,000) = start position
+HEX  "_exx" ID 30 "619" 0x00
+HEX  "_exy" ID 30 "18" 0x00 // (000,000) = exit position
+HEX  "easy" ID 30 "@@@:80 10 01 10 10 30 10 10 04 50 49 540:@@@" 0x00
+HEX  "_f1x" ID 30 "598" 0x00
+HEX  "_f1y" ID 30 "-6" 0x00
+HEX  "_f2x" ID 30 "625" 0x00
+HEX  "_f2y" ID 30 "-6" 0x00 // exit "fires" (000,000) and (000,000)

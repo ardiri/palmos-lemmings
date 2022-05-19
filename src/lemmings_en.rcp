@@ -1,0 +1,812 @@
+/*
+ * @(#)lemmings.rcp
+ *
+ * Copyright 2001-2002, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "resource.h"
+
+ALERT ID restartLevelAlert DEFAULTBUTTON 0 CONFIRMATION
+BEGIN
+  TITLE "Restart Level"
+  MESSAGE "Are you sure you want to restart this level?"
+  BUTTONS "Yes" "No"
+END
+
+ALERT ID skipLevelAlert DEFAULTBUTTON 0 CONFIRMATION
+BEGIN
+  TITLE "Skip Level"
+  MESSAGE "Are you sure you want to skip this level and move onto the next?"
+  BUTTONS "Yes" "No"
+END
+
+ALERT ID quitGameAlert DEFAULTBUTTON 0 CONFIRMATION
+BEGIN
+  TITLE "Quit Game"
+  MESSAGE "Are you sure you wish to quit the active game?"
+  BUTTONS "Yes" "No"
+END
+
+ALERT ID toolNotAvailable DEFAULTBUTTON 0 INFORMATION
+BEGIN
+  TITLE "Lemming Tool"
+  MESSAGE "You must have at least one of the selected tool to use it on a lemming."
+  BUTTONS "Ok"
+END
+
+ALERT ID saveGameAlert DEFAULTBUTTON 0 ERROR
+BEGIN
+  TITLE "Game Save Error"
+  MESSAGE "Lemmings was unable to save the current game due to an internal error.\n\nPlease consult the README.TXT file for an explanation."
+  BUTTONS "Ok"
+END
+
+ALERT ID loadGameAlert DEFAULTBUTTON 0 ERROR
+BEGIN
+  TITLE "Game Restore Error"
+  MESSAGE "Lemmings was unable to load the current game due to an internal error.\n\nPlease consult the README.TXT file for an explanation.\n\nSaved state removed."
+  BUTTONS "Ok"
+END
+
+ALERT ID invalidPackAlert DEFAULTBUTTON 0 ERROR
+BEGIN
+  TITLE "Invalid Level Pack"
+  MESSAGE "The level pack you are attempting to load is not registered for this particular device.\n\nif this is a legitimate copy, please email and ask for assistance at\n\n lemmings@ardiri.com"
+  BUTTONS "Ok"
+END
+
+ALERT ID removePackAlert DEFAULTBUTTON 0 CONFIRMATION
+BEGIN
+  TITLE "Remove Level Pack"
+  MESSAGE "Are you sure you want to remove this pack:\n^1?"
+  BUTTONS "Yes" "No"
+END
+
+ALERT ID exitGameAlert DEFAULTBUTTON 0 ERROR
+BEGIN
+  TITLE "Select Level Pack"
+  MESSAGE "You must not be playing the game in order to change level packs."
+  BUTTONS "Ok"
+END
+
+#ifdef MDM_DISTRIBUTION
+FORM ID infoForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "About Lemmings"
+
+  BUTTON "Ok" ID infoFormOkButton AT (CENTER 138 40 AUTO)
+
+  FORMBITMAP AT (6 16) BITMAP bitmapIcon
+  LABEL "http://www.ardiri.com/" AUTOID AT (50 PrevTop)
+  LABEL "lemmings@ardiri.com" AUTOID AT (44 PrevBottom) FONT 1
+
+  FORMBITMAP AT (88 PrevBottom+4) BITMAP bitmapPalm
+  LABEL "\251 2001-2003" AUTOID AT (6 PrevTop+2)
+  LABEL "ardiri.com / MDM" AUTOID AT (6 PrevBottom)
+  LABEL "All rights reserved" AUTOID AT (6 PrevBottom)
+
+  LABEL "Lemmings" AUTOID AT (6 PrevBottom+3) FONT 1
+  LABEL "version 1.0 [2003-02-01]" AUTOID AT (6 PrevTop+12) FONT 1
+
+  LABEL "Developed under exclusive license" AUTOID AT (6 PrevBottom+3)
+  LABEL "from Sony Entertainment for PDA." AUTOID AT (6 PrevBottom)
+END
+
+FORM ID deviForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "Incompatability"
+
+  BUTTON "Ok" AUTOID AT (CENTER 138 40 AUTO)
+
+  LABEL "This device is incompatible," AUTOID AT (CENTER 20)
+  LABEL "read README.TXT for assistance." AUTOID AT (CENTER PrevTop+11)
+
+  LABEL "http://www.ardiri.com/" AUTOID AT (CENTER PrevTop+15) FONT 1
+
+  LABEL "\251 2001-2003" AUTOID AT (8 PrevTop+20)
+  FORMBITMAP AT (88 PrevTop) BITMAP bitmapPalm
+  LABEL "ardiri.com / MDM" AUTOID AT (8 PrevTop+12)
+  LABEL "All rights reserved" AUTOID AT (8 PrevTop+12)
+
+  LABEL "Lemmings" AUTOID AT (8 PrevTop+16) FONT 1
+  LABEL "version 1.0 [2003-02-01]" AUTOID AT (8 PrevTop+12) FONT 1
+END
+#else
+FORM ID infoForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "About Lemmings"
+
+  BUTTON "Ok" ID infoFormOkButton AT (CENTER 138 40 AUTO)
+
+  FORMBITMAP AT (6 16) BITMAP bitmapIcon
+  LABEL "http://www.ardiri.com/" AUTOID AT (50 PrevTop)
+  LABEL "lemmings@ardiri.com" AUTOID AT (44 PrevBottom) FONT 1
+
+  FORMBITMAP AT (88 PrevBottom+4) BITMAP bitmapPalm
+  LABEL "\251 2001-2003" AUTOID AT (6 PrevTop+2)
+  LABEL "ardiri.com" AUTOID AT (6 PrevBottom)
+  LABEL "All rights reserved" AUTOID AT (6 PrevBottom)
+
+  LABEL "Lemmings" AUTOID AT (6 PrevBottom+3) FONT 1
+  LABEL "Demonstration Version [4.3]" AUTOID AT (6 PrevTop+12) FONT 1
+
+  LABEL "Psygnosis has no involvement with" AUTOID AT (6 PrevBottom+3)
+  LABEL "the development of this software." AUTOID AT (6 PrevBottom)
+END
+
+FORM ID deviForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "Incompatability"
+
+  BUTTON "Ok" AUTOID AT (CENTER 138 40 AUTO)
+
+  LABEL "This device is incompatible," AUTOID AT (CENTER 20)
+  LABEL "read README.TXT for assistance." AUTOID AT (CENTER PrevTop+11)
+
+  LABEL "http://www.ardiri.com/" AUTOID AT (CENTER PrevTop+15) FONT 1
+
+  LABEL "\251 2001-2003" AUTOID AT (8 PrevTop+20)
+  FORMBITMAP AT (88 PrevTop) BITMAP bitmapPalm
+  LABEL "ardiri.com" AUTOID AT (8 PrevTop+12)
+  LABEL "All rights reserved" AUTOID AT (8 PrevTop+12)
+
+  LABEL "Lemmings" AUTOID AT (8 PrevTop+16) FONT 1
+  LABEL "Demonstration Version [4.3]" AUTOID AT (8 PrevTop+12) FONT 1
+END
+
+FORM ID demoForm AT (2 2 156 156) MODAL NOSAVEBEHIND
+BEGIN
+  TITLE "Demonstration Edition"
+
+  BUTTON "Accept" ID demoFormAcceptButton AT (30 138 40 AUTO)
+  BUTTON "Decline" ID demoFormDeclineButton AT (90 PrevTop 40 AUTO)
+
+  FORMBITMAP AT (6 16) BITMAP bitmapPaw
+  LABEL "http://www.ardiri.com/" AUTOID AT (50 PrevTop+4)
+  LABEL "lemmings@ardiri.com" AUTOID AT (44 PrevBottom) FONT 1
+
+  LABEL "ardiri.com is currently pursuing" AUTOID AT (CENTER PrevTop+17)
+  LABEL "the license of the Lemmings game" AUTOID AT (CENTER PrevBottom-1)
+  LABEL "for the Palm Computing Platform." AUTOID AT (CENTER PrevBottom-1)
+
+  LABEL "additional levels are purchasable at" AUTOID AT (CENTER PrevTop+15)
+  LABEL "www.ardiri.com" AUTOID AT (CENTER PrevBottom-1) FONT 1
+  LABEL "this demo is for evaluation only." AUTOID AT (CENTER PrevBottom-1)
+
+  CHECKBOX "Display this message on startup"
+    ID demoFormDemoCheckbox AT (CENTER PrevTop+14 AUTO AUTO) CHECKED
+END
+#endif
+
+FORM ID dvlpForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "About The Developers"
+
+  BUTTON "Ok" ID dvlpFormOkButton AT (CENTER 138 40 AUTO)
+
+  FORMBITMAP AT (14 16) BITMAP bitmapPaw
+  LABEL "Aaron Ardiri" AUTOID AT (67 PrevTop+5) FONT 1
+  LABEL "aaron@ardiri.com" AUTOID AT (64 PrevBottom-1)
+
+  LABEL "- Game Concept and Logistics" AUTOID AT (8 PrevTop+16)
+  LABEL "- User Interface" AUTOID AT (8 PrevBottom-1)
+  LABEL "- Application Framework" AUTOID AT (8 PrevBottom-1)
+
+  FORMBITMAP AT (116 PrevTop+10) BITMAP bitmapPaw
+  LABEL "Charles Kerchner" AUTOID AT (18 PrevTop+7) FONT 1
+  LABEL "chip@ardiri.com" AUTOID AT (28 PrevBottom-1)
+
+  LABEL "- Optimizations and Tweaking" AUTOID AT (8 PrevTop+14)
+  LABEL "- Compression/Decompression" AUTOID AT (8 PrevBottom-1)
+END
+
+FORM ID cfigForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "Configuration"
+
+  BUTTON "Ok" ID cfigFormOkButton AT (30 138 40 AUTO)
+  BUTTON "Cancel" ID cfigFormCancelButton AT (90 PrevTop 40 AUTO)
+
+  FORMBITMAP AT (0 25) BITMAP bitmapKeyConfig
+
+  POPUPTRIGGER "" ID cfigFormHardKey1Trigger AT (4 PrevTop-12 44 AUTO) LEFTANCHOR
+  LIST "------" "Left" "Right" "Up" "Down" "Select" "Tool" ID cfigFormHardKey1List AT (PrevLeft+16 PrevTop 28 16) VISIBLEITEMS 7 NONUSABLE
+  POPUPLIST ID cfigFormHardKey1Trigger cfigFormHardKey1List
+
+  POPUPTRIGGER "" ID cfigFormHardKey4Trigger AT (112 PrevTop 44 AUTO) LEFTANCHOR
+  LIST "------" "Left" "Right" "Up" "Down" "Select" "Tool" ID cfigFormHardKey4List AT (PrevLeft+16 PrevTop 28 16) VISIBLEITEMS 7 NONUSABLE
+  POPUPLIST ID cfigFormHardKey4Trigger cfigFormHardKey4List
+
+  POPUPTRIGGER "" ID cfigFormPageUpTrigger AT (56 PrevTop+8 44 AUTO) LEFTANCHOR
+  LIST "------" "Left" "Right" "Up" "Down" "Select" "Tool" ID cfigFormPageUpList AT (PrevLeft+16 PrevTop 28 16) VISIBLEITEMS 7 NONUSABLE
+  POPUPLIST ID cfigFormPageUpTrigger cfigFormPageUpList
+
+  POPUPTRIGGER "" ID cfigFormHardKey2Trigger AT (24 PrevTop+36 44 AUTO) LEFTANCHOR
+  LIST "------" "Left" "Right" "Up" "Down" "Select" "Tool" ID cfigFormHardKey2List AT (PrevLeft+16 PrevTop 28 16) VISIBLEITEMS 7 NONUSABLE
+  POPUPLIST ID cfigFormHardKey2Trigger cfigFormHardKey2List
+
+  POPUPTRIGGER "" ID cfigFormHardKey3Trigger AT (92 PrevTop 44 AUTO) LEFTANCHOR
+  LIST "------" "Left" "Right" "Up" "Down" "Select" "Tool" ID cfigFormHardKey3List AT (PrevLeft+16 PrevTop 28 16) VISIBLEITEMS 7 NONUSABLE
+  POPUPLIST ID cfigFormHardKey3Trigger cfigFormHardKey3List
+
+  POPUPTRIGGER "" ID cfigFormPageDownTrigger AT (56 PrevTop+8 44 AUTO) LEFTANCHOR
+  LIST "------" "Left" "Right" "Up" "Down" "Select" "Tool" ID cfigFormPageDownList AT (PrevLeft+16 PrevTop 28 16) VISIBLEITEMS 7 NONUSABLE
+  POPUPLIST ID cfigFormPageDownTrigger cfigFormPageDownList
+
+  CHECKBOX "Enable WideScreen Display" cfigFormScaleCheckbox AT (CENTER PrevTop+12 AUTO AUTO)
+  CHECKBOX "Enable Scroll-by-Graffiti" cfigFormScrollCheckbox AT (CENTER PrevTop+11 AUTO AUTO)
+
+  LABEL "Music:" AUTOID AT (8 PrevTop+12) FONT 1
+  CHECKBOX "Enable Tunes" ID cfigFormMusicCheckbox AT (57 PrevTop AUTO AUTO)
+
+  LABEL "Sound:" AUTOID AT (8 PrevTop+12) FONT 1
+  PUSHBUTTON "" ID cfigFormSound0Button AT (60 PrevTop+2 9 8) GROUP 1
+  PUSHBUTTON "" ID cfigFormSound1Button AT (PrevLeft+10 PrevTop 9 8) GROUP 1
+  PUSHBUTTON "" ID cfigFormSound2Button AT (PrevLeft+10 PrevTop 9 8) GROUP 1
+  PUSHBUTTON "" ID cfigFormSound3Button AT (PrevLeft+10 PrevTop 9 8) GROUP 1
+  PUSHBUTTON "" ID cfigFormSound4Button AT (PrevLeft+10 PrevTop 9 8) GROUP 1
+  PUSHBUTTON "" ID cfigFormSound5Button AT (PrevLeft+10 PrevTop 9 8) GROUP 1
+  PUSHBUTTON "" ID cfigFormSound6Button AT (PrevLeft+10 PrevTop 9 8) GROUP 1
+  PUSHBUTTON "" ID cfigFormSound7Button AT (PrevLeft+10 PrevTop 9 8) GROUP 1
+  CHECKBOX "Mute Sound" ID cfigFormMuteCheckbox AT (57 PrevTop+10 AUTO AUTO)
+END
+
+FORM ID grayForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "Grayscale Configuration"
+
+  BUTTON "Ok" ID grayFormOkButton AT (CENTER 138 40 AUTO)
+
+  LABEL "Under various lighting conditions" AUTOID AT (CENTER 16)
+  LABEL "grayscale information may be hard" AUTOID AT (CENTER PrevTop+11)
+  LABEL "to read on non-color devices" AUTOID AT (CENTER PrevTop+11)
+
+  LABEL "You can adjust the LCD brightness" AUTOID AT (CENTER PrevTop+16)
+  LABEL "of the grayscale tones below." AUTOID AT (CENTER PrevTop+11)
+
+  FORMBITMAP AT (4 PrevTop+16) BITMAP bitmapGrayscaleTest
+
+  PUSHBUTTON "" ID grayWhite1Button AT (68 PrevTop+1 11 8) DISABLED GROUP 1
+  PUSHBUTTON "" ID grayWhite2Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 1
+  PUSHBUTTON "" ID grayWhite3Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 1
+  PUSHBUTTON "" ID grayWhite4Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 1
+  PUSHBUTTON "" ID grayWhite5Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 1
+  PUSHBUTTON "" ID grayWhite6Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 1
+  PUSHBUTTON "" ID grayWhite7Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 1
+
+  PUSHBUTTON "" ID grayLightGray1Button AT (68 PrevTop+12 11 8) GROUP 2
+  PUSHBUTTON "" ID grayLightGray2Button AT (PrevLeft+12 PrevTop 11 8) GROUP 2
+  PUSHBUTTON "" ID grayLightGray3Button AT (PrevLeft+12 PrevTop 11 8) GROUP 2
+  PUSHBUTTON "" ID grayLightGray4Button AT (PrevLeft+12 PrevTop 11 8) GROUP 2
+  PUSHBUTTON "" ID grayLightGray5Button AT (PrevLeft+12 PrevTop 11 8) GROUP 2
+  PUSHBUTTON "" ID grayLightGray6Button AT (PrevLeft+12 PrevTop 11 8) GROUP 2
+  PUSHBUTTON "" ID grayLightGray7Button AT (PrevLeft+12 PrevTop 11 8) GROUP 2
+
+  PUSHBUTTON "" ID grayDarkGray1Button AT (68 PrevTop+12 11 8) GROUP 3
+  PUSHBUTTON "" ID grayDarkGray2Button AT (PrevLeft+12 PrevTop 11 8) GROUP 3
+  PUSHBUTTON "" ID grayDarkGray3Button AT (PrevLeft+12 PrevTop 11 8) GROUP 3
+  PUSHBUTTON "" ID grayDarkGray4Button AT (PrevLeft+12 PrevTop 11 8) GROUP 3
+  PUSHBUTTON "" ID grayDarkGray5Button AT (PrevLeft+12 PrevTop 11 8) GROUP 3
+  PUSHBUTTON "" ID grayDarkGray6Button AT (PrevLeft+12 PrevTop 11 8) GROUP 3
+  PUSHBUTTON "" ID grayDarkGray7Button AT (PrevLeft+12 PrevTop 11 8) GROUP 3
+
+  PUSHBUTTON "" ID grayBlack1Button AT (68 PrevTop+12 11 8) DISABLED GROUP 4
+  PUSHBUTTON "" ID grayBlack2Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 4
+  PUSHBUTTON "" ID grayBlack3Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 4
+  PUSHBUTTON "" ID grayBlack4Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 4
+  PUSHBUTTON "" ID grayBlack5Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 4
+  PUSHBUTTON "" ID grayBlack6Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 4
+  PUSHBUTTON "" ID grayBlack7Button AT (PrevLeft+12 PrevTop 11 8) DISABLED GROUP 4
+END
+
+#ifdef MDM_DISTRIBUTION
+FORM ID helpForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "Instructions"
+
+  BUTTON "Done" ID helpFormOkButton AT (6 138 AUTO AUTO)
+  SCROLLBAR ID helpFormScrollBar AT (147 16 7 116) VALUE 0 MIN 0 MAX 0 PAGESIZE 100
+
+  LABEL "\251 ardiri.com / MDM" AUTOID AT (56 139) FONT 1
+END
+#else
+FORM ID helpForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "Instructions"
+
+  BUTTON "Done" ID helpFormOkButton AT (6 138 AUTO AUTO)
+  SCROLLBAR ID helpFormScrollBar AT (147 16 7 116) VALUE 0 MIN 0 MAX 0 PAGESIZE 100
+
+  LABEL "\251 ardiri.com" AUTOID AT (92 139) FONT 1
+END
+#endif
+
+FORM ID xmemForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "System Memory"
+
+  BUTTON "Ok" ID xmemFormOkButton AT (CENTER 138 40 AUTO)
+
+  FORMBITMAP AT (6 20) BITMAP bitmapPaw
+  LABEL "http://www.ardiri.com/" AUTOID AT (50 PrevTop+4)
+  LABEL "support@ardiri.com" AUTOID AT (46 PrevBottom) FONT 1
+
+  LABEL "Insufficent memory available to" AUTOID AT (CENTER PrevTop+22)
+  LABEL "do the operation you requested." AUTOID AT (CENTER PrevBottom-1)
+
+  LABEL "Please disable any unnecessary" AUTOID AT (CENTER PrevTop+20)
+  LABEL "hacks and try using the standard" AUTOID AT (CENTER PrevBottom-1)
+  LABEL "application launcher of the device," AUTOID AT (CENTER PrevBottom-1)
+  LABEL "or free up some memory space." AUTOID AT (CENTER PrevBottom-1)
+END
+
+FORM ID regiForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "Registration"
+
+  BUTTON "Ok" ID regiFormOkButton AT (CENTER 138 40 AUTO)
+
+  FORMBITMAP AT (6 16) BITMAP bitmapPaw
+  LABEL "http://www.ardiri.com/" AUTOID AT (50 PrevTop+4)
+  LABEL "lemmings@ardiri.com" AUTOID AT (46 PrevBottom) FONT 1
+
+  LABEL "Level packs are available from" AUTOID AT (CENTER PrevTop+20)
+  LABEL "www.ardiri.com" AUTOID AT (CENTER PrevBottom-1) FONT 1
+
+  LABEL "- copy exactly as shown -" AUTOID AT (CENTER PrevTop+30) FONT 1
+
+  LABEL "The above numbers are used as a" AUTOID AT (CENTER PrevTop+19)
+  LABEL "level copy prevention measure." AUTOID AT (CENTER PrevBottom-1)
+END
+
+FORM ID prepForm AT (2 2 156 156) MODAL NOSAVEBEHIND
+BEGIN
+  TITLE "Lemmings: The Mission"
+
+  BUTTON "Lets Go!" ID prepFormGoButton AT (CENTER 138 50 AUTO)
+
+  GADGET
+    ID prepFormPreviewGadget AT (16 16 128 25)
+
+  LABEL "Released:" AUTOID AT (16 PrevTop+46) FONT 1
+  LABEL "Required:" AUTOID AT (PrevLeft PrevBottom-1)  FONT 1
+
+  LABEL "Time Available:" AUTOID AT (PrevLeft PrevBottom+3) FONT 1
+
+  LABEL "" AUTOID AT (CENTER PrevTop+16)
+  FORMBITMAP AT (14 PrevBottom+1) BITMAP bitmapLemmingTools
+END
+
+FORM ID verdForm AT (2 2 156 156) MODAL NOSAVEBEHIND
+BEGIN
+  TITLE "Lemmings: The Verdict"
+
+  BUTTON "" ID verdFormOkButton AT (CENTER 138 60 AUTO)
+
+  LABEL "All lemmings accounted for!" AUTOID AT (CENTER 18)
+
+  LABEL "You Needed:" AUTOID AT (16 PrevBottom+14) FONT 1
+  LABEL "You Rescued:" AUTOID AT (PrevLeft PrevBottom-1)  FONT 1
+
+  LABEL "" AUTOID AT (CENTER PrevBottom+12) FONT 1
+
+  LABEL "" AUTOID AT (CENTER PrevBottom+3)
+  LABEL "" AUTOID AT (CENTER PrevBottom-1)
+
+  LABEL "" AUTOID AT (CENTER PrevBottom+3) FONT 1
+END
+
+FORM ID packForm AT (2 2 156 156) MODAL
+BEGIN
+  TITLE "Lemmings: Level Packs"
+
+  BUTTON "Open" ID packFormOpenButton AT (8 138 40 AUTO)
+  BUTTON "Delete" ID packFormDeleteButton AT (PrevRight+10 PrevTop 40 AUTO)
+  BUTTON "Cancel" ID packFormCancelButton AT (PrevRight+10 PrevTop 40 AUTO)
+
+  LABEL "Level packs are available from" AUTOID AT (CENTER 16)
+  LABEL "www.ardiri.com" AUTOID AT (CENTER PrevBottom-1) FONT 1
+
+  LIST ""
+    ID packFormDatabaseList AT (8 PrevBottom+3 140 AUTO) VISIBLEITEMS 7
+
+  CHECKBOX "use difficult mode (if available)"
+    ID packFormHardCheckbox AT (5 PrevBottom+3 AUTO AUTO)
+END
+
+FORM ID mainForm AT (0 0 160 160) NOSAVEBEHIND
+BEGIN
+  TITLE "Lemmings"
+
+  PUSHBUTTON "PLAY" ID mainFormPlayButton AT (CENTER 116 47 12) GROUP 1
+
+  LABEL "Level:" AUTOID AT (64 1) FONT 1
+  POPUPTRIGGER "" ID mainFormLevelTrigger AT (96 PrevTop 32 AUTO) LEFTANCHOR
+  LIST "" ID mainFormLevelList
+    AT (PrevLeft+16 PrevTop 22 16) VISIBLEITEMS 1 NONUSABLE
+  POPUPLIST ID mainFormLevelTrigger mainFormLevelList
+
+  BUTTON "" ID globalFormHelpButton AT (133 PrevTop 12 12) NOFRAME
+  FORMBITMAP AT (PrevLeft PrevTop) BITMAP bitmapHelp
+  BUTTON "" ID globalFormAboutButton AT (PrevLeft+14 PrevTop 12 12) NOFRAME
+  FORMBITMAP AT (PrevLeft PrevTop) BITMAP bitmapAbout
+
+  BUTTON "" ID mainFormLevelButton AT (0 148 160 12) NOFRAME
+END
+
+#ifdef MDM_DISTRIBUTION
+MENU ID mainMenu_nogray
+BEGIN
+  PULLDOWN "Game"
+  BEGIN
+    MENUITEM "Play"          mainMenuItemPlay         "P"
+    MENUITEM "Level Packs"   mainMenuItemLevelPacks   "L"
+    MENUITEM SEPARATOR
+    MENUITEM "Configuration" menuItemConfig           "C"
+    MENUITEM "Register"      menuItemRegister         "R"
+  END
+  PULLDOWN "Help"
+  BEGIN
+    MENUITEM "Instructions"  menuItemHelp             "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Developers"    menuItemDeveloper        "A"
+    MENUITEM "About"         menuItemAbout
+  END
+END
+
+MENU ID mainMenu_gray
+BEGIN
+  PULLDOWN "Game"
+  BEGIN
+    MENUITEM "Play"          mainMenuItemPlay         "P"
+    MENUITEM "Level Packs"   mainMenuItemLevelPacks   "L"
+    MENUITEM SEPARATOR
+    MENUITEM "Grayscale"     menuItemGrayscale        "G"
+    MENUITEM SEPARATOR
+    MENUITEM "Configuration" menuItemConfig           "C"
+    MENUITEM "Register"      menuItemRegister         "R"
+  END
+  PULLDOWN "Help"
+  BEGIN
+    MENUITEM "Instructions"  menuItemHelp             "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Developers"    menuItemDeveloper        "A"
+    MENUITEM "About"         menuItemAbout
+  END
+END
+#else
+MENU ID mainMenu_nogray
+BEGIN
+  PULLDOWN "Game"
+  BEGIN
+    MENUITEM "Play"          mainMenuItemPlay         "P"
+    MENUITEM "Level Packs"   mainMenuItemLevelPacks   "L"
+    MENUITEM SEPARATOR
+    MENUITEM "Configuration" menuItemConfig           "C"
+    MENUITEM "Register"      menuItemRegister         "R"
+  END
+  PULLDOWN "Help"
+  BEGIN
+    MENUITEM "Demo Notice"   menuItemDemo             "D"
+    MENUITEM SEPARATOR
+    MENUITEM "Instructions"  menuItemHelp             "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Developers"    menuItemDeveloper        "A"
+    MENUITEM "About"         menuItemAbout
+  END
+END
+
+MENU ID mainMenu_gray
+BEGIN
+  PULLDOWN "Game"
+  BEGIN
+    MENUITEM "Play"          mainMenuItemPlay         "P"
+    MENUITEM "Level Packs"   mainMenuItemLevelPacks   "L"
+    MENUITEM SEPARATOR
+    MENUITEM "Grayscale"     menuItemGrayscale        "G"
+    MENUITEM SEPARATOR
+    MENUITEM "Configuration" menuItemConfig           "C"
+    MENUITEM "Register"      menuItemRegister         "R"
+  END
+  PULLDOWN "Help"
+  BEGIN
+    MENUITEM "Demo Notice"   menuItemDemo             "D"
+    MENUITEM SEPARATOR
+    MENUITEM "Instructions"  menuItemHelp             "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Developers"    menuItemDeveloper        "A"
+    MENUITEM "About"         menuItemAbout
+  END
+END
+#endif
+
+FORM ID gameForm AT (0 0 160 160) NOSAVEBEHIND
+BEGIN
+  TITLE "Lemmings"
+
+  BUTTON "" ID globalFormHelpButton AT (133 1 12 12) NOFRAME
+  FORMBITMAP AT (PrevLeft PrevTop) BITMAP bitmapHelp
+  BUTTON "" ID globalFormAboutButton AT (PrevLeft+14 PrevTop 12 12) NOFRAME
+  FORMBITMAP AT (PrevLeft PrevTop) BITMAP bitmapAbout
+
+  FORMBITMAP AT (0 147) BITMAP bitmapToolBar
+  BUTTON "" ID gameFormSoundButton AT (1 147 12 12) NOFRAME
+  BUTTON "" ID gameFormPauseButton AT (PrevLeft+14 147 12 12) NOFRAME
+END
+
+#ifdef MDM_DISTRIBUTION
+MENU ID gameMenu_nogray
+BEGIN
+  PULLDOWN "Game"
+  BEGIN
+    MENUITEM "Restart Level" gameMenuItemRestart   "S"
+    MENUITEM "Skip Level"    gameMenuItemSkip      "J"
+    MENUITEM SEPARATOR
+    MENUITEM "Level Packs"   gameMenuItemLevelPacks "L"
+    MENUITEM SEPARATOR
+    MENUITEM "Pause"         gameMenuItemPause     "P"
+    MENUITEM "Exit"          gameMenuItemExit      "X"
+    MENUITEM SEPARATOR
+    MENUITEM "Configuration" menuItemConfig        "C"
+    MENUITEM "Register"      menuItemRegister      "R"
+  END
+  PULLDOWN "Help"
+  BEGIN
+    MENUITEM "Instructions"  menuItemHelp          "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Developers"    menuItemDeveloper     "A"
+    MENUITEM "About"         menuItemAbout
+  END
+END
+
+MENU ID gameMenu_gray
+BEGIN
+  PULLDOWN "Game"
+  BEGIN
+    MENUITEM "Restart Level" gameMenuItemRestart   "S"
+    MENUITEM "Skip Level"    gameMenuItemSkip      "J"
+    MENUITEM SEPARATOR
+    MENUITEM "Level Packs"   gameMenuItemLevelPacks "L"
+    MENUITEM SEPARATOR
+    MENUITEM "Pause"         gameMenuItemPause     "P"
+    MENUITEM "Exit"          gameMenuItemExit      "X"
+    MENUITEM SEPARATOR
+    MENUITEM "Grayscale"     menuItemGrayscale     "G"
+    MENUITEM SEPARATOR
+    MENUITEM "Configuration" menuItemConfig        "C"
+    MENUITEM "Register"      menuItemRegister      "R"
+  END
+  PULLDOWN "Help"
+  BEGIN
+    MENUITEM "Instructions"  menuItemHelp          "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Developers"    menuItemDeveloper     "A"
+    MENUITEM "About"         menuItemAbout
+  END
+END
+#else
+MENU ID gameMenu_nogray
+BEGIN
+  PULLDOWN "Game"
+  BEGIN
+    MENUITEM "Restart Level" gameMenuItemRestart   "S"
+    MENUITEM "Skip Level"    gameMenuItemSkip      "J"
+    MENUITEM SEPARATOR
+    MENUITEM "Level Packs"   gameMenuItemLevelPacks "L"
+    MENUITEM SEPARATOR
+    MENUITEM "Pause"         gameMenuItemPause     "P"
+    MENUITEM "Exit"          gameMenuItemExit      "X"
+    MENUITEM SEPARATOR
+    MENUITEM "Configuration" menuItemConfig        "C"
+    MENUITEM "Register"      menuItemRegister      "R"
+  END
+  PULLDOWN "Help"
+  BEGIN
+    MENUITEM "Demo Notice"   menuItemDemo          "D"
+    MENUITEM SEPARATOR
+    MENUITEM "Instructions"  menuItemHelp          "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Developers"    menuItemDeveloper     "A"
+    MENUITEM "About"         menuItemAbout
+  END
+END
+
+MENU ID gameMenu_gray
+BEGIN
+  PULLDOWN "Game"
+  BEGIN
+    MENUITEM "Restart Level" gameMenuItemRestart   "S"
+    MENUITEM "Skip Level"    gameMenuItemSkip      "J"
+    MENUITEM SEPARATOR
+    MENUITEM "Level Packs"   gameMenuItemLevelPacks "L"
+    MENUITEM SEPARATOR
+    MENUITEM "Pause"         gameMenuItemPause     "P"
+    MENUITEM "Exit"          gameMenuItemExit      "X"
+    MENUITEM SEPARATOR
+    MENUITEM "Grayscale"     menuItemGrayscale     "G"
+    MENUITEM SEPARATOR
+    MENUITEM "Configuration" menuItemConfig        "C"
+    MENUITEM "Register"      menuItemRegister      "R"
+  END
+  PULLDOWN "Help"
+  BEGIN
+    MENUITEM "Demo Notice"   menuItemDemo          "D"
+    MENUITEM SEPARATOR
+    MENUITEM "Instructions"  menuItemHelp          "I"
+    MENUITEM SEPARATOR
+    MENUITEM "Developers"    menuItemDeveloper     "A"
+    MENUITEM "About"         menuItemAbout
+  END
+END
+#endif
+
+#ifdef MDM_DISTRIBUTION
+VERSION "1.0"
+#else
+VERSION "demo"
+#endif
+
+ICONFAMILYEX
+BEGIN
+  BITMAP "images/icon1bpp.bmp"    BPP 1
+  BITMAP "images/icon2bpp.bmp"    BPP 2
+  BITMAP "images/icon8bpp.bmp"    BPP 8 DENSITY 1 COMPRESS TRANSPARENCY 255 0 0
+  BITMAP "images/icon8bpp_hr.bmp" BPP 8 DENSITY 2 COMPRESS TRANSPARENCY 255 0 0
+END
+
+SMALLICONFAMILYEX
+BEGIN
+  BITMAP "images/smic1bpp.bmp"    BPP 1
+  BITMAP "images/smic2bpp.bmp"    BPP 2
+  BITMAP "images/smic8bpp.bmp"    BPP 8 DENSITY 1 COMPRESS TRANSPARENCY 255 0 0
+  BITMAP "images/smic8bpp_hr.bmp" BPP 8 DENSITY 2 COMPRESS TRANSPARENCY 255 0 0
+END
+
+BITMAPFAMILYSPECIAL ID bitmapIcon
+  "" "images/icon2bpp.bmp" "images/icon4bpc.bmp" COMPRESS
+
+BITMAPGREY ID bitmapPaw "images/_paw2bpp.bmp" COMPRESS
+
+BITMAPFAMILYSPECIAL ID bitmapPalm
+  "images/palm1bpp.bmp" "images/palm2bpp.bmp" "images/palm4bpc.bmp" COMPRESS
+
+BITMAPGREY ID bitmapGrayscaleTest "images/gray2bpp.bmp" COMPRESS
+BITMAPGREY ID bitmapKeyConfig "images/keys2bpp.bmp" COMPRESS
+
+BITMAPFAMILYSPECIAL ID bitmapLogo
+  "" "images/logo2bpp.bmp" "images/logo4bpc.bmp" COMPRESS
+
+BITMAPFAMILYSPECIAL ID bitmapLemmingTools
+  "" "images/game/lemt2bpp.bmp" "images/game/lemt4bpc.bmp"
+  BITMAPPALETTE "images/palette/gamebase.pal" COMPRESS
+
+BITMAP ID bitmapAbout "images/info1bpp.bmp" COMPRESS
+BITMAP ID bitmapHelp  "images/help1bpp.bmp" COMPRESS
+
+BITMAPFAMILYSPECIAL ID bitmapHelpLemmings
+  "" "images/lemh2bpp.bmp" "images/lemh4bpc.bmp"
+  BITMAPPALETTE "images/palette/gamebase.pal" COMPRESS
+
+BITMAPFAMILYSPECIAL ID bitmapToolBar
+  "" "images/game/tool2bpp.bmp" "images/game/tool4bpc.bmp"
+  BITMAPPALETTE "images/palette/gamebase.pal" COMPRESS
+
+#ifdef USE_CHIP_COMPRESS
+DATA "_spt" ID bitmapLemmingsColor "images/game/lemmspt4.cmp"
+#else
+BITMAPFAMILYSPECIAL ID bitmapLemmings
+  "" "images/game/lemm2bpp.bmp" "images/game/lemm4bpc.bmp"
+  BITMAPPALETTE "images/palette/gamebase.pal" COMPRESS
+BITMAP ID bitmapLemmingsMask "images/game/lemmmask.bmp" COMPRESS
+#endif
+
+BITMAPGREY ID bitmapGameMasks "images/game/gamemask.bmp" COMPRESS
+
+// palettes
+
+PALETTE ID paletteVGA16       "images/palette/vga16.pal"
+PALETTE ID paletteGameBase    "images/palette/gamebase.pal"
+
+// strings
+STRING ID stringDemo            "- DEMONSTRATION VERSION -"
+STRING ID stringDemoMainPage    "- PRESS FOR LEVEL PACKS -"
+STRING ID stringRegisteredPack  "- REGISTERED LEVEL PACK -"
+STRING ID stringCopyrightNotice "\251 2001-2003 ardiri.com"
+
+STRING ID stringVerdButton0 "Try Again"
+STRING ID stringVerdButton1 "Continue"
+STRING ID stringVerdLevel0_0 "Rock Bottom!"
+STRING ID stringVerdLevel0_1 "I hope for your sake that"
+STRING ID stringVerdLevel0_2 "you nuked that level!"
+STRING ID stringVerdLevel0_3 "Time for a new strategy?"
+STRING ID stringVerdLevel1_0 "Oochie Momma!"
+STRING ID stringVerdLevel1_1 "Better rethink your strategy"
+STRING ID stringVerdLevel1_2 "before you attempt this level."
+STRING ID stringVerdLevel1_3 "Almost there, try again!"
+STRING ID stringVerdLevel2_0 "Superb!"
+STRING ID stringVerdLevel2_1 "You rescued every lemming on"
+STRING ID stringVerdLevel2_2 "that level, well done!"
+STRING ID stringVerdLevel2_3 "Can you do it again?"
+STRING ID stringVerdLevel3_0 "Right On!"
+STRING ID stringVerdLevel3_1 "You can't get much closer than"
+STRING ID stringVerdLevel3_2 "that, you just squeezed through!"
+STRING ID stringVerdLevel3_3 "You can do better!"
+STRING ID stringVerdLevel4_0 "Alrighty Then!"
+STRING ID stringVerdLevel4_1 "You totally stormed that level!"
+STRING ID stringVerdLevel4_2 "Smashing new records hey?"
+STRING ID stringVerdLevel4_3 "Try to save them all!"
+
+DATA "mesg" ID 0 "@message"
+
+#ifdef PALM_AUDIO_STREAMING
+DATA "_arm" ID sfxResource             "sfx-callback.arm"
+
+DATA "_pcm" ID audioLetsGo             "audio/sfx/lets_go.pcm"
+DATA "_pcm" ID audioChangeTool         "audio/sfx/change_tool.pcm"
+DATA "_pcm" ID audioSelection          "audio/sfx/selection.pcm"
+DATA "_pcm" ID audioOhNo               "audio/sfx/oh_no.pcm"
+DATA "_pcm" ID audioYippee             "audio/sfx/yippee.pcm"
+DATA "_pcm" ID audioExplode            "audio/sfx/explode.pcm"
+DATA "_pcm" ID audioSplat              "audio/sfx/splat.pcm"
+DATA "_pcm" ID audioTing               "audio/sfx/ting.pcm"
+#endif
+
+#ifdef PALM_AUDIO_YAMAHAPA1
+DATA "_adp" ID audioLetsGo             "audio/sfx/lets_go.adp"
+DATA "_adp" ID audioChangeTool         "audio/sfx/change_tool.adp"
+DATA "_adp" ID audioSelection          "audio/sfx/selection.adp"
+DATA "_adp" ID audioOhNo               "audio/sfx/oh_no.adp"
+DATA "_adp" ID audioYippee             "audio/sfx/yippee.adp"
+DATA "_adp" ID audioExplode            "audio/sfx/explode.adp"
+DATA "_adp" ID audioSplat              "audio/sfx/splat.adp"
+DATA "_adp" ID audioTing               "audio/sfx/ting.adp"
+#endif
+
+#ifdef PALM_MIDI_ANY
+DATA "midi" ID midiResource            "music/midi/high_quality/lemm_cancan.mid"
+#endif
+
+#ifdef PALM_MIDI_STREAMING
+/*
+DATA "_arm" ID midiResource            "midi-callback.arm"
+ */
+DATA "_arm" ID midiResource            "midi-callback.code"
+
+// instrument samples
+DATA "_pcm" ID midiSampleInstrument     "audio/midi/simple/instrument.pcm"
+DATA "_pcm" ID midiSampleDrum           "audio/midi/simple/percussion.pcm"
+
+#ifndef MIDI_SIMPLE_SAMPLES
+// instrument samples
+// drum samples
+#endif
+#endif
+
+//
+// handera 330 stuff
+//
+
+#ifdef HANDERA_NATIVE
+HEX "sKst" ID 1000 0x00 0x00 0x00 0x00
+
+BITMAP ID 0x1000+bitmapAbout "images/info1bpp_handera.bmp" COMPRESS
+BITMAP ID 0x1000+bitmapHelp  "images/help1bpp_handera.bmp" COMPRESS
+BITMAPFAMILYSPECIAL ID 0x1000+bitmapToolBar
+  "" "images/game/tool2bpp_handera.bmp" "images/game/tool4bpc_handera.bmp"
+  BITMAPPALETTE "images/palette/gamebase.pal" COMPRESS
+#endif

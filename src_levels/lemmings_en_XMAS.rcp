@@ -1,0 +1,298 @@
+/*
+ * @(#)lemmigns_en_XMAS.rcp
+ *
+ * Copyright 2001-2002, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "../src/resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "XMAS" 0x00
+
+// the number of levels?
+HEX  "levl" ID 0 "10" 0x00
+
+// pack bitmap
+BITMAPFAMILYSPECIAL "logo" 0
+  "" "levels/xmas/logo2bpp.bmp" "levels/xmas/logo4bpc.bmp" COMPRESS
+
+// user info [for encryption]
+HEX  "_key" ID 0 "DATA=xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 256 bytes of data
+HEX  "xxxx" ID 0 "|HaCkMe|" 0x00
+
+//
+// music
+//
+
+HEX  "musc" ID 0 "4" 0x00
+DATA "musc" ID 1 "music/lemm_here_comes_santa_claus.mus"
+DATA "musc" ID 2 "music/lemm_adeste_fidelis.mus"
+DATA "musc" ID 3 "music/lemm_jingle_bells.mus"
+DATA "musc" ID 4 "music/lemm_noel.mus"
+#ifdef PALM_MIDI_ANY
+HEX  "midi" ID 0 "4" 0x00
+DATA "midi" ID 1 "music/midi/high_quality/lemm_here_comes_santa_claus.mid"
+DATA "midi" ID 2 "music/midi/high_quality/lemm_adeste_fidelis.mid"
+DATA "midi" ID 3 "music/midi/high_quality/lemm_jingle_bells.mid"
+DATA "midi" ID 4 "music/midi/high_quality/lemm_noel.mid"
+#endif
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "Waiting for Santa" 0x00
+PALETTE ID 1 "levels/xmas/level-01.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/xmas/level-01-data.cmp"
+DATA "mask" ID 1 "levels/xmas/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/xmas/level-01-data.bin"
+DATA "mask" ID 1 "levels/xmas/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "73"  0x00
+HEX  "yofs" ID 1 "46"  0x00 // ( 73, 46) = start position
+HEX  "_exx" ID 1 "614" 0x00
+HEX  "_exy" ID 1 "108" 0x00 // (614,108) = exit position
+HEX  "easy" ID 1 "@@@:50 0  0  0  0  10 5  0  0  25 15 360:@@@" 0x00
+HEX  "hard" ID 1 "@@@:50 0  0  0  0  7  0  1  0  50 49 300:@@@" 0x00
+HEX  "_f1x" ID 1 "590" 0x00
+HEX  "_f1y" ID 1 "65"  0x00
+HEX  "_f2x" ID 1 "622" 0x00
+HEX  "_f2y" ID 1 "65"  0x00 // exit "fires" (590, 65) and (622, 65)
+
+/*
+ * level 2:
+ */
+HEX  "titl" ID 2 "Up on the rooftop" 0x00
+PALETTE ID 2 "levels/xmas/level-02.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/xmas/level-02-data.cmp"
+DATA "mask" ID 2 "levels/xmas/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/xmas/level-02-data.bin"
+DATA "mask" ID 2 "levels/xmas/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "73"  0x00
+HEX  "yofs" ID 2 "50"  0x00 // ( 73, 50) = start position
+HEX  "_exx" ID 2 "531" 0x00
+HEX  "_exy" ID 2 "43"  0x00 // (531, 43) = exit position
+HEX  "easy" ID 2 "@@@:50 25 0  5  5  15 0  0  0  25 15 360:@@@" 0x00
+HEX  "hard" ID 2 "@@@:50 0  0  1  1  10 1  1  1  50 50 300:@@@" 0x00
+HEX  "_f1x" ID 2 "507" 0x00
+HEX  "_f1y" ID 2 "0"   0x00
+HEX  "_f2x" ID 2 "539" 0x00
+HEX  "_f2y" ID 2 "0"   0x00 // exit "fires" (507,  0) and (539,  0)
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "Snowman Island" 0x00
+PALETTE ID 3 "levels/xmas/level-03.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/xmas/level-03-data.cmp"
+DATA "mask" ID 3 "levels/xmas/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/xmas/level-03-data.bin"
+DATA "mask" ID 3 "levels/xmas/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "549" 0x00
+HEX  "yofs" ID 3 "71"  0x00 // (549, 71) = start position
+HEX  "_exx" ID 3 "54"  0x00
+HEX  "_exy" ID 3 "110" 0x00 // ( 54,110) = exit position
+HEX  "easy" ID 3 "@@@:50 0  0  5  5  10 10 0  0  25 20 360:@@@" 0x00
+HEX  "hard" ID 3 "@@@:50 0  0  1  1  15 0  1  1  50 49 360:@@@" 0x00
+HEX  "_f1x" ID 3 "30"  0x00
+HEX  "_f1y" ID 3 "69"  0x00
+HEX  "_f2x" ID 3 "63"  0x00
+HEX  "_f2y" ID 3 "69"  0x00 // exit "fires" ( 30, 69) and ( 63, 69)
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "Cookies and milk" 0x00
+PALETTE ID 4 "levels/xmas/level-04.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/xmas/level-04-data.cmp"
+DATA "mask" ID 4 "levels/xmas/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/xmas/level-04-data.bin"
+DATA "mask" ID 4 "levels/xmas/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "558" 0x00
+HEX  "yofs" ID 4 "32"  0x00 // (558, 32) = start position
+HEX  "_exx" ID 4 "80"  0x00
+HEX  "_exy" ID 4 "116" 0x00 // ( 80,116) = exit position
+HEX  "easy" ID 4 "@@@:50 0  0  5  5  5  5  5  0  25 15 360:@@@" 0x00
+HEX  "hard" ID 4 "@@@:50 0  0  15 1  5  1  1  0  50 35 420:@@@" 0x00
+HEX  "_f1x" ID 4 "56"  0x00
+HEX  "_f1y" ID 4 "74"  0x00
+HEX  "_f2x" ID 4 "89"  0x00
+HEX  "_f2y" ID 4 "74"  0x00 // exit "fires" ( 56, 74) and ( 89, 74)
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "Sweet dreams" 0x00
+PALETTE ID 5 "levels/xmas/level-05.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/xmas/level-05-data.cmp"
+DATA "mask" ID 5 "levels/xmas/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/xmas/level-05-data.bin"
+DATA "mask" ID 5 "levels/xmas/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "34"  0x00
+HEX  "yofs" ID 5 "44"  0x00 // ( 34, 44) = start position
+HEX  "_exx" ID 5 "589" 0x00
+HEX  "_exy" ID 5 "55"  0x00 // (589, 55) = exit position
+HEX  "easy" ID 5 "@@@:50 0  0  5  5  25 0  0  0  25 15 480:@@@" 0x00
+HEX  "hard" ID 5 "@@@:50 0  0  5  5  15 0  0  1  25 20 300:@@@" 0x00
+HEX  "_f1x" ID 5 "565" 0x00
+HEX  "_f1y" ID 5 "12"  0x00
+HEX  "_f2x" ID 5 "597" 0x00
+HEX  "_f2y" ID 5 "12"  0x00 // exit "fires" (565, 12) and (597, 12)
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "Cold as ice" 0x00
+PALETTE ID 6 "levels/xmas/level-06.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/xmas/level-06-data.cmp"
+DATA "mask" ID 6 "levels/xmas/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/xmas/level-06-data.bin"
+DATA "mask" ID 6 "levels/xmas/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "52"  0x00
+HEX  "yofs" ID 6 "66"  0x00 // ( 52, 66) = start position
+HEX  "_exx" ID 6 "545" 0x00
+HEX  "_exy" ID 6 "43"  0x00 // (545, 43) = exit position
+HEX  "easy" ID 6 "@@@:50 0  0  5  5  20 5  0  0  50 40 599:@@@" 0x00
+HEX  "hard" ID 6 "@@@:50 0  0  5  5  50 1  0  0  50 49 599:@@@" 0x00
+HEX  "_f1x" ID 6 "521" 0x00
+HEX  "_f1y" ID 6 "0"   0x00
+HEX  "_f2x" ID 6 "553" 0x00
+HEX  "_f2y" ID 6 "0"   0x00 // exit "fires" (521,  0) and (553,  0)
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "Up, up and away!" 0x00
+PALETTE ID 7 "levels/xmas/level-07.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/xmas/level-07-data.cmp"
+DATA "mask" ID 7 "levels/xmas/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/xmas/level-07-data.bin"
+DATA "mask" ID 7 "levels/xmas/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "52"  0x00
+HEX  "yofs" ID 7 "45"  0x00 // ( 52, 45) = start position
+HEX  "_exx" ID 7 "606" 0x00
+HEX  "_exy" ID 7 "86"  0x00 // (606, 86) = exit position
+HEX  "easy" ID 7 "@@@:50 20 20 1  1  1  0  0  0  20 15 420:@@@" 0x00
+HEX  "hard" ID 7 "@@@:50 2  2  5  5  10 0  1  1  50 48 480:@@@" 0x00
+HEX  "_f1x" ID 7 "582" 0x00
+HEX  "_f1y" ID 7 "45"  0x00
+HEX  "_f2x" ID 7 "615" 0x00
+HEX  "_f2y" ID 7 "45"  0x00 // exit "fires" (582, 45) and (615, 45)
+
+/*
+ * level 8
+ */
+HEX  "titl" ID 8 "Nestled in for winter" 0x00
+PALETTE ID 8 "levels/xmas/level-08.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 8 "levels/xmas/level-08-data.cmp"
+DATA "mask" ID 8 "levels/xmas/level-08-mask.cmp"
+#else
+DATA "_gfx" ID 8 "levels/xmas/level-08-data.bin"
+DATA "mask" ID 8 "levels/xmas/level-08-mask.bin"
+#endif
+HEX  "xofs" ID 8 "579" 0x00
+HEX  "yofs" ID 8 "65"  0x00 // (579, 65) = start position
+HEX  "_exx" ID 8 "145" 0x00
+HEX  "_exy" ID 8 "109" 0x00 // (145,109) = exit position
+HEX  "easy" ID 8 "@@@:50 25 25 1  1  5  0  0  2  25 20 360:@@@" 0x00
+HEX  "hard" ID 8 "@@@:50 0  0  5  5  10 0  0  2  50 48 480:@@@" 0x00
+HEX  "_f1x" ID 8 "121" 0x00
+HEX  "_f1y" ID 8 "68"  0x00
+HEX  "_f2x" ID 8 "154" 0x00
+HEX  "_f2y" ID 8 "68"  0x00 // exit "fires" (121, 68) and (154, 68)
+
+/*
+ * level 9
+ */
+HEX  "titl" ID 9 "32 feet below zero" 0x00
+PALETTE ID 9 "levels/xmas/level-09.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 9 "levels/xmas/level-09-data.cmp"
+DATA "mask" ID 9 "levels/xmas/level-09-mask.cmp"
+#else
+DATA "_gfx" ID 9 "levels/xmas/level-09-data.bin"
+DATA "mask" ID 9 "levels/xmas/level-09-mask.bin"
+#endif
+HEX  "xofs" ID 9 "89"  0x00
+HEX  "yofs" ID 9 "31"  0x00 // ( 89, 31) = start position
+HEX  "_exx" ID 9 "547" 0x00
+HEX  "_exy" ID 9 "125" 0x00 // (547,125) = exit position
+HEX  "easy" ID 9 "@@@:50 0  1  1  1  5  5  0  1  25 15 599:@@@" 0x00
+HEX  "hard" ID 9 "@@@:50 0  5  5  5  0  0  1  0  50 50 300:@@@" 0x00
+HEX  "_f1x" ID 9 "523" 0x00
+HEX  "_f1y" ID 9 "82"  0x00
+HEX  "_f2x" ID 9 "555" 0x00
+HEX  "_f2y" ID 9 "82"  0x00 // exit "fires" (523, 82) and (555, 82)
+
+/*
+ * level 10
+ */
+HEX  "titl" ID 10 "Winter wonderland" 0x00
+PALETTE ID 10 "levels/xmas/level-10.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 10 "levels/xmas/level-10-data.cmp"
+DATA "mask" ID 10 "levels/xmas/level-10-mask.cmp"
+#else
+DATA "_gfx" ID 10 "levels/xmas/level-10-data.bin"
+DATA "mask" ID 10 "levels/xmas/level-10-mask.bin"
+#endif
+HEX  "xofs" ID 10 "274" 0x00
+HEX  "yofs" ID 10 "65"  0x00 // (274, 65) = start position
+HEX  "_exx" ID 10 "35"  0x00
+HEX  "_exy" ID 10 "121" 0x00 // ( 35,121) = exit position
+HEX  "easy" ID 10 "@@@:50 0  0  0  0  0  1  1  0  25 25 300:@@@" 0x00
+HEX  "hard" ID 10 "@@@:50 1  1  1  1  3  1  0  0  50 50 360:@@@" 0x00
+HEX  "_f1x" ID 10 "11"  0x00
+HEX  "_f1y" ID 10 "80"  0x00
+HEX  "_f2x" ID 10 "44"  0x00
+HEX  "_f2y" ID 10 "80"  0x00 // exit "fires" ( 11, 80) and ( 44, 80)

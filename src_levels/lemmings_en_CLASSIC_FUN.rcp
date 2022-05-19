@@ -1,0 +1,726 @@
+/*
+ * @(#)lemmigns_en_CLASSIC_FUN.rcp
+ *
+ * Copyright 2001-2002, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "../src/resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "CLASSIC:FUN" 0x00
+
+// pack bitmap
+BITMAPFAMILYSPECIAL "logo" 0
+  "" "levels/\classic-fun/logo2bpp.bmp" "levels/\classic-fun/logo4bpc.bmp" COMPRESS
+
+// the number of levels?
+HEX  "levl" ID 0 "30" 0x00
+
+// user info [for encryption]
+HEX  "_key" ID 0 "DATA=xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 256 bytes of data
+HEX  "xxxx" ID 0 "|HaCkMe|" 0x00
+
+//
+// music
+//
+
+HEX  "musc" ID 0 "3" 0x00
+DATA "musc" ID 1 "music/lemm_mountain.mus"
+DATA "musc" ID 2 "music/lemm_tenbottles.mus"
+DATA "musc" ID 3 "music/lemm_cancan.mus"
+#ifdef PALM_MIDI_ANY
+HEX  "midi" ID 0 "3" 0x00
+DATA "midi" ID 1 "music/midi/high_quality/lemm_mountain.mid"
+DATA "midi" ID 2 "music/midi/high_quality/lemm_tenbottles.mid"
+DATA "midi" ID 3 "music/midi/high_quality/lemm_cancan.mid"
+#endif
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "Just dig!" 0x00
+PALETTE ID 1 "levels/\classic-fun/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/\classic-fun/level-01-data.cmp"
+DATA "mask" ID 1 "levels/\classic-fun/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/\classic-fun/level-01-data.bin"
+DATA "mask" ID 1 "levels/\classic-fun/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "278" 0x00
+HEX  "yofs" ID 1 "25"  0x00 // (278,25) = start position
+HEX  "_exx" ID 1 "425" 0x00
+HEX  "_exy" ID 1 "105" 0x00 // (425,105) = exit position
+HEX  "easy" ID 1 "@@@:50 0  0  0  0  0  0  0  10 10 1  300:@@@" 0x00
+HEX  "_f1x" ID 1 "403" 0x00
+HEX  "_f1y" ID 1 "76"  0x00
+HEX  "_f2x" ID 1 "431" 0x00
+HEX  "_f2y" ID 1 "76"  0x00 // exit "fires" (403, 76) and (431, 76)
+
+/*
+ * level 2:
+ */
+HEX  "titl" ID 2 "Only Floaters can survive this" 0x00
+PALETTE ID 2 "levels/\classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/\classic-fun/level-02-data.cmp"
+DATA "mask" ID 2 "levels/\classic-fun/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/\classic-fun/level-02-data.bin"
+DATA "mask" ID 2 "levels/\classic-fun/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "179" 0x00
+HEX  "yofs" ID 2 "16"  0x00 // (179,16) = start position
+HEX  "_exx" ID 2 "420" 0x00
+HEX  "_exy" ID 2 "116" 0x00 // (420,116) = exit position
+HEX  "easy" ID 2 "@@@:50 0  10 0  0  0  0  0  0  10 1  300:@@@" 0x00
+HEX  "_f1x" ID 2 "398" 0x00
+HEX  "_f1y" ID 2 "87"  0x00
+HEX  "_f2x" ID 2 "426" 0x00
+HEX  "_f2y" ID 2 "87"  0x00 // exit "fires" (398, 87) and (426, 87)
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "Tailor made for Blockers" 0x00
+PALETTE ID 3 "levels/\classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/\classic-fun/level-03-data.cmp"
+DATA "mask" ID 3 "levels/\classic-fun/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/\classic-fun/level-03-data.bin"
+DATA "mask" ID 3 "levels/\classic-fun/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "266" 0x00
+HEX  "yofs" ID 3 "17"  0x00 // (266,17) = start position
+HEX  "_exx" ID 3 "252" 0x00
+HEX  "_exy" ID 3 "118" 0x00 // (252,118) = exit position
+HEX  "easy" ID 3 "@@@:50 0  0  0  10 0  0  0  0  50 5  300:@@@" 0x00
+HEX  "_f1x" ID 3 "230" 0x00
+HEX  "_f1y" ID 3 "89"  0x00
+HEX  "_f2x" ID 3 "258" 0x00
+HEX  "_f2y" ID 3 "89"  0x00 // exit "fires" (230, 89) and (258, 89)
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "Now use Miners and Climbers" 0x00
+PALETTE ID 4 "levels/\classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/\classic-fun/level-04-data.cmp"
+DATA "mask" ID 4 "levels/\classic-fun/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/\classic-fun/level-04-data.bin"
+DATA "mask" ID 4 "levels/\classic-fun/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "256" 0x00
+HEX  "yofs" ID 4 "26"  0x00 // (256,26) = start position
+HEX  "_exx" ID 4 "419" 0x00
+HEX  "_exy" ID 4 "45"  0x00 // (419,45) = exit position
+HEX  "easy" ID 4 "@@@:50 10 0  0  0  0  0  1  0  10 10 300:@@@" 0x00
+HEX  "_f1x" ID 4 "397" 0x00
+HEX  "_f1y" ID 4 "17"  0x00
+HEX  "_f2x" ID 4 "425" 0x00
+HEX  "_f2y" ID 4 "17"  0x00 // exit "fires" (397, 17) and (425, 17)
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "You need Bashers this time" 0x00
+PALETTE ID 5 "levels/\classic-fun/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/\classic-fun/level-05-data.cmp"
+DATA "mask" ID 5 "levels/\classic-fun/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/\classic-fun/level-05-data.bin"
+DATA "mask" ID 5 "levels/\classic-fun/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "87"  0x00
+HEX  "yofs" ID 5 "32"  0x00 // (87,32) = start position
+HEX  "_exx" ID 5 "506" 0x00
+HEX  "_exy" ID 5 "120" 0x00 // (506,120) = exit position
+HEX  "easy" ID 5 "@@@:50 0  0  0  0  0  50 0  0  50 5  300:@@@" 0x00
+HEX  "_f1x" ID 5 "484" 0x00
+HEX  "_f1y" ID 5 "91"  0x00
+HEX  "_f2x" ID 5 "512" 0x00
+HEX  "_f2y" ID 5 "91"  0x00 // exit "fires" (484, 91) and (512, 91)
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "A task for Blockers and Bombers" 0x00
+PALETTE ID 6 "levels/\classic-fun/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/\classic-fun/level-06-data.cmp"
+DATA "mask" ID 6 "levels/\classic-fun/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/\classic-fun/level-06-data.bin"
+DATA "mask" ID 6 "levels/\classic-fun/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "204" 0x00
+HEX  "yofs" ID 6 "24"  0x00 // (204,24) = start position
+HEX  "_exx" ID 6 "443" 0x00
+HEX  "_exy" ID 6 "91"  0x00 // (443,91) = exit position
+HEX  "easy" ID 6 "@@@:50 0  0  5  5  0  0  0  0  50 10 300:@@@" 0x00
+HEX  "_f1x" ID 6 "431" 0x00
+HEX  "_f1y" ID 6 "52"  0x00
+HEX  "_f2x" ID 6 "438" 0x00
+HEX  "_f2y" ID 6 "52"  0x00 // exit "fires" (431, 52) and (438, 52)
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "Builders will help you here" 0x00
+PALETTE ID 7 "levels/\classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/\classic-fun/level-07-data.cmp"
+DATA "mask" ID 7 "levels/\classic-fun/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/\classic-fun/level-07-data.bin"
+DATA "mask" ID 7 "levels/\classic-fun/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "56"  0x00
+HEX  "yofs" ID 7 "76"  0x00 //  (56,76) = start position
+HEX  "_exx" ID 7 "603" 0x00
+HEX  "_exy" ID 7 "75"  0x00 // (603,75) = exit position
+HEX  "easy" ID 7 "@@@:50 0  0  0  0  20 0  0  0  50 25 300:@@@" 0x00
+HEX  "_f1x" ID 7 "581" 0x00
+HEX  "_f1y" ID 7 "47"  0x00
+HEX  "_f2x" ID 7 "609" 0x00
+HEX  "_f2y" ID 7 "47"  0x00 // exit "fires" (581, 47) and (609, 47)
+
+/*
+ * level 8
+ */
+HEX  "titl" ID 8 "Not as complicated as it looks" 0x00
+PALETTE ID 8 "levels/\classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 8 "levels/\classic-fun/level-08-data.cmp"
+DATA "mask" ID 8 "levels/\classic-fun/level-08-mask.cmp"
+#else
+DATA "_gfx" ID 8 "levels/\classic-fun/level-08-data.bin"
+DATA "mask" ID 8 "levels/\classic-fun/level-08-mask.bin"
+#endif
+HEX  "xofs" ID 8 "241" 0x00
+HEX  "yofs" ID 8 "50"  0x00 // (241,50) = start position
+HEX  "_exx" ID 8 "211" 0x00
+HEX  "_exy" ID 8 "98"  0x00 // (211,98) = exit position
+HEX  "easy" ID 8 "@@@:20 20 20 20 20 20 20 20 20 50 25 300:@@@" 0x00
+HEX  "_f1x" ID 8 "189" 0x00
+HEX  "_f1y" ID 8 "69"  0x00
+HEX  "_f2x" ID 8 "216" 0x00
+HEX  "_f2y" ID 8 "69"  0x00 // exit "fires" (189, 69) and (216, 89)
+
+/*
+ * level 9
+ */
+HEX  "titl" ID 9 "As long as you try your best" 0x00
+PALETTE ID 9 "levels/\classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 9 "levels/\classic-fun/level-09-data.cmp"
+DATA "mask" ID 9 "levels/\classic-fun/level-09-mask.cmp"
+#else
+DATA "_gfx" ID 9 "levels/\classic-fun/level-09-data.bin"
+DATA "mask" ID 9 "levels/\classic-fun/level-09-mask.bin"
+#endif
+HEX  "xofs" ID 9 "230" 0x00
+HEX  "yofs" ID 9 "75"  0x00 // (230, 75) = start position
+HEX  "_exx" ID 9 "377" 0x00
+HEX  "_exy" ID 9 "102" 0x00 // (377,102) = exit position
+HEX  "easy" ID 9 "@@@:5  20 20 20 20 20 20 20 20 50 25 300:@@@" 0x00
+HEX  "_f1x" ID 9 "355" 0x00
+HEX  "_f1y" ID 9 "74"  0x00
+HEX  "_f2x" ID 9 "383" 0x00
+HEX  "_f2y" ID 9 "74"  0x00 // exit "fires" (355, 74) and (383, 74)
+
+/*
+ * level 10
+ */
+HEX  "titl" ID 10 "Smile if you love Lemmings" 0x00
+PALETTE ID 10 "levels/\classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 10 "levels/\classic-fun/level-10-data.cmp"
+DATA "mask" ID 10 "levels/\classic-fun/level-10-mask.cmp"
+#else
+DATA "_gfx" ID 10 "levels/\classic-fun/level-10-data.bin"
+DATA "mask" ID 10 "levels/\classic-fun/level-10-mask.bin"
+#endif
+HEX  "xofs" ID 10 "327" 0x00
+HEX  "yofs" ID 10 "17"  0x00 // (327,17)  = start position
+HEX  "_exx" ID 10 "265" 0x00
+HEX  "_exy" ID 10 "121" 0x00 // (265,121) = exit position
+HEX  "easy" ID 10 "@@@:50 20 20 20 20 20 20 20 20 20 10 300:@@@" 0x00
+HEX  "_f1x" ID 10 "243" 0x00
+HEX  "_f1y" ID 10 "92"  0x00
+HEX  "_f2x" ID 10 "270" 0x00
+HEX  "_f2y" ID 10 "92"  0x00 // exit "fires" (243, 92) and (270, 92)
+
+/*
+ * level 11
+ */
+HEX  "titl" ID 11 "Keep your hair on Mr. Lemming" 0x00
+PALETTE ID 11 "levels/\classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 11 "levels/\classic-fun/level-11-data.cmp"
+DATA "mask" ID 11 "levels/\classic-fun/level-11-mask.cmp"
+#else
+DATA "_gfx" ID 11 "levels/\classic-fun/level-11-data.bin"
+DATA "mask" ID 11 "levels/\classic-fun/level-11-mask.bin"
+#endif
+HEX  "xofs" ID 11 "192" 0x00
+HEX  "yofs" ID 11 "68"  0x00 // (192, 68) = start position
+HEX  "_exx" ID 11 "435" 0x00
+HEX  "_exy" ID 11 "115" 0x00 // (435,115) = exit position
+HEX  "easy" ID 11 "@@@:50 20 20 20 20 20 20 20 20 50 42 300:@@@" 0x00
+HEX  "_f1x" ID 11 "413" 0x00
+HEX  "_f1y" ID 11 "87"  0x00
+HEX  "_f2x" ID 11 "441" 0x00
+HEX  "_f2y" ID 11 "87"  0x00 // exit "fires" (413, 87) and (441, 87)
+
+/*
+ * level 12
+ */
+HEX  "titl" ID 12 "Patience" 0x00
+PALETTE ID 12 "levels/classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 12 "levels/classic-fun/level-12-data.cmp"
+DATA "mask" ID 12 "levels/classic-fun/level-12-mask.cmp"
+#else
+DATA "_gfx" ID 12 "levels/classic-fun/level-12-data.bin"
+DATA "mask" ID 12 "levels/classic-fun/level-12-mask.bin"
+#endif
+HEX  "xofs" ID 12 "180" 0x00
+HEX  "yofs" ID 12 "77"  0x00 // (180,77) = start position
+HEX  "_exx" ID 12 "454" 0x00
+HEX  "_exy" ID 12 "105" 0x00 // (454,105) = exit position
+HEX  "easy" ID 12 "@@@:5  20 20 20 20 20 20 20 20 50 25 300:@@@" 0x00
+HEX  "_f1x" ID 12 "432" 0x00
+HEX  "_f1y" ID 12 "76"  0x00
+HEX  "_f2x" ID 12 "459" 0x00
+HEX  "_f2y" ID 12 "76"  0x00 // exit "fires" (432, 76) and (459, 76)
+
+/*
+ * level 13
+ */
+HEX  "titl" ID 13 "We all fall down" 0x00
+PALETTE ID 13 "levels/classic-fun/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 13 "levels/classic-fun/level-13-data.cmp"
+DATA "mask" ID 13 "levels/classic-fun/level-13-mask.cmp"
+#else
+DATA "_gfx" ID 13 "levels/classic-fun/level-13-data.bin"
+DATA "mask" ID 13 "levels/classic-fun/level-13-mask.bin"
+#endif
+HEX  "xofs" ID 13 "142" 0x00
+HEX  "yofs" ID 13 "20"  0x00 // (142,20) = start position
+HEX  "_exx" ID 13 "596" 0x00
+HEX  "_exy" ID 13 "105" 0x00 // (596,105) = exit position
+HEX  "easy" ID 13 "@@@:50 0  0  0  0  0  0  0  20 20 20 180:@@@" 0x00
+HEX  "_f1x" ID 13 "584" 0x00
+HEX  "_f1y" ID 13 "66"  0x00
+HEX  "_f2x" ID 13 "591" 0x00
+HEX  "_f2y" ID 13 "66"  0x00 // exit "fires" (584, 66) and (591, 66)
+
+/*
+ * level 14
+ */
+HEX  "titl" ID 14 "Origins and Lemmings" 0x00
+PALETTE ID 14 "levels/classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 14 "levels/classic-fun/level-14-data.cmp"
+DATA "mask" ID 14 "levels/classic-fun/level-14-mask.cmp"
+#else
+DATA "_gfx" ID 14 "levels/classic-fun/level-14-data.bin"
+DATA "mask" ID 14 "levels/classic-fun/level-14-mask.bin"
+#endif
+HEX  "xofs" ID 14 "62"  0x00
+HEX  "yofs" ID 14 "17"  0x00 // ( 62,17) = start position
+HEX  "_exx" ID 14 "561" 0x00
+HEX  "_exy" ID 14 "80"  0x00 // (561,80) = exit position
+HEX  "easy" ID 14 "@@@:80 20 20 20 20 20 20 20 20 50 37 300:@@@" 0x00
+HEX  "_f1x" ID 14 "539" 0x00
+HEX  "_f1y" ID 14 "52"  0x00
+HEX  "_f2x" ID 14 "566" 0x00
+HEX  "_f2y" ID 14 "52"  0x00 // exit "fires" (539, 52) and (566, 52)
+
+/*
+ * level 15
+ */
+HEX  "titl" ID 15 "Don't let your eyes deceive you" 0x00
+PALETTE ID 15 "levels/classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 15 "levels/classic-fun/level-15-data.cmp"
+DATA "mask" ID 15 "levels/classic-fun/level-15-mask.cmp"
+#else
+DATA "_gfx" ID 15 "levels/classic-fun/level-15-data.bin"
+DATA "mask" ID 15 "levels/classic-fun/level-15-mask.bin"
+#endif
+HEX  "xofs" ID 15 "43"  0x00
+HEX  "yofs" ID 15 "30"  0x00 // ( 43,30) = start position
+HEX  "_exx" ID 15 "582" 0x00
+HEX  "_exy" ID 15 "38"  0x00 // (582,38) = exit position
+HEX  "easy" ID 15 "@@@:60 20 20 20 20 20 20 20 20 50 40 480:@@@" 0x00
+HEX  "_f1x" ID 15 "560" 0x00
+HEX  "_f1y" ID 15 "11"  0x00
+HEX  "_f2x" ID 15 "587" 0x00
+HEX  "_f2y" ID 15 "11"  0x00 // exit "fires" (560, 11) and (587, 11)
+
+/*
+ * level 16
+ */
+HEX  "titl" ID 16 "Don't do anything too hasty" 0x00
+PALETTE ID 16 "levels/classic-fun/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 16 "levels/classic-fun/level-16-data.cmp"
+DATA "mask" ID 16 "levels/classic-fun/level-16-mask.cmp"
+#else
+DATA "_gfx" ID 16 "levels/classic-fun/level-16-data.bin"
+DATA "mask" ID 16 "levels/classic-fun/level-16-mask.bin"
+#endif
+HEX  "xofs" ID 16 "151" 0x00
+HEX  "yofs" ID 16 "98"  0x00 // (151,98) = start position
+HEX  "_exx" ID 16 "486" 0x00
+HEX  "_exy" ID 16 "53"  0x00 // (486,53) = exit position
+HEX  "easy" ID 16 "@@@:95 20 20 20 20 20 20 20 20 50 31 480:@@@" 0x00
+HEX  "_f1x" ID 16 "474" 0x00
+HEX  "_f1y" ID 16 "14"  0x00
+HEX  "_f2x" ID 16 "481" 0x00
+HEX  "_f2y" ID 16 "14"  0x00 // exit "fires" (474, 14) and (481, 14)
+
+/*
+ * level 17
+ */
+HEX  "titl" ID 17 "Easy when you know how" 0x00
+PALETTE ID 17 "levels/classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 17 "levels/classic-fun/level-17-data.cmp"
+DATA "mask" ID 17 "levels/classic-fun/level-17-mask.cmp"
+#else
+DATA "_gfx" ID 17 "levels/classic-fun/level-17-data.bin"
+DATA "mask" ID 17 "levels/classic-fun/level-17-mask.bin"
+#endif
+HEX  "xofs" ID 17 "291" 0x00
+HEX  "yofs" ID 17 "19"  0x00 // (291,19) = start position
+HEX  "_exx" ID 17 "486" 0x00
+HEX  "_exy" ID 17 "102" 0x00 // (486,102) = exit position
+HEX  "easy" ID 17 "@@@:5  20 20 20 20 20 20 20 20 50 20 300:@@@" 0x00
+HEX  "_f1x" ID 17 "464" 0x00
+HEX  "_f1y" ID 17 "74"  0x00
+HEX  "_f2x" ID 17 "492" 0x00
+HEX  "_f2y" ID 17 "74"  0x00 // exit "fires" (464, 74) and (492, 74)
+
+/*
+ * level 18
+ */
+HEX  "titl" ID 18 "Let's block and blow" 0x00
+PALETTE ID 18 "levels/classic-fun/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 18 "levels/classic-fun/level-18-data.cmp"
+DATA "mask" ID 18 "levels/classic-fun/level-18-mask.cmp"
+#else
+DATA "_gfx" ID 18 "levels/classic-fun/level-18-data.bin"
+DATA "mask" ID 18 "levels/classic-fun/level-18-mask.bin"
+#endif
+HEX  "xofs" ID 18 "77"  0x00
+HEX  "yofs" ID 18 "19"  0x00 // ( 77,19) = start position
+HEX  "_exx" ID 18 "560" 0x00
+HEX  "_exy" ID 18 "107" 0x00 // (560,107) = exit position
+HEX  "easy" ID 18 "@@@:20 0  0  20 20 0  0  0  0  50 35 300:@@@" 0x00
+HEX  "_f1x" ID 18 "548" 0x00
+HEX  "_f1y" ID 18 "69"  0x00
+HEX  "_f2x" ID 18 "555" 0x00
+HEX  "_f2y" ID 18 "69"  0x00 // exit "fires" (548, 69) and (555, 69)
+
+/*
+ * level 19
+ */
+HEX  "titl" ID 19 "Take good care of my Lemmings" 0x00
+PALETTE ID 19 "levels/classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 19 "levels/classic-fun/level-19-data.cmp"
+DATA "mask" ID 19 "levels/classic-fun/level-19-mask.cmp"
+#else
+DATA "_gfx" ID 19 "levels/classic-fun/level-19-data.bin"
+DATA "mask" ID 19 "levels/classic-fun/level-19-mask.bin"
+#endif
+HEX  "xofs" ID 19 "95"  0x00
+HEX  "yofs" ID 19 "58"  0x00 // ( 95,58) = start position
+HEX  "_exx" ID 19 "603" 0x00
+HEX  "_exy" ID 19 "50"  0x00 // (603,50) = exit position
+HEX  "easy" ID 19 "@@@:80 20 20 20 20 20 20 20 20 50 35 300:@@@" 0x00
+HEX  "_f1x" ID 19 "581" 0x00
+HEX  "_f1y" ID 19 "22"  0x00
+HEX  "_f2x" ID 19 "609" 0x00
+HEX  "_f2y" ID 19 "22"  0x00 // exit "fires" (581, 22) and (609, 22)
+
+/*
+ * level 20
+ */
+HEX  "titl" ID 20 "We are now at LEMCON ONE" 0x00
+PALETTE ID 20 "levels/classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 20 "levels/classic-fun/level-20-data.cmp"
+DATA "mask" ID 20 "levels/classic-fun/level-20-mask.cmp"
+#else
+DATA "_gfx" ID 20 "levels/classic-fun/level-20-data.bin"
+DATA "mask" ID 20 "levels/classic-fun/level-20-mask.bin"
+#endif
+HEX  "xofs" ID 20 "136" 0x00
+HEX  "yofs" ID 20 "22"  0x00 // (136,22) = start position
+HEX  "_exx" ID 20 "475" 0x00
+HEX  "_exy" ID 20 "77"  0x00 // (475,77) = exit position
+HEX  "easy" ID 20 "@@@:90 20 20 20 20 20 20 20 20 50 30 300:@@@" 0x00
+HEX  "_f1x" ID 20 "453" 0x00
+HEX  "_f1y" ID 20 "49"  0x00
+HEX  "_f2x" ID 20 "481" 0x00
+HEX  "_f2y" ID 20 "49"  0x00 // exit "fires" (453, 49) and (481, 49)
+
+/*
+ * level 21
+ */
+HEX  "titl" ID 21 "You Live and Lem" 0x00
+PALETTE ID 21 "levels/classic-fun/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 21 "levels/classic-fun/level-21-data.cmp"
+DATA "mask" ID 21 "levels/classic-fun/level-21-mask.cmp"
+#else
+DATA "_gfx" ID 21 "levels/classic-fun/level-21-data.bin"
+DATA "mask" ID 21 "levels/classic-fun/level-21-mask.bin"
+#endif
+HEX  "xofs" ID 21 "71"  0x00
+HEX  "yofs" ID 21 "15"  0x00 // ( 71,15) = start position
+HEX  "_exx" ID 21 "614" 0x00
+HEX  "_exy" ID 21 "104" 0x00 // (614,104) = exit position
+HEX  "easy" ID 21 "@@@:50 20 20 20 20 20 20 20 20 50 30 480:@@@" 0x00
+HEX  "_f1x" ID 21 "593" 0x00
+HEX  "_f1y" ID 21 "75"  0x00
+HEX  "_f2x" ID 21 "620" 0x00
+HEX  "_f2y" ID 21 "75"  0x00 // exit "fires" (593, 75) and (620, 75)
+
+/*
+ * level 22
+ */
+HEX  "titl" ID 22 "A Beast of a level" 0x00
+PALETTE ID 22 "levels/classic-fun/palette-trees.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 22 "levels/classic-fun/level-22-data.cmp"
+DATA "mask" ID 22 "levels/classic-fun/level-22-mask.cmp"
+#else
+DATA "_gfx" ID 22 "levels/classic-fun/level-22-data.bin"
+DATA "mask" ID 22 "levels/classic-fun/level-22-mask.bin"
+#endif
+HEX  "xofs" ID 22 "27"  0x00
+HEX  "yofs" ID 22 "86"  0x00 // ( 27,86) = start position
+HEX  "_exx" ID 22 "586" 0x00
+HEX  "_exy" ID 22 "57"  0x00 // (586,57) = exit position
+HEX  "easy" ID 22 "@@@:50 20 20 20 20 20 20 20 20 50 40 360:@@@" 0x00
+HEX  "_f1x" ID 22 "567" 0x00
+HEX  "_f1y" ID 22 "28"  0x00
+HEX  "_f2x" ID 22 "589" 0x00
+HEX  "_f2y" ID 22 "28"  0x00 // exit "fires" (567, 28) and (589, 28)
+
+/*
+ * level 23
+ */
+HEX  "titl" ID 23 "I've lost that Lemmings feeling" 0x00
+PALETTE ID 23 "levels/classic-fun/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 23 "levels/classic-fun/level-23-data.cmp"
+DATA "mask" ID 23 "levels/classic-fun/level-23-mask.cmp"
+#else
+DATA "_gfx" ID 23 "levels/classic-fun/level-23-data.bin"
+DATA "mask" ID 23 "levels/classic-fun/level-23-mask.bin"
+#endif
+HEX  "xofs" ID 23 "469" 0x00
+HEX  "yofs" ID 23 "72"  0x00 // (469,72) = start position
+HEX  "_exx" ID 23 "23"  0x00
+HEX  "_exy" ID 23 "112" 0x00 // ( 23,112) = exit position
+HEX  "easy" ID 23 "@@@:50 20 20 20 20 20 20 20 20 50 12 480:@@@" 0x00
+HEX  "_f1x" ID 23 "11"  0x00
+HEX  "_f1y" ID 23 "73"  0x00
+HEX  "_f2x" ID 23 "18"  0x00
+HEX  "_f2y" ID 23 "73"  0x00 // exit "fires" ( 11, 73) and ( 18, 73)
+
+/*
+ * level 24
+ */
+HEX  "titl" ID 24 "Konbanwa Lemmings san" 0x00
+PALETTE ID 24 "levels/classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 24 "levels/classic-fun/level-24-data.cmp"
+DATA "mask" ID 24 "levels/classic-fun/level-24-mask.cmp"
+#else
+DATA "_gfx" ID 24 "levels/classic-fun/level-24-data.bin"
+DATA "mask" ID 24 "levels/classic-fun/level-24-mask.bin"
+#endif
+HEX  "xofs" ID 24 "267" 0x00
+HEX  "yofs" ID 24 "15"  0x00 // (267, 15) = start position
+HEX  "_exx" ID 24 "457" 0x00
+HEX  "_exy" ID 24 "123" 0x00 // (457,123) = exit position
+HEX  "easy" ID 24 "@@@:50 20 20 20 20 20 20 20 20 30 20 300:@@@" 0x00
+HEX  "_f1x" ID 24 "435" 0x00
+HEX  "_f1y" ID 24 "95"  0x00
+HEX  "_f2x" ID 24 "463" 0x00
+HEX  "_f2y" ID 24 "95"  0x00 // exit "fires" (435, 95) and (463, 95)
+
+/*
+ * level 25
+ */
+HEX  "titl" ID 25 "Lemmings Lemmings everywhere" 0x00
+PALETTE ID 25 "levels/classic-fun/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 25 "levels/classic-fun/level-25-data.cmp"
+DATA "mask" ID 25 "levels/classic-fun/level-25-mask.cmp"
+#else
+DATA "_gfx" ID 25 "levels/classic-fun/level-25-data.bin"
+DATA "mask" ID 25 "levels/classic-fun/level-25-mask.bin"
+#endif
+HEX  "xofs" ID 25 "137" 0x00
+HEX  "yofs" ID 25 "85"  0x00 // (137,85) = start position
+HEX  "_exx" ID 25 "487" 0x00
+HEX  "_exy" ID 25 "125" 0x00 // (487,125) = exit position
+HEX  "easy" ID 25 "@@@:5  20 20 20 20 20 20 20 20 50 25 300:@@@" 0x00
+HEX  "_f1x" ID 25 "465" 0x00
+HEX  "_f1y" ID 25 "96"  0x00
+HEX  "_f2x" ID 25 "493" 0x00
+HEX  "_f2y" ID 25 "96"  0x00 // exit "fires" (465, 96) and (493, 96)
+
+/*
+ * level 26
+ */
+HEX  "titl" ID 26 "Nightmare on Lem street" 0x00
+PALETTE ID 26 "levels/classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 26 "levels/classic-fun/level-26-data.cmp"
+DATA "mask" ID 26 "levels/classic-fun/level-26-mask.cmp"
+#else
+DATA "_gfx" ID 26 "levels/classic-fun/level-26-data.bin"
+DATA "mask" ID 26 "levels/classic-fun/level-26-mask.bin"
+#endif
+HEX  "xofs" ID 26 "237" 0x00
+HEX  "yofs" ID 26 "16"  0x00 // (237,16) = start position
+HEX  "_exx" ID 26 "511" 0x00
+HEX  "_exy" ID 26 "88"  0x00 // (511,88) = exit position
+HEX  "easy" ID 26 "@@@:70 20 20 20 20 20 20 20 20 2  2  300:@@@" 0x00
+HEX  "_f1x" ID 26 "489" 0x00
+HEX  "_f1y" ID 26 "59"  0x00
+HEX  "_f2x" ID 26 "516" 0x00
+HEX  "_f2y" ID 26 "59"  0x00 // exit "fires" (489, 59) and (516, 59)
+
+/*
+ * level 27
+ */
+HEX  "titl" ID 27 "Let's be careful out there" 0x00
+PALETTE ID 27 "levels/classic-fun/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 27 "levels/classic-fun/level-27-data.cmp"
+DATA "mask" ID 27 "levels/classic-fun/level-27-mask.cmp"
+#else
+DATA "_gfx" ID 27 "levels/classic-fun/level-27-data.bin"
+DATA "mask" ID 27 "levels/classic-fun/level-27-mask.bin"
+#endif
+HEX  "xofs" ID 27 "252" 0x00
+HEX  "yofs" ID 27 "29"  0x00 // (252, 29) = start position
+HEX  "_exx" ID 27 "425" 0x00
+HEX  "_exy" ID 27 "117" 0x00 // (425,117) = exit position
+HEX  "easy" ID 27 "@@@:50 20 20 20 20 20 20 20 20 50 25 300:@@@" 0x00
+HEX  "_f1x" ID 27 "403" 0x00
+HEX  "_f1y" ID 27 "89"  0x00
+HEX  "_f2x" ID 27 "431" 0x00
+HEX  "_f2y" ID 27 "89"  0x00 // exit "fires" (403, 89) and (431, 89)
+
+/*
+ * level 28
+ */
+HEX  "titl" ID 28 "If only they could fly" 0x00
+PALETTE ID 28 "levels/classic-fun/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 28 "levels/classic-fun/level-28-data.cmp"
+DATA "mask" ID 28 "levels/classic-fun/level-28-mask.cmp"
+#else
+DATA "_gfx" ID 28 "levels/classic-fun/level-28-data.bin"
+DATA "mask" ID 28 "levels/classic-fun/level-28-mask.bin"
+#endif
+HEX  "xofs" ID 28 "444" 0x00
+HEX  "yofs" ID 28 "18"  0x00 // (444,18) = start position
+HEX  "_exx" ID 28 "139" 0x00
+HEX  "_exy" ID 28 "61"  0x00 // (139,61) = exit position
+HEX  "easy" ID 28 "@@@:20 20 20 20 20 20 20 20 20 50 30 300:@@@" 0x00
+HEX  "_f1x" ID 28 "127" 0x00
+HEX  "_f1y" ID 28 "22"  0x00
+HEX  "_f2x" ID 28 "134" 0x00
+HEX  "_f2y" ID 28 "22"  0x00 // exit "fires" (127, 22) and (134, 22)
+
+/*
+ * level 29
+ */
+HEX  "titl" ID 29 "worra lorra Lemmings" 0x00
+PALETTE ID 29 "levels/classic-fun/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 29 "levels/classic-fun/level-29-data.cmp"
+DATA "mask" ID 29 "levels/classic-fun/level-29-mask.cmp"
+#else
+DATA "_gfx" ID 29 "levels/classic-fun/level-29-data.bin"
+DATA "mask" ID 29 "levels/classic-fun/level-29-mask.bin"
+#endif
+HEX  "xofs" ID 29 "595" 0x00
+HEX  "yofs" ID 29 "50"  0x00 // (595,50) = start position
+HEX  "_exx" ID 29 "37"  0x00
+HEX  "_exy" ID 29 "35"  0x00 // ( 37,35) = exit position
+HEX  "easy" ID 29 "@@@:10 20 20 20 20 20 20 20 20 50 30 480:@@@" 0x00
+HEX  "_f1x" ID 29 "15"  0x00
+HEX  "_f1y" ID 29 "9"   0x00
+HEX  "_f2x" ID 29 "42"  0x00
+HEX  "_f2y" ID 29 "9"   0x00 // exit "fires" ( 15,  9) and ( 42,  9)
+
+/*
+ * level 30
+ */
+HEX  "titl" ID 30 "Lock up your Lemmings" 0x00
+PALETTE ID 30 "levels/classic-fun/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 30 "levels/classic-fun/level-30-data.cmp"
+DATA "mask" ID 30 "levels/classic-fun/level-30-mask.cmp"
+#else
+DATA "_gfx" ID 30 "levels/classic-fun/level-30-data.bin"
+DATA "mask" ID 30 "levels/classic-fun/level-30-mask.bin"
+#endif
+HEX  "xofs" ID 30 "293" 0x00
+HEX  "yofs" ID 30 "14"  0x00 // (293,14) = start position
+HEX  "_exx" ID 30 "244" 0x00
+HEX  "_exy" ID 30 "124" 0x00 // (244,124) = exit position
+HEX  "easy" ID 30 "@@@:90 20 20 20 20 20 20 20 20 50 33 300:@@@" 0x00
+HEX  "_f1x" ID 30 "232" 0x00
+HEX  "_f1y" ID 30 "85"  0x00
+HEX  "_f2x" ID 30 "239" 0x00
+HEX  "_f2y" ID 30 "85"  0x00 // exit "fires" (232, 85) and (239, 85)

@@ -1,0 +1,293 @@
+/*
+ * @(#)lemmigns_en_NEWAGE.rcp
+ *
+ * Copyright 2001-2002, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "../src/resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "NEW AGE" 0x00
+
+// the number of levels?
+HEX  "levl" ID 0 "10" 0x00
+
+// user info [for encryption]
+HEX  "_key" ID 0 "DATA=xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 256 bytes of data
+HEX  "xxxx" ID 0 "|HaCkMe|" 0x00
+
+//
+// music
+//
+
+HEX  "musc" ID 0 "3" 0x00
+DATA "musc" ID 1 "music/lemm_mountain.mus"
+DATA "musc" ID 2 "music/lemm_tenbottles.mus"
+DATA "musc" ID 3 "music/lemm_cancan.mus"
+#ifdef PALM_MIDI_ANY
+HEX  "midi" ID 0 "3" 0x00
+DATA "midi" ID 1 "music/midi/high_quality/lemm_mountain.mid"
+DATA "midi" ID 2 "music/midi/high_quality/lemm_tenbottles.mid"
+DATA "midi" ID 3 "music/midi/high_quality/lemm_cancan.mid"
+#endif
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "Lemmings Temple" 0x00
+PALETTE ID 1 "levels/newage/level-01.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/newage/level-01-data.cmp"
+DATA "mask" ID 1 "levels/newage/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/newage/level-01-data.bin"
+DATA "mask" ID 1 "levels/newage/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "28"  0x00
+HEX  "yofs" ID 1 "28"  0x00 // ( 28, 28) = start position
+HEX  "_exx" ID 1 "496" 0x00
+HEX  "_exy" ID 1 "123" 0x00 // (496,123) = exit position
+HEX  "easy" ID 1 "@@@:50 0  0  5  5  15 5  0  5  50 45 599:@@@" 0x00
+HEX  "hard" ID 1 "@@@:50 0  0  1  1  10 1  0  1  50 49 599:@@@" 0x00
+HEX  "_f1x" ID 1 "640" 0x00
+HEX  "_f1y" ID 1 "128" 0x00
+HEX  "_f2x" ID 1 "640" 0x00
+HEX  "_f2y" ID 1 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 2:
+ */
+HEX  "titl" ID 2 "Garden of Lemmings" 0x00
+PALETTE ID 2 "levels/newage/level-02.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/newage/level-02-data.cmp"
+DATA "mask" ID 2 "levels/newage/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/newage/level-02-data.bin"
+DATA "mask" ID 2 "levels/newage/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "35"  0x00
+HEX  "yofs" ID 2 "21"  0x00 // ( 35, 21) = start position
+HEX  "_exx" ID 2 "592" 0x00
+HEX  "_exy" ID 2 "115" 0x00 // (592,115) = exit position
+HEX  "easy" ID 2 "@@@:50 5  5  5  5  40 5  5  5  50 40 599:@@@" 0x00
+HEX  "hard" ID 2 "@@@:50 1  0  1  1  30 0  1  1  50 49 599:@@@" 0x00
+HEX  "_f1x" ID 2 "640" 0x00
+HEX  "_f1y" ID 2 "128" 0x00
+HEX  "_f2x" ID 2 "640" 0x00
+HEX  "_f2y" ID 2 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "Go Away!" 0x00
+PALETTE ID 3 "levels/newage/level-03.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/newage/level-03-data.cmp"
+DATA "mask" ID 3 "levels/newage/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/newage/level-03-data.bin"
+DATA "mask" ID 3 "levels/newage/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "31"  0x00
+HEX  "yofs" ID 3 "44"  0x00 // ( 31, 44) = start position
+HEX  "_exx" ID 3 "605" 0x00
+HEX  "_exy" ID 3 "54"  0x00 // (605, 54) = exit position
+HEX  "easy" ID 3 "@@@:50 5  0  10 10 35 10 10 0  50 35 599:@@@" 0x00
+HEX  "hard" ID 3 "@@@:50 2  0  2  10 25 2  0  0  50 45 599:@@@" 0x00
+HEX  "_f1x" ID 3 "640" 0x00
+HEX  "_f1y" ID 3 "128" 0x00
+HEX  "_f2x" ID 3 "640" 0x00
+HEX  "_f2y" ID 3 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "Escaping the Paparizzi" 0x00
+PALETTE ID 4 "levels/newage/level-04.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/newage/level-04-data.cmp"
+DATA "mask" ID 4 "levels/newage/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/newage/level-04-data.bin"
+DATA "mask" ID 4 "levels/newage/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "602" 0x00
+HEX  "yofs" ID 4 "22"  0x00 // (602, 22) = start position
+HEX  "_exx" ID 4 "165" 0x00
+HEX  "_exy" ID 4 "36"  0x00 // (165, 36) = exit position
+HEX  "easy" ID 4 "@@@:50 5  5  5  5  30 15 5  5  50 40 599:@@@" 0x00
+HEX  "hard" ID 4 "@@@:50 1  1  2  2  20 1  0  1  50 48 599:@@@" 0x00
+HEX  "_f1x" ID 4 "640" 0x00
+HEX  "_f1y" ID 4 "128" 0x00
+HEX  "_f2x" ID 4 "640" 0x00
+HEX  "_f2y" ID 4 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "Tree House" 0x00
+PALETTE ID 5 "levels/newage/level-05.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/newage/level-05-data.cmp"
+DATA "mask" ID 5 "levels/newage/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/newage/level-05-data.bin"
+DATA "mask" ID 5 "levels/newage/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "23"  0x00
+HEX  "yofs" ID 5 "14"  0x00 // ( 23, 14) = start position
+HEX  "_exx" ID 5 "620" 0x00
+HEX  "_exy" ID 5 "93"  0x00 // (620, 93) = exit position
+HEX  "easy" ID 5 "@@@:50 5  0  5  5  30 10 10 5  50 40 599:@@@" 0x00
+HEX  "hard" ID 5 "@@@:50 0  0  1  2  20 0  1  0  50 49 599:@@@" 0x00
+HEX  "_f1x" ID 5 "640" 0x00
+HEX  "_f1y" ID 5 "128" 0x00
+HEX  "_f2x" ID 5 "640" 0x00
+HEX  "_f2y" ID 5 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "Brick & Mortar" 0x00
+PALETTE ID 6 "levels/newage/level-06.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/newage/level-06-data.cmp"
+DATA "mask" ID 6 "levels/newage/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/newage/level-06-data.bin"
+DATA "mask" ID 6 "levels/newage/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "33"  0x00
+HEX  "yofs" ID 6 "46"  0x00 // ( 33, 46) = start position
+HEX  "_exx" ID 6 "600" 0x00
+HEX  "_exy" ID 6 "112" 0x00 // (600,112) = exit position
+HEX  "easy" ID 6 "@@@:50 5  5  10 10 40 10 5  5  50 40 599:@@@" 0x00
+HEX  "hard" ID 6 "@@@:50 1  1  2  5  30 3  0  1  50 48 599:@@@" 0x00
+HEX  "_f1x" ID 6 "640" 0x00
+HEX  "_f1y" ID 6 "128" 0x00
+HEX  "_f2x" ID 6 "640" 0x00
+HEX  "_f2y" ID 6 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "A-Mazing Lemmings" 0x00
+PALETTE ID 7 "levels/newage/level-07.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/newage/level-07-data.cmp"
+DATA "mask" ID 7 "levels/newage/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/newage/level-07-data.bin"
+DATA "mask" ID 7 "levels/newage/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "613" 0x00
+HEX  "yofs" ID 7 "35"  0x00 // (613, 35) = start position
+HEX  "_exx" ID 7 "52"  0x00
+HEX  "_exy" ID 7 "52"  0x00 // ( 52, 52) = exit position
+HEX  "easy" ID 7 "@@@:50 5  5  5  5  60 5  5  5  50 30 599:@@@" 0x00
+HEX  "hard" ID 7 "@@@:50 1  1  1  1  30 0  1  0  50 49 599:@@@" 0x00
+HEX  "_f1x" ID 7 "640" 0x00
+HEX  "_f1y" ID 7 "128" 0x00
+HEX  "_f2x" ID 7 "640" 0x00
+HEX  "_f2y" ID 7 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 8
+ */
+HEX  "titl" ID 8 "Atomic Bath" 0x00
+PALETTE ID 8 "levels/newage/level-08.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 8 "levels/newage/level-08-data.cmp"
+DATA "mask" ID 8 "levels/newage/level-08-mask.cmp"
+#else
+DATA "_gfx" ID 8 "levels/newage/level-08-data.bin"
+DATA "mask" ID 8 "levels/newage/level-08-mask.bin"
+#endif
+HEX  "xofs" ID 8 "607" 0x00
+HEX  "yofs" ID 8 "22"  0x00 // (607, 22) = start position
+HEX  "_exx" ID 8 "41"  0x00
+HEX  "_exy" ID 8 "52"  0x00 // ( 41, 52) = exit position
+HEX  "easy" ID 8 "@@@:50 5  5  5  5  30 30 10 10 50 40 599:@@@" 0x00
+HEX  "hard" ID 8 "@@@:50 1  1  1  1  15 15 0  5  50 49 599:@@@" 0x00
+HEX  "_f1x" ID 8 "640" 0x00
+HEX  "_f1y" ID 8 "128" 0x00
+HEX  "_f2x" ID 8 "640" 0x00
+HEX  "_f2y" ID 8 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 9
+ */
+HEX  "titl" ID 9 "Up or Down?" 0x00
+PALETTE ID 9 "levels/newage/level-09.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 9 "levels/newage/level-09-data.cmp"
+DATA "mask" ID 9 "levels/newage/level-09-mask.cmp"
+#else
+DATA "_gfx" ID 9 "levels/newage/level-09-data.bin"
+DATA "mask" ID 9 "levels/newage/level-09-mask.bin"
+#endif
+HEX  "xofs" ID 9 "29"  0x00
+HEX  "yofs" ID 9 "26"  0x00 // ( 29, 26) = start position
+HEX  "_exx" ID 9 "582" 0x00
+HEX  "_exy" ID 9 "80"  0x00 // (582, 80) = exit position
+HEX  "easy" ID 9 "@@@:50 0  5  5  5  55 10 0  5  50 25 599:@@@" 0x00
+HEX  "hard" ID 9 "@@@:50 0  0  2  2  35 2  0  0  50 49 599:@@@" 0x00
+HEX  "_f1x" ID 9 "640" 0x00
+HEX  "_f1y" ID 9 "128" 0x00
+HEX  "_f2x" ID 9 "640" 0x00
+HEX  "_f2y" ID 9 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 10
+ */
+HEX  "titl" ID 10 "Crystalline Lemmings" 0x00
+PALETTE ID 10 "levels/newage/level-10.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 10 "levels/newage/level-10-data.cmp"
+DATA "mask" ID 10 "levels/newage/level-10-mask.cmp"
+#else
+DATA "_gfx" ID 10 "levels/newage/level-10-data.bin"
+DATA "mask" ID 10 "levels/newage/level-10-mask.bin"
+#endif
+HEX  "xofs" ID 10 "26"  0x00
+HEX  "yofs" ID 10 "19"  0x00 // ( 26, 19) = start position
+HEX  "_exx" ID 10 "601" 0x00
+HEX  "_exy" ID 10 "56"  0x00 // (601, 56) = exit position
+HEX  "easy" ID 10 "@@@:50 0  0  5  5  40 5  5  5  50 40 599:@@@" 0x00
+HEX  "hard" ID 10 "@@@:50 0  0  2  2  20 0  1  0  50 50 599:@@@" 0x00
+HEX  "_f1x" ID 10 "640" 0x00
+HEX  "_f1y" ID 10 "128" 0x00
+HEX  "_f2x" ID 10 "640" 0x00
+HEX  "_f2y" ID 10 "128" 0x00 // exit "fires" (640,128) and (640,128)
+

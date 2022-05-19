@@ -1,0 +1,726 @@
+/*
+ * @(#)lemmigns_en_CLASSIC_TAXING.rcp
+ *
+ * Copyright 2001-2003, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "../src/resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "CLASSIC:TAXING" 0x00
+
+// pack bitmap
+BITMAPFAMILYSPECIAL "logo" 0
+  "" "levels/\classic-taxing/logo2bpp.bmp" "levels/\classic-taxing/logo4bpc.bmp" COMPRESS
+
+// the number of levels?
+HEX  "levl" ID 0 "30" 0x00
+
+// user info [for encryption]
+HEX  "_key" ID 0 "DATA=xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 256 bytes of data
+HEX  "xxxx" ID 0 "|HaCkMe|" 0x00
+
+//
+// music
+//
+
+HEX  "musc" ID 0 "3" 0x00
+DATA "musc" ID 1 "music/lemm_mountain.mus"
+DATA "musc" ID 2 "music/lemm_tenbottles.mus"
+DATA "musc" ID 3 "music/lemm_cancan.mus"
+#ifdef PALM_MIDI_ANY
+HEX  "midi" ID 0 "3" 0x00
+DATA "midi" ID 1 "music/midi/high_quality/lemm_mountain.mid"
+DATA "midi" ID 2 "music/midi/high_quality/lemm_tenbottles.mid"
+DATA "midi" ID 3 "music/midi/high_quality/lemm_cancan.mid"
+#endif
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "If at first you don't succeed" 0x00
+PALETTE ID 1 "levels/\classic-taxing/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/\classic-taxing/level-01-data.cmp"
+DATA "mask" ID 1 "levels/\classic-taxing/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/\classic-taxing/level-01-data.bin"
+DATA "mask" ID 1 "levels/\classic-taxing/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "43"  0x00
+HEX  "yofs" ID 1 "30"  0x00 // ( 43,30) = start position
+HEX  "_exx" ID 1 "582" 0x00
+HEX  "_exy" ID 1 "38"  0x00 // (582,38) = exit position
+HEX  "easy" ID 1 "@@@:40 2  2  2  2  8  1  2  2  50 49 240:@@@" 0x00
+HEX  "_f1x" ID 1 "560" 0x00
+HEX  "_f1y" ID 1 "11"  0x00
+HEX  "_f2x" ID 1 "587" 0x00
+HEX  "_f2y" ID 1 "11"  0x00 // exit "fires" (560, 11) and (587, 11)
+
+/*
+ * level 2
+ */
+HEX  "titl" ID 2 "Watch out, there's traps about" 0x00
+PALETTE ID 2 "levels/classic-taxing/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/classic-taxing/level-02-data.cmp"
+DATA "mask" ID 2 "levels/classic-taxing/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/classic-taxing/level-02-data.bin"
+DATA "mask" ID 2 "levels/classic-taxing/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "248" 0x00
+HEX  "yofs" ID 2 "22"  0x00 // (248,22) = start position
+HEX  "_exx" ID 2 "26"  0x00
+HEX  "_exy" ID 2 "74"  0x00 // ( 26, 74) = exit position
+HEX  "easy" ID 2 "@@@:70 10 5  5  0  3  1  2  0  50 40 300:@@@" 0x00
+HEX  "_f1x" ID 2 "4"   0x00
+HEX  "_f1y" ID 2 "45"  0x00
+HEX  "_f2x" ID 2 "31"  0x00
+HEX  "_f2y" ID 2 "45"  0x00 // exit "fires" (  4, 45) and ( 31, 45)
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "Heaven can wait (we hope!)" 0x00
+PALETTE ID 3 "levels/\classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/\classic-taxing/level-03-data.cmp"
+DATA "mask" ID 3 "levels/\classic-taxing/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/\classic-taxing/level-03-data.bin"
+DATA "mask" ID 3 "levels/\classic-taxing/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "151" 0x00
+HEX  "yofs" ID 3 "98"  0x00 // (151,98) = start position
+HEX  "_exx" ID 3 "486" 0x00
+HEX  "_exy" ID 3 "53"  0x00 // (486,53) = exit position
+HEX  "easy" ID 3 "@@@:40 30 30 30 0  30 30 30 30 50 50 180:@@@" 0x00
+HEX  "_f1x" ID 3 "474" 0x00
+HEX  "_f1y" ID 3 "14"  0x00
+HEX  "_f2x" ID 3 "481" 0x00
+HEX  "_f2y" ID 3 "14"  0x00 // exit "fires" (474, 14) and (481, 14)
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "Lend a helping hand" 0x00
+PALETTE ID 4 "levels/\classic-taxing/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/\classic-taxing/level-04-data.cmp"
+DATA "mask" ID 4 "levels/\classic-taxing/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/\classic-taxing/level-04-data.bin"
+DATA "mask" ID 4 "levels/\classic-taxing/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "356" 0x00
+HEX  "yofs" ID 4 "98"  0x00 // (356, 98) = start position
+HEX  "_exx" ID 4 "326" 0x00
+HEX  "_exy" ID 4 "22"  0x00 // (608, 98) = exit position
+HEX  "easy" ID 4 "@@@:50 0  0  5  4  20 2  2  2  40 30 420:@@@" 0x00
+HEX  "_f1x" ID 4 "304" 0x00
+HEX  "_f1y" ID 4 "-3"  0x00
+HEX  "_f2x" ID 4 "331" 0x00
+HEX  "_f2y" ID 4 "-3"  0x00 // exit "fires" (304, -3) and (331, -3)
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "The Prison!" 0x00
+PALETTE ID 5 "levels/\classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/\classic-taxing/level-05-data.cmp"
+DATA "mask" ID 5 "levels/\classic-taxing/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/\classic-taxing/level-05-data.bin"
+DATA "mask" ID 5 "levels/\classic-taxing/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "212" 0x00
+HEX  "yofs" ID 5 "70"  0x00 // (212, 70) = start position
+HEX  "_exx" ID 5 "435" 0x00
+HEX  "_exy" ID 5 "53"  0x00 // (435, 53) = exit position
+HEX  "easy" ID 5 "@@@:50 0  0  5  4  20 10 0  3  50 37 300:@@@" 0x00
+HEX  "_f1x" ID 5 "423" 0x00
+HEX  "_f1y" ID 5 "14"  0x00
+HEX  "_f2x" ID 5 "430" 0x00
+HEX  "_f2y" ID 5 "14"  0x00 // exit "fires" (423, 14) and (430, 14)
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "Compression Method 1" 0x00
+PALETTE ID 6 "levels/\classic-taxing/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/\classic-taxing/level-06-data.cmp"
+DATA "mask" ID 6 "levels/\classic-taxing/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/\classic-taxing/level-06-data.bin"
+DATA "mask" ID 6 "levels/\classic-taxing/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "291" 0x00
+HEX  "yofs" ID 6 "19"  0x00 // (291,19) = start position
+HEX  "_exx" ID 6 "486" 0x00
+HEX  "_exy" ID 6 "102" 0x00 // (486,102) = exit position
+HEX  "easy" ID 6 "@@@:99 0  0  0  0  10 0  2  0  50 30 180:@@@" 0x00
+HEX  "_f1x" ID 6 "464" 0x00
+HEX  "_f1y" ID 6 "74"  0x00
+HEX  "_f2x" ID 6 "492" 0x00
+HEX  "_f2y" ID 6 "74"  0x00 // exit "fires" (464, 74) and (492, 74)
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "Every Lemming for himself!" 0x00
+PALETTE ID 7 "levels/\classic-taxing/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/\classic-taxing/level-07-data.cmp"
+DATA "mask" ID 7 "levels/\classic-taxing/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/\classic-taxing/level-07-data.bin"
+DATA "mask" ID 7 "levels/\classic-taxing/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "39"  0x00
+HEX  "yofs" ID 7 "34"  0x00 // ( 39, 34) = start position
+HEX  "_exx" ID 7 "608" 0x00
+HEX  "_exy" ID 7 "98"  0x00 // (608, 98) = exit position
+HEX  "easy" ID 7 "@@@:55 1  0  5  1  6  1  0  0  50 49 240:@@@" 0x00
+HEX  "_f1x" ID 7 "586" 0x00
+HEX  "_f1y" ID 7 "69"  0x00
+HEX  "_f2x" ID 7 "613" 0x00
+HEX  "_f2y" ID 7 "69"  0x00 // exit "fires" (586, 69) and (613, 69)
+
+/*
+ * level 8
+ */
+HEX  "titl" ID 8 "The Art Gallery" 0x00
+PALETTE ID 8 "levels/\classic-taxing/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 8 "levels/\classic-taxing/level-08-data.cmp"
+DATA "mask" ID 8 "levels/\classic-taxing/level-08-mask.cmp"
+#else
+DATA "_gfx" ID 8 "levels/\classic-taxing/level-08-data.bin"
+DATA "mask" ID 8 "levels/\classic-taxing/level-08-mask.bin"
+#endif
+HEX  "xofs" ID 8 "35"  0x00
+HEX  "yofs" ID 8 "61"  0x00 // ( 35, 61) = start position
+HEX  "_exx" ID 8 "609" 0x00
+HEX  "_exy" ID 8 "69"  0x00 // (609, 69) = exit position
+HEX  "easy" ID 8 "@@@:20 10 10 10 0  10 10 0  0  50 50 240:@@@" 0x00
+HEX  "_f1x" ID 8 "587" 0x00
+HEX  "_f1y" ID 8 "40"  0x00
+HEX  "_f2x" ID 8 "615" 0x00
+HEX  "_f2y" ID 8 "40"  0x00 // exit "fires" (587, 40) and (615, 40)
+
+/*
+ * level 9
+ */
+HEX  "titl" ID 9 "Perseverance" 0x00
+PALETTE ID 9 "levels/\classic-taxing/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 9 "levels/\classic-taxing/level-09-data.cmp"
+DATA "mask" ID 9 "levels/\classic-taxing/level-09-mask.cmp"
+#else
+DATA "_gfx" ID 9 "levels/\classic-taxing/level-09-data.bin"
+DATA "mask" ID 9 "levels/\classic-taxing/level-09-mask.bin"
+#endif
+HEX  "xofs" ID 9 "327" 0x00
+HEX  "yofs" ID 9 "17"  0x00 // (327,17)  = start position
+HEX  "_exx" ID 9 "265" 0x00
+HEX  "_exy" ID 9 "121" 0x00 // (265,121) = exit position
+HEX  "easy" ID 9 "@@@:50 2  1  1  2  2  1  1  2  20 20 240:@@@" 0x00
+HEX  "_f1x" ID 9 "243" 0x00
+HEX  "_f1y" ID 9 "92"  0x00
+HEX  "_f2x" ID 9 "270" 0x00
+HEX  "_f2y" ID 9 "92"  0x00 // exit "fires" (243, 92) and (270, 92)
+
+/*
+ * level 10
+ */
+HEX  "titl" ID 10 "Izzie Wizzie lemmings get busy" 0x00
+PALETTE ID 10 "levels/\classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 10 "levels/\classic-taxing/level-10-data.cmp"
+DATA "mask" ID 10 "levels/\classic-taxing/level-10-mask.cmp"
+#else
+DATA "_gfx" ID 10 "levels/\classic-taxing/level-10-data.bin"
+DATA "mask" ID 10 "levels/\classic-taxing/level-10-mask.bin"
+#endif
+HEX  "xofs" ID 10 "123" 0x00
+HEX  "yofs" ID 10 "26"  0x00 // (123, 26) = start position
+HEX  "_exx" ID 10 "442" 0x00
+HEX  "_exy" ID 10 "95"  0x00 // (442, 95) = exit position
+HEX  "easy" ID 10 "@@@:50 0  0  5  5  15 5  5  5  5  5  300:@@@" 0x00
+HEX  "_f1x" ID 10 "429" 0x00
+HEX  "_f1y" ID 10 "57"  0x00
+HEX  "_f2x" ID 10 "436" 0x00
+HEX  "_f2y" ID 10 "57"  0x00 // exit "fires" (429,57) and (426,57)
+
+/*
+ * level 11
+ */
+HEX  "titl" ID 11 "The ascending pillar scenario" 0x00
+PALETTE ID 11 "levels/\classic-taxing/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 11 "levels/\classic-taxing/level-11-data.cmp"
+DATA "mask" ID 11 "levels/\classic-taxing/level-11-mask.cmp"
+#else
+DATA "_gfx" ID 11 "levels/\classic-taxing/level-11-data.bin"
+DATA "mask" ID 11 "levels/\classic-taxing/level-11-mask.bin"
+#endif
+HEX  "xofs" ID 11 "565" 0x00
+HEX  "yofs" ID 11 "63"  0x00 // (565, 63) = start position
+HEX  "_exx" ID 11 "87"  0x00
+HEX  "_exy" ID 11 "111" 0x00 // ( 87,111) = exit position
+HEX  "easy" ID 11 "@@@:40 2  1  0  0  20 5  5  5  50 50 360:@@@" 0x00
+HEX  "_f1x" ID 11 "65"  0x00
+HEX  "_f1y" ID 11 "82"  0x00
+HEX  "_f2x" ID 11 "92"  0x00
+HEX  "_f2y" ID 11 "82"  0x00 // exit "fires" ( 65, 82) and ( 92, 82)
+
+/*
+ * level 12
+ */
+HEX  "titl" ID 12 "Livin' On The Edge" 0x00
+PALETTE ID 12 "levels/classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 12 "levels/classic-taxing/level-12-data.cmp"
+DATA "mask" ID 12 "levels/classic-taxing/level-12-mask.cmp"
+#else
+DATA "_gfx" ID 12 "levels/classic-taxing/level-12-data.bin"
+DATA "mask" ID 12 "levels/classic-taxing/level-12-mask.bin"
+#endif
+HEX  "xofs" ID 12 "174" 0x00
+HEX  "yofs" ID 12 "86"  0x00 // (174, 86) = start position
+HEX  "_exx" ID 12 "509" 0x00
+HEX  "_exy" ID 12 "45"  0x00 // (509, 45) = exit position
+HEX  "easy" ID 12 "@@@:30 10 10 10 2  10 10 10 10 10 8  300:@@@" 0x00
+HEX  "_f1x" ID 12 "497" 0x00
+HEX  "_f1y" ID 12 "6"   0x00
+HEX  "_f2x" ID 12 "504" 0x00
+HEX  "_f2y" ID 12 "6"   0x00 // exit "fires" (497,  6) and (504,  6)
+
+/*
+ * level 13
+ */
+HEX  "titl" ID 13 "Upsidedown World" 0x00
+PALETTE ID 13 "levels/classic-taxing/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 13 "levels/classic-taxing/level-13-data.cmp"
+DATA "mask" ID 13 "levels/classic-taxing/level-13-mask.cmp"
+#else
+DATA "_gfx" ID 13 "levels/classic-taxing/level-13-data.bin"
+DATA "mask" ID 13 "levels/classic-taxing/level-13-mask.bin"
+#endif
+HEX  "xofs" ID 13 "41"  0x00
+HEX  "yofs" ID 13 "45"  0x00 // ( 41, 45) = start position
+HEX  "_exx" ID 13 "605" 0x00
+HEX  "_exy" ID 13 "62"  0x00 // (605, 62) = exit position
+HEX  "easy" ID 13 "@@@:40 1  0  10 1  2  3  4  2  50 49 360:@@@" 0x00
+HEX  "_f1x" ID 13 "584" 0x00
+HEX  "_f1y" ID 13 "33"  0x00
+HEX  "_f2x" ID 13 "611" 0x00
+HEX  "_f2y" ID 13 "33"  0x00 // exit "fires" (584, 33) and (611, 33)
+
+/*
+ * level 14
+ */
+HEX  "titl" ID 14 "Hunt the Nessy" 0x00
+PALETTE ID 14 "levels/classic-taxing/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 14 "levels/classic-taxing/level-14-data.cmp"
+DATA "mask" ID 14 "levels/classic-taxing/level-14-mask.cmp"
+#else
+DATA "_gfx" ID 14 "levels/classic-taxing/level-14-data.bin"
+DATA "mask" ID 14 "levels/classic-taxing/level-14-mask.bin"
+#endif
+HEX  "xofs" ID 14 "42"  0x00
+HEX  "yofs" ID 14 "48"  0x00 // ( 42, 48) = start position
+HEX  "_exx" ID 14 "615" 0x00
+HEX  "_exy" ID 14 "72"  0x00 // (615, 72) = exit position
+HEX  "easy" ID 14 "@@@:30 0  0  0  0  15 2  1  1  50 47 480:@@@" 0x00
+HEX  "_f1x" ID 14 "593" 0x00
+HEX  "_f1y" ID 14 "43"  0x00
+HEX  "_f2x" ID 14 "620" 0x00
+HEX  "_f2y" ID 14 "43"  0x00 // exit "fires" (593, 43) and (620, 43)
+
+/*
+ * level 15
+ */
+HEX  "titl" ID 15 "What an AWESOME level" 0x00
+PALETTE ID 15 "levels/\classic-taxing/palette-alien.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 15 "levels/\classic-taxing/level-15-data.cmp"
+DATA "mask" ID 15 "levels/\classic-taxing/level-15-mask.cmp"
+#else
+DATA "_gfx" ID 15 "levels/\classic-taxing/level-15-data.bin"
+DATA "mask" ID 15 "levels/\classic-taxing/level-15-mask.bin"
+#endif
+HEX  "xofs" ID 15 "29"  0x00
+HEX  "yofs" ID 15 "16"  0x00 // ( 29, 16) = start position
+HEX  "_exx" ID 15 "607" 0x00
+HEX  "_exy" ID 15 "25"  0x00 // (607, 25) = exit position
+HEX  "easy" ID 15 "@@@:50 20 20 20 20 10 20 20 20 50 50 360:@@@" 0x00
+HEX  "_f1x" ID 15 "585" 0x00
+HEX  "_f1y" ID 15 "-3"  0x00
+HEX  "_f2x" ID 15 "612" 0x00
+HEX  "_f2y" ID 15 "-3"  0x00 // exit "fires" (585, -3) and (612, -3)
+
+/*
+ * level 16
+ */
+HEX  "titl" ID 16 "Mary Poppins' land" 0x00
+PALETTE ID 16 "levels/\classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 16 "levels/\classic-taxing/level-16-data.cmp"
+DATA "mask" ID 16 "levels/\classic-taxing/level-16-mask.cmp"
+#else
+DATA "_gfx" ID 16 "levels/\classic-taxing/level-16-data.bin"
+DATA "mask" ID 16 "levels/\classic-taxing/level-16-mask.bin"
+#endif
+HEX  "xofs" ID 16 "55"  0x00
+HEX  "yofs" ID 16 "17"  0x00 // ( 55, 17) = start position
+HEX  "_exx" ID 16 "568" 0x00
+HEX  "_exy" ID 16 "91"  0x00 // (568, 91) = exit position
+HEX  "easy" ID 16 "@@@:50 0  4  3  3  20 0  0  0  50 48 300:@@@" 0x00
+HEX  "_f1x" ID 16 "556" 0x00
+HEX  "_f1y" ID 16 "52"  0x00
+HEX  "_f2x" ID 16 "563" 0x00
+HEX  "_f2y" ID 16 "52"  0x00 // exit "fires" (556, 52) and (563, 52)
+
+/*
+ * level 17
+ */
+HEX  "titl" ID 17 "X mark'ed' the spot" 0x00
+PALETTE ID 17 "levels/\classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 17 "levels/\classic-taxing/level-17-data.cmp"
+DATA "mask" ID 17 "levels/\classic-taxing/level-17-mask.cmp"
+#else
+DATA "_gfx" ID 17 "levels/\classic-taxing/level-17-data.bin"
+DATA "mask" ID 17 "levels/\classic-taxing/level-17-mask.bin"
+#endif
+HEX  "xofs" ID 17 "469" 0x00
+HEX  "yofs" ID 17 "72"  0x00 // (469,72) = start position
+HEX  "_exx" ID 17 "23"  0x00
+HEX  "_exy" ID 17 "112" 0x00 // ( 23,112) = exit position
+HEX  "easy" ID 17 "@@@:50 5  0  5  0  20 5  6  0  50 45 420:@@@" 0x00
+HEX  "_f1x" ID 17 "11"  0x00
+HEX  "_f1y" ID 17 "73"  0x00
+HEX  "_f2x" ID 17 "18"  0x00
+HEX  "_f2y" ID 17 "73"  0x00 // exit "fires" ( 11, 73) and ( 18, 73)
+
+/*
+ * level 18
+ */
+HEX  "titl" ID 18 "Tribute to M.C.Escher" 0x00
+PALETTE ID 18 "levels/\classic-taxing/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 18 "levels/\classic-taxing/level-18-data.cmp"
+DATA "mask" ID 18 "levels/\classic-taxing/level-18-mask.cmp"
+#else
+DATA "_gfx" ID 18 "levels/\classic-taxing/level-18-data.bin"
+DATA "mask" ID 18 "levels/\classic-taxing/level-18-mask.bin"
+#endif
+HEX  "xofs" ID 18 "192" 0x00
+HEX  "yofs" ID 18 "68"  0x00 // (192, 68) = start position
+HEX  "_exx" ID 18 "435" 0x00
+HEX  "_exy" ID 18 "115" 0x00 // (435,115) = exit position
+HEX  "easy" ID 18 "@@@:50 0  1  15 0  15 1  0  1  50 43 300:@@@" 0x00
+HEX  "_f1x" ID 18 "413" 0x00
+HEX  "_f1y" ID 18 "87"  0x00
+HEX  "_f2x" ID 18 "441" 0x00
+HEX  "_f2y" ID 18 "87"  0x00 // exit "fires" (413, 87) and (441, 87)
+
+/*
+ * level 19
+ */
+HEX  "titl" ID 19 "Bomboozal" 0x00
+PALETTE ID 19 "levels/\classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 19 "levels/\classic-taxing/level-19-data.cmp"
+DATA "mask" ID 19 "levels/\classic-taxing/level-19-mask.cmp"
+#else
+DATA "_gfx" ID 19 "levels/\classic-taxing/level-19-data.bin"
+DATA "mask" ID 19 "levels/\classic-taxing/level-19-mask.bin"
+#endif
+HEX  "xofs" ID 19 "77"  0x00
+HEX  "yofs" ID 19 "19"  0x00 // ( 77,19) = start position
+HEX  "_exx" ID 19 "560" 0x00
+HEX  "_exy" ID 19 "107" 0x00 // (560,107) = exit position
+HEX  "easy" ID 19 "@@@:80 0  0  15 0  0  0  0  0  50 45 300:@@@" 0x00
+HEX  "_f1x" ID 19 "548" 0x00
+HEX  "_f1y" ID 19 "69"  0x00
+HEX  "_f2x" ID 19 "555" 0x00
+HEX  "_f2y" ID 19 "69"  0x00 // exit "fires" (548, 69) and (555, 69)
+
+/*
+ * level 20
+ */
+HEX  "titl" ID 20 "Walk the web rope" 0x00
+PALETTE ID 20 "levels/classic-taxing/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 20 "levels/classic-taxing/level-20-data.cmp"
+DATA "mask" ID 20 "levels/classic-taxing/level-20-mask.cmp"
+#else
+DATA "_gfx" ID 20 "levels/classic-taxing/level-20-data.bin"
+DATA "mask" ID 20 "levels/classic-taxing/level-20-mask.bin"
+#endif
+HEX  "xofs" ID 20 "25"  0x00
+HEX  "yofs" ID 20 "72"  0x00 // ( 25, 72) = start position
+HEX  "_exx" ID 20 "602" 0x00
+HEX  "_exy" ID 20 "124" 0x00 // (602,124) = exit position
+HEX  "easy" ID 20 "@@@:50 20 20 20 20 20 20 20 20 50 50 240:@@@" 0x00
+HEX  "_f1x" ID 20 "581" 0x00
+HEX  "_f1y" ID 20 "95" 0x00
+HEX  "_f2x" ID 20 "609" 0x00
+HEX  "_f2y" ID 20 "95" 0x00 // exit "fires" (581, 95) and (609, 95)
+
+/*
+ * level 21
+ */
+HEX  "titl" ID 21 "Feel the heat!" 0x00
+PALETTE ID 21 "levels/classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 21 "levels/classic-taxing/level-21-data.cmp"
+DATA "mask" ID 21 "levels/classic-taxing/level-21-mask.cmp"
+#else
+DATA "_gfx" ID 21 "levels/classic-taxing/level-21-data.bin"
+DATA "mask" ID 21 "levels/classic-taxing/level-21-mask.bin"
+#endif
+HEX  "xofs" ID 21 "190" 0x00
+HEX  "yofs" ID 21 "70"  0x00 // (190, 70) = start position
+HEX  "_exx" ID 21 "365" 0x00
+HEX  "_exy" ID 21 "93"  0x00 // (365, 93) = exit position
+HEX  "easy" ID 21 "@@@:70 3  3  3  3  4  3  3  3  20 20 120:@@@" 0x00
+HEX  "_f1x" ID 21 "353" 0x00
+HEX  "_f1y" ID 21 "54"  0x00
+HEX  "_f2x" ID 21 "360" 0x00
+HEX  "_f2y" ID 21 "54"  0x00 // exit "fires" (353, 54) and (360, 54)
+
+/*
+ * level 22
+ */
+HEX  "titl" ID 22 "Come on over to my place" 0x00
+PALETTE ID 22 "levels/\classic-taxing/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 22 "levels/\classic-taxing/level-22-data.cmp"
+DATA "mask" ID 22 "levels/\classic-taxing/level-22-mask.cmp"
+#else
+DATA "_gfx" ID 22 "levels/\classic-taxing/level-22-data.bin"
+DATA "mask" ID 22 "levels/\classic-taxing/level-22-mask.bin"
+#endif
+HEX  "xofs" ID 22 "252" 0x00
+HEX  "yofs" ID 22 "29"  0x00 // (252, 29) = start position
+HEX  "_exx" ID 22 "425" 0x00
+HEX  "_exy" ID 22 "117" 0x00 // (425,117) = exit position
+HEX  "easy" ID 22 "@@@:40 0  2  0  1  5  1  1  2  50 50 180:@@@" 0x00
+HEX  "_f1x" ID 22 "403" 0x00
+HEX  "_f1y" ID 22 "89"  0x00
+HEX  "_f2x" ID 22 "431" 0x00
+HEX  "_f2y" ID 22 "89"  0x00 // exit "fires" (403, 89) and (431, 89)
+
+/*
+ * level 23
+ */
+HEX  "titl" ID 23 "King of the castle" 0x00
+PALETTE ID 23 "levels/classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 23 "levels/classic-taxing/level-23-data.cmp"
+DATA "mask" ID 23 "levels/classic-taxing/level-23-mask.cmp"
+#else
+DATA "_gfx" ID 23 "levels/classic-taxing/level-23-data.bin"
+DATA "mask" ID 23 "levels/classic-taxing/level-23-mask.bin"
+#endif
+HEX  "xofs" ID 23 "434" 0x00
+HEX  "yofs" ID 23 "107" 0x00 // (434,107) = start position
+HEX  "_exx" ID 23 "178" 0x00
+HEX  "_exy" ID 23 "49"  0x00 // (178, 49) = exit position
+HEX  "easy" ID 23 "@@@:50 0  0  0  0  20 0  0  0  50 49 360:@@@" 0x00
+HEX  "_f1x" ID 23 "165" 0x00
+HEX  "_f1y" ID 23 "11"  0x00
+HEX  "_f2x" ID 23 "172" 0x00
+HEX  "_f2y" ID 23 "11"  0x00 // exit "fires" (165, 11) and (172, 11)
+
+/*
+ * level 24
+ */
+HEX  "titl" ID 24 "Take a running jump" 0x00
+PALETTE ID 24 "levels/classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 24 "levels/classic-taxing/level-24-data.cmp"
+DATA "mask" ID 24 "levels/classic-taxing/level-24-mask.cmp"
+#else
+DATA "_gfx" ID 24 "levels/classic-taxing/level-24-data.bin"
+DATA "mask" ID 24 "levels/classic-taxing/level-24-mask.bin"
+#endif
+HEX  "xofs" ID 24 "34"  0x00
+HEX  "yofs" ID 24 "50"  0x00 // ( 34, 50) = start position
+HEX  "_exx" ID 24 "264" 0x00
+HEX  "_exy" ID 24 "98"  0x00 // (264, 98) = exit position
+HEX  "easy" ID 24 "@@@:50 0  0  0  0  30 0  0  0  50 49 240:@@@" 0x00
+HEX  "_f1x" ID 24 "252" 0x00
+HEX  "_f1y" ID 24 "59"  0x00
+HEX  "_f2x" ID 24 "259" 0x00
+HEX  "_f2y" ID 24 "59"  0x00 // exit "fires" (252, 59) and (259, 59)
+
+/*
+ * level 25
+ */
+HEX  "titl" ID 25 "Follow the leader" 0x00
+PALETTE ID 25 "levels/classic-taxing/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 25 "levels/classic-taxing/level-25-data.cmp"
+DATA "mask" ID 25 "levels/classic-taxing/level-25-mask.cmp"
+#else
+DATA "_gfx" ID 25 "levels/classic-taxing/level-25-data.bin"
+DATA "mask" ID 25 "levels/classic-taxing/level-25-mask.bin"
+#endif
+HEX  "xofs" ID 25 "95"  0x00
+HEX  "yofs" ID 25 "58"  0x00 // ( 95,58) = start position
+HEX  "_exx" ID 25 "603" 0x00
+HEX  "_exy" ID 25 "50"  0x00 // (603,50) = exit position
+HEX  "easy" ID 25 "@@@:20 0  0  10 0  7  5  0  0  50 45 240:@@@" 0x00
+HEX  "_f1x" ID 25 "581" 0x00
+HEX  "_f1y" ID 25 "22"  0x00
+HEX  "_f2x" ID 25 "609" 0x00
+HEX  "_f2y" ID 25 "22"  0x00 // exit "fires" (581, 22) and (609, 22)
+
+/*
+ * level 26
+ */
+HEX  "titl" ID 26 "Squeeze" 0x00
+PALETTE ID 26 "levels/\classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 26 "levels/\classic-taxing/level-26-data.cmp"
+DATA "mask" ID 26 "levels/\classic-taxing/level-26-mask.cmp"
+#else
+DATA "_gfx" ID 26 "levels/\classic-taxing/level-26-data.bin"
+DATA "mask" ID 26 "levels/\classic-taxing/level-26-mask.bin"
+#endif
+HEX  "xofs" ID 26 "429" 0x00
+HEX  "yofs" ID 26 "87"  0x00 // (429, 87) = start position
+HEX  "_exx" ID 26 "316" 0x00
+HEX  "_exy" ID 26 "66"  0x00 // (316, 66) = exit position
+HEX  "easy" ID 26 "@@@:80 10 10 10 10 10 10 10 10 50 49 300:@@@" 0x00
+HEX  "_f1x" ID 26 "304" 0x00
+HEX  "_f1y" ID 26 "27"  0x00
+HEX  "_f2x" ID 26 "311" 0x00
+HEX  "_f2y" ID 26 "27"  0x00 // exit "fires" (304, 27) and (311, 27)
+
+/*
+ * level 27
+ */
+HEX  "titl" ID 27 "Call in the bomb squad" 0x00
+PALETTE ID 27 "levels/classic-taxing/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 27 "levels/classic-taxing/level-27-data.cmp"
+DATA "mask" ID 27 "levels/classic-taxing/level-27-mask.cmp"
+#else
+DATA "_gfx" ID 27 "levels/classic-taxing/level-27-data.bin"
+DATA "mask" ID 27 "levels/classic-taxing/level-27-mask.bin"
+#endif
+HEX  "xofs" ID 27 "197" 0x00
+HEX  "yofs" ID 27 "79"  0x00 // (197, 79) = start position
+HEX  "_exx" ID 27 "375" 0x00
+HEX  "_exy" ID 27 "39"  0x00 // (375, 39) = exit position
+HEX  "easy" ID 27 "@@@:10 0  0  10 10 10 0  0  0  50 30 300:@@@" 0x00
+HEX  "_f1x" ID 27 "353" 0x00
+HEX  "_f1y" ID 27 "10"  0x00
+HEX  "_f2x" ID 27 "380" 0x00
+HEX  "_f2y" ID 27 "10"  0x00 // exit "fires" (353, 14) and (380, 14)
+
+/*
+ * level 28
+ */
+HEX  "titl" ID 28 "POOR WEE CREATURES!" 0x00
+PALETTE ID 28 "levels/classic-taxing/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 28 "levels/classic-taxing/level-28-data.cmp"
+DATA "mask" ID 28 "levels/classic-taxing/level-28-mask.cmp"
+#else
+DATA "_gfx" ID 28 "levels/classic-taxing/level-28-data.bin"
+DATA "mask" ID 28 "levels/classic-taxing/level-28-mask.bin"
+#endif
+HEX  "xofs" ID 28 "98"  0x00
+HEX  "yofs" ID 28 "43"  0x00 // ( 98, 43) = start position
+HEX  "_exx" ID 28 "607" 0x00
+HEX  "_exy" ID 28 "64"  0x00 // (607, 64) = exit position
+HEX  "easy" ID 28 "@@@:99 1  1  4  4  8  3  1  0  50 45 300:@@@" 0x00
+HEX  "_f1x" ID 28 "585" 0x00
+HEX  "_f1y" ID 28 "35"  0x00
+HEX  "_f2x" ID 28 "613" 0x00
+HEX  "_f2y" ID 28 "35"  0x00 // exit "fires" (585, 35) and (613, 35)
+
+/*
+ * level 29
+ */
+HEX  "titl" ID 29 "How do I dig up the way?" 0x00
+PALETTE ID 29 "levels/classic-taxing/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 29 "levels/classic-taxing/level-29-data.cmp"
+DATA "mask" ID 29 "levels/classic-taxing/level-29-mask.cmp"
+#else
+DATA "_gfx" ID 29 "levels/classic-taxing/level-29-data.bin"
+DATA "mask" ID 29 "levels/classic-taxing/level-29-mask.bin"
+#endif
+HEX  "xofs" ID 29 "78"  0x00
+HEX  "yofs" ID 29 "18"  0x00 // ( 78, 18) = start position
+HEX  "_exx" ID 29 "577" 0x00
+HEX  "_exy" ID 29 "54"  0x00 // (577, 54) = exit position
+HEX  "easy" ID 29 "@@@:80 0  0  0  1  6  1  1  2  50 50 240:@@@" 0x00
+HEX  "_f1x" ID 29 "555" 0x00
+HEX  "_f1y" ID 29 "25"  0x00
+HEX  "_f2x" ID 29 "582" 0x00
+HEX  "_f2y" ID 29 "25" 0x00 // exit "fires" (555, 25) and (582, 25)
+
+/*
+ * level 30
+ */
+HEX  "titl" ID 30 "We all fall down" 0x00
+PALETTE ID 30 "levels/classic-taxing/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 30 "levels/classic-taxing/level-30-data.cmp"
+DATA "mask" ID 30 "levels/classic-taxing/level-30-mask.cmp"
+#else
+DATA "_gfx" ID 30 "levels/classic-taxing/level-30-data.bin"
+DATA "mask" ID 30 "levels/classic-taxing/level-30-mask.bin"
+#endif
+HEX  "xofs" ID 30 "142" 0x00
+HEX  "yofs" ID 30 "20"  0x00 // (142,20) = start position
+HEX  "_exx" ID 30 "596" 0x00
+HEX  "_exy" ID 30 "105" 0x00 // (596,105) = exit position
+HEX  "easy" ID 30 "@@@:40 0  0  0  0  0  0  0  45 45 45 120:@@@" 0x00
+HEX  "_f1x" ID 30 "584" 0x00
+HEX  "_f1y" ID 30 "66"  0x00
+HEX  "_f2x" ID 30 "591" 0x00
+HEX  "_f2y" ID 30 "66"  0x00 // exit "fires" (584, 66) and (591, 66)

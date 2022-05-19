@@ -1,0 +1,296 @@
+/*
+ * @(#)lemmigns_en_INFINITY.rcp
+ *
+ * Copyright 2001-2002, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "../src/resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "INFINITY" 0x00
+
+// pack bitmap
+BITMAPFAMILYSPECIAL "logo" 0
+  "" "levels/infinity/logo2bpp.bmp" "levels/infinity/logo4bpc.bmp" COMPRESS
+
+// the number of levels?
+HEX  "levl" ID 0 "10" 0x00
+
+// user info [for encryption]
+HEX  "_key" ID 0 "DATA=xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 256 bytes of data
+HEX  "xxxx" ID 0 "|HaCkMe|" 0x00
+
+//
+// music
+//
+
+HEX  "musc" ID 0 "3" 0x00
+DATA "musc" ID 1 "music/lemm_mountain.mus"
+DATA "musc" ID 2 "music/lemm_tenbottles.mus"
+DATA "musc" ID 3 "music/lemm_cancan.mus"
+#ifdef PALM_MIDI_ANY
+HEX  "midi" ID 0 "3" 0x00
+DATA "midi" ID 1 "music/midi/high_quality/lemm_mountain.mid"
+DATA "midi" ID 2 "music/midi/high_quality/lemm_tenbottles.mid"
+DATA "midi" ID 3 "music/midi/high_quality/lemm_cancan.mid"
+#endif
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "Mind the step!" 0x00
+PALETTE ID 1 "levels/infinity/level-01.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/infinity/level-01-data.cmp"
+DATA "mask" ID 1 "levels/infinity/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/infinity/level-01-data.bin"
+DATA "mask" ID 1 "levels/infinity/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "64"  0x00
+HEX  "yofs" ID 1 "47"  0x00 // ( 64, 47) = start position
+HEX  "_exx" ID 1 "595" 0x00
+HEX  "_exy" ID 1 "93"  0x00 // (595, 93) = exit position
+HEX  "easy" ID 1 "@@@:20 5  5  0  5  15 5  0  5  50 35 599:@@@" 0x00
+HEX  "hard" ID 1 "@@@:5  1  1  0  0  10 0  0  1  50 50 599:@@@" 0x00
+HEX  "_f1x" ID 1 "0"   0x00
+HEX  "_f1y" ID 1 "128" 0x00
+HEX  "_f2x" ID 1 "0"   0x00
+HEX  "_f2y" ID 1 "128" 0x00 // exit "fires" [offscreen]
+
+/*
+ * level 2:
+ */
+HEX  "titl" ID 2 "Defrosted Lemmings" 0x00
+PALETTE ID 2 "levels/infinity/level-02.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/infinity/level-02-data.cmp"
+DATA "mask" ID 2 "levels/infinity/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/infinity/level-02-data.bin"
+DATA "mask" ID 2 "levels/infinity/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "77"  0x00
+HEX  "yofs" ID 2 "14"  0x00 // ( 77, 14) = start position
+HEX  "_exx" ID 2 "541" 0x00
+HEX  "_exy" ID 2 "108" 0x00 // (540,108) = exit position
+HEX  "easy" ID 2 "@@@:50 0  5  10 5  20 10 10 10 50 37 599:@@@" 0x00
+HEX  "hard" ID 2 "@@@:30 0  1  10 0  2  1  1  0  50 45 599:@@@" 0x00
+HEX  "_f1x" ID 2 "546" 0x00
+HEX  "_f1y" ID 2 "58"  0x00
+HEX  "_f2x" ID 2 "0"   0x00
+HEX  "_f2y" ID 2 "128" 0x00 // exit "fires" [offscreen] + on pole
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "Blue balls from Hell" 0x00
+PALETTE ID 3 "levels/infinity/level-03.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/infinity/level-03-data.cmp"
+DATA "mask" ID 3 "levels/infinity/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/infinity/level-03-data.bin"
+DATA "mask" ID 3 "levels/infinity/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "55"  0x00
+HEX  "yofs" ID 3 "28"  0x00 // ( 55, 28) = start position
+HEX  "_exx" ID 3 "619" 0x00
+HEX  "_exy" ID 3 "90"  0x00 // (619, 90) = exit position
+HEX  "easy" ID 3 "@@@:60 20 20 20 20 20 20 20 20 50 25 599:@@@" 0x00
+HEX  "hard" ID 3 "@@@:60 0  0  0  1  9  0  1  1  42 42 599:@@@" 0x00
+HEX  "_f1x" ID 3 "0"   0x00
+HEX  "_f1y" ID 3 "128" 0x00
+HEX  "_f2x" ID 3 "0"   0x00
+HEX  "_f2y" ID 3 "128" 0x00 // exit "fires" [offscreen]
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "In-n-Out Lemmburger" 0x00
+PALETTE ID 4 "levels/infinity/level-04.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/infinity/level-04-data.cmp"
+DATA "mask" ID 4 "levels/infinity/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/infinity/level-04-data.bin"
+DATA "mask" ID 4 "levels/infinity/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "98"  0x00
+HEX  "yofs" ID 4 "33"  0x00 // ( 98, 33) = start position
+HEX  "_exx" ID 4 "516" 0x00
+HEX  "_exy" ID 4 "54"  0x00 // (516, 54) = exit position
+HEX  "easy" ID 4 "@@@:40 0  10 0  10 20 10 10 10 50 38 599:@@@" 0x00
+HEX  "hard" ID 4 "@@@:40 0  1  0  0  10 0  1  1  50 50 599:@@@" 0x00
+HEX  "_f1x" ID 4 "0"   0x00
+HEX  "_f1y" ID 4 "128" 0x00
+HEX  "_f2x" ID 4 "0"   0x00
+HEX  "_f2y" ID 4 "128" 0x00 // exit "fires" [offscreen]
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "Toxic Lemming facility" 0x00
+PALETTE ID 5 "levels/infinity/level-05.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/infinity/level-05-data.cmp"
+DATA "mask" ID 5 "levels/infinity/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/infinity/level-05-data.bin"
+DATA "mask" ID 5 "levels/infinity/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "69"  0x00
+HEX  "yofs" ID 5 "42"  0x00 // ( 69, 42) = start position
+HEX  "_exx" ID 5 "615" 0x00
+HEX  "_exy" ID 5 "67"  0x00 // (615, 67) = exit position
+HEX  "easy" ID 5 "@@@:50 20 20 20 20 20 20 20 20 50 25 599:@@@" 0x00
+HEX  "hard" ID 5 "@@@:50 0  0  0  0  12 5  0  0  1  1  599:@@@" 0x00
+HEX  "_f1x" ID 5 "0"   0x00
+HEX  "_f1y" ID 5 "128" 0x00
+HEX  "_f2x" ID 5 "0"   0x00
+HEX  "_f2y" ID 5 "128" 0x00 // exit "fires" [offscreen]
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "How the hell..." 0x00
+PALETTE ID 6 "levels/infinity/level-06.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/infinity/level-06-data.cmp"
+DATA "mask" ID 6 "levels/infinity/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/infinity/level-06-data.bin"
+DATA "mask" ID 6 "levels/infinity/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "72"  0x00
+HEX  "yofs" ID 6 "21"  0x00 // ( 72, 21) = start position
+HEX  "_exx" ID 6 "583" 0x00
+HEX  "_exy" ID 6 "119" 0x00 // (583,119) = exit position
+HEX  "easy" ID 6 "@@@:50 20 20 20 20 40 20 20 20 50 25 599:@@@" 0x00
+HEX  "hard" ID 6 "@@@:5  1  1  0  0  17 2  0  0  50 50 599:@@@" 0x00
+HEX  "_f1x" ID 6 "588" 0x00
+HEX  "_f1y" ID 6 "68"  0x00
+HEX  "_f2x" ID 6 "0"   0x00
+HEX  "_f2y" ID 6 "128" 0x00 // exit "fires" [offscreen] + on pole
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "Not quite the Bay Bridge" 0x00
+PALETTE ID 7 "levels/infinity/level-07.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/infinity/level-07-data.cmp"
+DATA "mask" ID 7 "levels/infinity/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/infinity/level-07-data.bin"
+DATA "mask" ID 7 "levels/infinity/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "127" 0x00
+HEX  "yofs" ID 7 "24"  0x00 // (127, 24) = start position
+HEX  "_exx" ID 7 "611" 0x00
+HEX  "_exy" ID 7 "46"  0x00 // (611, 46) = exit position
+HEX  "easy" ID 7 "@@@:50 0  0  0  5  20 5  5  5  50 45 599:@@@" 0x00
+HEX  "hard" ID 7 "@@@:10 1  1  0  0  11 0  0  1  50 50 599:@@@" 0x00
+HEX  "_f1x" ID 7 "0"   0x00
+HEX  "_f1y" ID 7 "128" 0x00
+HEX  "_f2x" ID 7 "0"   0x00
+HEX  "_f2y" ID 7 "128" 0x00 // exit "fires" [offscreen]
+
+/*
+ * level 8
+ */
+HEX  "titl" ID 8 "Bubble land" 0x00
+PALETTE ID 8 "levels/infinity/level-08.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 8 "levels/infinity/level-08-data.cmp"
+DATA "mask" ID 8 "levels/infinity/level-08-mask.cmp"
+#else
+DATA "_gfx" ID 8 "levels/infinity/level-08-data.bin"
+DATA "mask" ID 8 "levels/infinity/level-08-mask.bin"
+#endif
+HEX  "xofs" ID 8 "49"  0x00
+HEX  "yofs" ID 8 "15"  0x00 // ( 49, 15) = start position
+HEX  "_exx" ID 8 "555" 0x00
+HEX  "_exy" ID 8 "36"  0x00 // (555, 36) = exit position
+HEX  "easy" ID 8 "@@@:50 20 20 20 20 20 20 20 20 50 25 599:@@@" 0x00
+HEX  "hard" ID 8 "@@@:30 0  0  0  14 2  0  0  1  40 40 599:@@@" 0x00
+HEX  "_f1x" ID 8 "0"   0x00
+HEX  "_f1y" ID 8 "128" 0x00
+HEX  "_f2x" ID 8 "0"   0x00
+HEX  "_f2y" ID 8 "128" 0x00 // exit "fires" [offscreen]
+
+/*
+ * level 9
+ */
+HEX  "titl" ID 9 "Just add calcium!" 0x00
+PALETTE ID 9 "levels/infinity/level-09.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 9 "levels/infinity/level-09-data.cmp"
+DATA "mask" ID 9 "levels/infinity/level-09-mask.cmp"
+#else
+DATA "_gfx" ID 9 "levels/infinity/level-09-data.bin"
+DATA "mask" ID 9 "levels/infinity/level-09-mask.bin"
+#endif
+HEX  "xofs" ID 9 "43"  0x00
+HEX  "yofs" ID 9 "13"  0x00 // ( 43, 13) = start position
+HEX  "_exx" ID 9 "512" 0x00
+HEX  "_exy" ID 9 "29"  0x00 // (512, 29) = exit position
+HEX  "easy" ID 9 "@@@:95 15 15 15 15 15 15 15 15 50 20 599:@@@" 0x00
+HEX  "hard" ID 9 "@@@:95 1  1  0  1  15 1  1  0  40 35 599:@@@" 0x00
+HEX  "_f1x" ID 9 "0"   0x00
+HEX  "_f1y" ID 9 "128" 0x00
+HEX  "_f2x" ID 9 "0"   0x00
+HEX  "_f2y" ID 9 "128" 0x00 // exit "fires" [offscreen]
+
+/*
+ * level 10
+ */
+HEX  "titl" ID 10 "The easy way" 0x00
+PALETTE ID 10 "levels/infinity/level-10.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 10 "levels/infinity/level-10-data.cmp"
+DATA "mask" ID 10 "levels/infinity/level-10-mask.cmp"
+#else
+DATA "_gfx" ID 10 "levels/infinity/level-10-data.bin"
+DATA "mask" ID 10 "levels/infinity/level-10-mask.bin"
+#endif
+HEX  "xofs" ID 10 "278" 0x00
+HEX  "yofs" ID 10 "20"  0x00 // (278, 20) = start position
+HEX  "_exx" ID 10 "358" 0x00
+HEX  "_exy" ID 10 "59"  0x00 // (358, 59) = exit position
+HEX  "easy" ID 10 "@@@:50 20 20 20 20 20 20 20 20 50 25 599:@@@" 0x00
+HEX  "hard" ID 10 "@@@:25 20 20 20 20 20 20 20 20 50 45 599:@@@" 0x00
+HEX  "_f1x" ID 10 "363" 0x00
+HEX  "_f1y" ID 10 "8"   0x00
+HEX  "_f2x" ID 10 "0"   0x00
+HEX  "_f2y" ID 10 "128" 0x00 // exit "fires" [offscreen] + on pole

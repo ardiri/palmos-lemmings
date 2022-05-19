@@ -1,0 +1,340 @@
+/*
+ * @(#)lemmigns_en_CALENDAR.rcp
+ *
+ * Copyright 2001-2003,
+ *   Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *   Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed 
+ * for the Palm Computing Platform designed by Palm: 
+ *
+ *   http://www.palm.com/ 
+ *
+ * The contents of this file is confidential and proprietrary in nature 
+ * ("Confidential Information"). Redistribution or modification without 
+ * prior consent of the original author is prohibited. 
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "../src/resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "CALENDAR" 0x00
+
+// the number of levels?
+HEX  "levl" ID 0 "12" 0x00
+
+// pack bitmap
+BITMAPFAMILYSPECIAL "logo" 0
+  "" "levels/calendar/logo2bpp.bmp" "levels/calendar/logo4bpc.bmp" COMPRESS
+
+// user info [for encryption]
+HEX  "_key" ID 0 "DATA=xxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 256 bytes of data
+HEX  "xxxx" ID 0 "|HaCkMe|" 0x00
+
+//
+// music
+//
+
+#ifdef MUSIC_ENGINE
+HEX  "musc" ID 0 "3" 0x00 
+DATA "musc" ID 1 "music/lemm_mountain.mus"
+DATA "musc" ID 2 "music/lemm_tenbottles.mus"
+DATA "musc" ID 3 "music/lemm_cancan.mus"
+#endif
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "Out with old, in with the new" 0x00
+PALETTE ID 1 "levels/calendar/level-01.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/calendar/level-01-data.cmp"
+DATA "mask" ID 1 "levels/calendar/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/calendar/level-01-data.bin"
+DATA "mask" ID 1 "levels/calendar/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "32"  0x00
+HEX  "yofs" ID 1 "57"  0x00 // ( 32, 57) = start position
+HEX  "_exx" ID 1 "595" 0x00
+HEX  "_exy" ID 1 "59"  0x00 // (595, 59) = exit position
+HEX  "easy" ID 1 "@@@:50 2  1  2  2  30 5  3  3  50 45 480:@@@" 0x00 
+HEX  "hard" ID 1 "@@@:50 0  0  0  2  20 5  3  3  50 50 360:@@@" 0x00
+HEX  "_f1x" ID 1 "584" 0x00
+HEX  "_f1y" ID 1 "21"  0x00
+HEX  "_f2x" ID 1 "591" 0x00
+HEX  "_f2y" ID 1 "21"  0x00 // exit "fires" (584, 21) and (591, 21)
+
+/*
+ * level 2:
+ */
+HEX  "titl" ID 2 "Be mine, Valentine!" 0x00
+PALETTE ID 2 "levels/calendar/level-02.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/calendar/level-02-data.cmp"
+DATA "mask" ID 2 "levels/calendar/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/calendar/level-02-data.bin"
+DATA "mask" ID 2 "levels/calendar/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "600" 0x00
+HEX  "yofs" ID 2 "25"  0x00 // (600, 25) = start position
+HEX  "_exx" ID 2 "69"  0x00
+HEX  "_exy" ID 2 "86"  0x00 // ( 69, 86) = exit position
+HEX  "easy" ID 2 "@@@:50 2  1  2  2  25 18 2  0  50 45 480:@@@" 0x00
+HEX  "hard" ID 2 "@@@:50 0  0  0  2  18 8  0  0  50 50 420:@@@" 0x00
+HEX  "_f1x" ID 2 "640" 0x00
+HEX  "_f1y" ID 2 "128" 0x00
+HEX  "_f2x" ID 2 "640" 0x00
+HEX  "_f2y" ID 2 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "Luck of the Lemmings" 0x00
+PALETTE ID 3 "levels/calendar/level-03.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/calendar/level-03-data.cmp"
+DATA "mask" ID 3 "levels/calendar/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/calendar/level-03-data.bin"
+DATA "mask" ID 3 "levels/calendar/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "73"  0x00
+HEX  "yofs" ID 3 "17"  0x00 // ( 73, 17) = start position
+HEX  "_exx" ID 3 "604" 0x00
+HEX  "_exy" ID 3 "70"  0x00 // (604, 70) = exit position
+HEX  "easy" ID 3 "@@@:50 2  1  2  2  25 20 2  0  50 45 480:@@@" 0x00
+HEX  "hard" ID 3 "@@@:50 0  0  0  2  18 12 0  0  50 50 420:@@@" 0x00
+HEX  "_f1x" ID 3 "640" 0x00
+HEX  "_f1y" ID 3 "128" 0x00
+HEX  "_f2x" ID 3 "640" 0x00
+HEX  "_f2y" ID 3 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "Easter Hunt" 0x00
+PALETTE ID 4 "levels/calendar/level-04.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/calendar/level-04-data.cmp"
+DATA "mask" ID 4 "levels/calendar/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/calendar/level-04-data.bin"
+DATA "mask" ID 4 "levels/calendar/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "31"  0x00
+HEX  "yofs" ID 4 "46"  0x00 // ( 31, 46) = start position
+HEX  "_exx" ID 4 "581" 0x00
+HEX  "_exy" ID 4 "80"  0x00 // (581, 80) = exit position
+HEX  "easy" ID 4 "@@@:50 2  1  2  2  20 8  2  0  50 45 420:@@@" 0x00
+HEX  "hard" ID 4 "@@@:50 0  0  0  2  15 4  0  0  50 50 330:@@@" 0x00
+HEX  "_f1x" ID 4 "640" 0x00
+HEX  "_f1y" ID 4 "128" 0x00
+HEX  "_f2x" ID 4 "640" 0x00
+HEX  "_f2y" ID 4 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "Beloved Mom" 0x00
+PALETTE ID 5 "levels/calendar/level-05.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/calendar/level-05-data.cmp"
+DATA "mask" ID 5 "levels/calendar/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/calendar/level-05-data.bin"
+DATA "mask" ID 5 "levels/calendar/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "29"  0x00
+HEX  "yofs" ID 5 "31"  0x00 // ( 29, 31) = start position
+HEX  "_exx" ID 5 "615" 0x00
+HEX  "_exy" ID 5 "120" 0x00 // (615,120) = exit position
+HEX  "easy" ID 5 "@@@:50 2  1  2  2  26 16 2  1  50 45 540:@@@" 0x00
+HEX  "hard" ID 5 "@@@:50 0  0  0  2  18 8  1  1  50 50 450:@@@" 0x00
+HEX  "_f1x" ID 5 "640" 0x00
+HEX  "_f1y" ID 5 "128" 0x00
+HEX  "_f2x" ID 5 "640" 0x00
+HEX  "_f2y" ID 5 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "Dear old Dad" 0x00
+PALETTE ID 6 "levels/calendar/level-06.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/calendar/level-06-data.cmp"
+DATA "mask" ID 6 "levels/calendar/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/calendar/level-06-data.bin"
+DATA "mask" ID 6 "levels/calendar/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "44"  0x00
+HEX  "yofs" ID 6 "47"  0x00 // ( 44, 47) = start position
+HEX  "_exx" ID 6 "593" 0x00
+HEX  "_exy" ID 6 "62"  0x00 // (593, 62) = exit position
+HEX  "easy" ID 6 "@@@:50 2  1  2  0  20 10 2  0  50 45 360:@@@" 0x00
+HEX  "hard" ID 6 "@@@:50 1  0  0  2  12 5  0  0  50 50 300:@@@" 0x00
+HEX  "_f1x" ID 6 "640" 0x00
+HEX  "_f1y" ID 6 "128" 0x00
+HEX  "_f2x" ID 6 "640" 0x00
+HEX  "_f2y" ID 6 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "Celebration" 0x00
+PALETTE ID 7 "levels/calendar/level-07.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/calendar/level-07-data.cmp"
+DATA "mask" ID 7 "levels/calendar/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/calendar/level-07-data.bin"
+DATA "mask" ID 7 "levels/calendar/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "29"  0x00
+HEX  "yofs" ID 7 "17"  0x00 // ( 29, 17) = start position
+HEX  "_exx" ID 7 "612" 0x00
+HEX  "_exy" ID 7 "69"  0x00 // (612, 69) = exit position
+HEX  "easy" ID 7 "@@@:50 2  1  2  4  30 2  2  1  50 45 360:@@@" 0x00
+HEX  "hard" ID 7 "@@@:50 0  0  0  2  20 2  0  1  50 50 300:@@@" 0x00
+HEX  "_f1x" ID 7 "640" 0x00
+HEX  "_f1y" ID 7 "128" 0x00
+HEX  "_f2x" ID 7 "640" 0x00
+HEX  "_f2y" ID 7 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 8
+ */
+HEX  "titl" ID 8 "Life's a Beach" 0x00
+PALETTE ID 8 "levels/calendar/level-08.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 8 "levels/calendar/level-08-data.cmp"
+DATA "mask" ID 8 "levels/calendar/level-08-mask.cmp"
+#else
+DATA "_gfx" ID 8 "levels/calendar/level-08-data.bin"
+DATA "mask" ID 8 "levels/calendar/level-08-mask.bin"
+#endif
+HEX  "xofs" ID 8 "595" 0x00
+HEX  "yofs" ID 8 "21"  0x00 // (595, 21) = start position
+HEX  "_exx" ID 8 "49"  0x00
+HEX  "_exy" ID 8 "70"  0x00 // ( 49, 70) = exit position
+HEX  "easy" ID 8 "@@@:50 2  1  2  2  20 10 1  2  50 45 599:@@@" 0x00
+HEX  "hard" ID 8 "@@@:50 0  0  0  2  15 10 1  2  50 50 480:@@@" 0x00
+HEX  "_f1x" ID 8 "27"  0x00
+HEX  "_f1y" ID 8 "43"  0x00
+HEX  "_f2x" ID 8 "55"  0x00
+HEX  "_f2y" ID 8 "43"  0x00 // exit "fires" ( 27, 43) and ( 55, 43)
+
+/*
+ * level 9
+ */
+HEX  "titl" ID 9 "Back to School" 0x00
+PALETTE ID 9 "levels/calendar/level-09.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 9 "levels/calendar/level-09-data.cmp"
+DATA "mask" ID 9 "levels/calendar/level-09-mask.cmp"
+#else
+DATA "_gfx" ID 9 "levels/calendar/level-09-data.bin"
+DATA "mask" ID 9 "levels/calendar/level-09-mask.bin"
+#endif
+HEX  "xofs" ID 9 "615" 0x00
+HEX  "yofs" ID 9 "17"  0x00 // (615, 17) = start position
+HEX  "_exx" ID 9 "81"  0x00
+HEX  "_exy" ID 9 "55"  0x00 // ( 81, 55) = exit position
+HEX  "easy" ID 9 "@@@:50 2  1  2  2  16 2  2  2  50 45 360:@@@" 0x00
+HEX  "hard" ID 9 "@@@:50 0  0  0  2  8  2  0  2  50 50 240:@@@" 0x00
+HEX  "_f1x" ID 9 "640" 0x00
+HEX  "_f1y" ID 9 "128" 0x00
+HEX  "_f2x" ID 9 "640" 0x00
+HEX  "_f2y" ID 9 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 10
+ */
+HEX  "titl" ID 10 "Trick or Treat" 0x00
+PALETTE ID 10 "levels/calendar/level-10.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 10 "levels/calendar/level-10-data.cmp"
+DATA "mask" ID 10 "levels/calendar/level-10-mask.cmp"
+#else
+DATA "_gfx" ID 10 "levels/calendar/level-10-data.bin"
+DATA "mask" ID 10 "levels/calendar/level-10-mask.bin"
+#endif
+HEX  "xofs" ID 10 "36"  0x00
+HEX  "yofs" ID 10 "72"  0x00 // ( 36, 72) = start position
+HEX  "_exx" ID 10 "616" 0x00
+HEX  "_exy" ID 10 "83"  0x00 // (616, 83) = exit position
+HEX  "easy" ID 10 "@@@:50 2  1  2  4  20 4  2  1  50 45 480:@@@" 0x00
+HEX  "hard" ID 10 "@@@:50 1  0  0  2  15 4  0  0  50 50 360:@@@" 0x00
+HEX  "_f1x" ID 10 "640" 0x00
+HEX  "_f1y" ID 10 "128" 0x00
+HEX  "_f2x" ID 10 "640" 0x00
+HEX  "_f2y" ID 10 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 11
+ */
+HEX  "titl" ID 11 "Gobble Gobble Gobble" 0x00
+PALETTE ID 11 "levels/calendar/level-11.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 11 "levels/calendar/level-11-data.cmp"
+DATA "mask" ID 11 "levels/calendar/level-11-mask.cmp"
+#else
+DATA "_gfx" ID 11 "levels/calendar/level-11-data.bin"
+DATA "mask" ID 11 "levels/calendar/level-11-mask.bin"
+#endif
+HEX  "xofs" ID 11 "32"  0x00
+HEX  "yofs" ID 11 "26"  0x00 // ( 32, 26) = start position
+HEX  "_exx" ID 11 "625" 0x00
+HEX  "_exy" ID 11 "95"  0x00 // (625, 95) = exit position
+HEX  "easy" ID 11 "@@@:50 2  1  2  4  18 5  2  1  50 45 480:@@@" 0x00
+HEX  "hard" ID 11 "@@@:50 1  0  1  3  12 5  1  1  50 50 360:@@@" 0x00
+HEX  "_f1x" ID 11 "640" 0x00
+HEX  "_f1y" ID 11 "128" 0x00
+HEX  "_f2x" ID 11 "640" 0x00
+HEX  "_f2y" ID 11 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 12
+ */
+HEX  "titl" ID 12 "'Tis the Season" 0x00
+PALETTE ID 12 "levels/calendar/level-12.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 12 "levels/calendar/level-12-data.cmp"
+DATA "mask" ID 12 "levels/calendar/level-12-mask.cmp"
+#else
+DATA "_gfx" ID 12 "levels/calendar/level-12-data.bin"
+DATA "mask" ID 12 "levels/calendar/level-12-mask.bin"
+#endif
+HEX  "xofs" ID 12 "585" 0x00
+HEX  "yofs" ID 12 "57"  0x00 // (585, 57) = start position
+HEX  "_exx" ID 12 "44"  0x00
+HEX  "_exy" ID 12 "78"  0x00 // ( 44, 78) = exit position
+HEX  "easy" ID 12 "@@@:50 2  1  2  4  20 5  1  2  50 45 480:@@@" 0x00
+HEX  "hard" ID 12 "@@@:65 0  0  1  2  18 5  1  2  50 50 360:@@@" 0x00
+HEX  "_f1x" ID 12 "20"  0x00
+HEX  "_f1y" ID 12 "35"  0x00
+HEX  "_f2x" ID 12 "52"  0x00
+HEX  "_f2y" ID 12 "35"  0x00 // exit "fires" ( 20, 35) and ( 55, 35)
+

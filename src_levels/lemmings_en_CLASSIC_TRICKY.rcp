@@ -1,0 +1,726 @@
+/*
+ * @(#)lemmigns_en_CLASSIC_TRICKY.rcp
+ *
+ * Copyright 2001-2002, Aaron Ardiri     (mailto:aaron@ardiri.com)
+ *                      Charles Kerchner (mailto:chip@ardiri.com)
+ * All rights reserved.
+ *
+ * This file was generated as part of the  "lemmings" program developed
+ * for the Palm Computing Platform designed by Palm:
+ *
+ *   http://www.palm.com/
+ *
+ * The contents of this file is confidential and proprietrary in nature
+ * ("Confidential Information"). Redistribution or modification without
+ * prior consent of the original author is prohibited.
+ *
+ * --------------------------------------------------------------------
+ *             THIS FILE CONTAINS THE ENGLISH LANGUAGE TEXT
+ * --------------------------------------------------------------------
+ */
+
+#include "../src/resource.h"
+
+//
+// game pack identifiers
+//
+
+// pack title
+HEX  "titl" ID 0 "CLASSIC:TRICKY" 0x00
+
+// pack bitmap
+BITMAPFAMILYSPECIAL "logo" 0
+  "" "levels/\classic-tricky/logo2bpp.bmp" "levels/\classic-tricky/logo4bpc.bmp" COMPRESS
+
+// the number of levels?
+HEX  "levl" ID 0 "30" 0x00
+
+// user info [for encryption]
+HEX  "_key" ID 0 "DATA=xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 256 bytes of data
+HEX  "xxxx" ID 0 "|HaCkMe|" 0x00
+
+//
+// music
+//
+
+HEX  "musc" ID 0 "3" 0x00
+DATA "musc" ID 1 "music/lemm_mountain.mus"
+DATA "musc" ID 2 "music/lemm_tenbottles.mus"
+DATA "musc" ID 3 "music/lemm_cancan.mus"
+#ifdef PALM_MIDI_ANY
+HEX  "midi" ID 0 "3" 0x00
+DATA "midi" ID 1 "music/midi/high_quality/lemm_mountain.mid"
+DATA "midi" ID 2 "music/midi/high_quality/lemm_tenbottles.mid"
+DATA "midi" ID 3 "music/midi/high_quality/lemm_cancan.mid"
+#endif
+
+//
+// level information
+//
+
+/*
+ * level 1:
+ */
+HEX  "titl" ID 1 "This should be a doddle!" 0x00
+PALETTE ID 1 "levels/\classic-tricky/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 1 "levels/\classic-tricky/level-01-data.cmp"
+DATA "mask" ID 1 "levels/\classic-tricky/level-01-mask.cmp"
+#else
+DATA "_gfx" ID 1 "levels/\classic-tricky/level-01-data.bin"
+DATA "mask" ID 1 "levels/\classic-tricky/level-01-mask.bin"
+#endif
+HEX  "xofs" ID 1 "77"  0x00
+HEX  "yofs" ID 1 "41"  0x00 // ( 77, 41) = start position
+HEX  "_exx" ID 1 "563" 0x00
+HEX  "_exy" ID 1 "82"  0x00 // (563, 82) = exit position
+HEX  "easy" ID 1 "@@@:50 10 10 10 10 10 10 10 10 50 25 240:@@@" 0x00
+HEX  "_f1x" ID 1 "541" 0x00
+HEX  "_f1y" ID 1 "53"  0x00
+HEX  "_f2x" ID 1 "568" 0x00
+HEX  "_f2y" ID 1 "53"  0x00 // exit "fires" (541, 53) and (568, 53)
+
+/*
+ * level 2
+ */
+HEX  "titl" ID 2 "We all fall down" 0x00
+PALETTE ID 2 "levels/classic-tricky/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 2 "levels/classic-tricky/level-02-data.cmp"
+DATA "mask" ID 2 "levels/classic-tricky/level-02-mask.cmp"
+#else
+DATA "_gfx" ID 2 "levels/classic-tricky/level-02-data.bin"
+DATA "mask" ID 2 "levels/classic-tricky/level-02-mask.bin"
+#endif
+HEX  "xofs" ID 2 "142" 0x00
+HEX  "yofs" ID 2 "20"  0x00 // (142,20) = start position
+HEX  "_exx" ID 2 "596" 0x00
+HEX  "_exy" ID 2 "105" 0x00 // (596,105) = exit position
+HEX  "easy" ID 2 "@@@:50 0  0  0  0  0  0  0  40 40 40 180:@@@" 0x00
+HEX  "_f1x" ID 2 "584" 0x00
+HEX  "_f1y" ID 2 "66"  0x00
+HEX  "_f2x" ID 2 "591" 0x00
+HEX  "_f2y" ID 2 "66"  0x00 // exit "fires" (584, 66) and (591, 66)
+
+/*
+ * level 3:
+ */
+HEX  "titl" ID 3 "A ladder would be handy" 0x00
+PALETTE ID 3 "levels/\classic-tricky/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 3 "levels/\classic-tricky/level-03-data.cmp"
+DATA "mask" ID 3 "levels/\classic-tricky/level-03-mask.cmp"
+#else
+DATA "_gfx" ID 3 "levels/\classic-tricky/level-03-data.bin"
+DATA "mask" ID 3 "levels/\classic-tricky/level-03-mask.bin"
+#endif
+HEX  "xofs" ID 3 "78"  0x00
+HEX  "yofs" ID 3 "18"  0x00 // ( 78, 18) = start position
+HEX  "_exx" ID 3 "577" 0x00
+HEX  "_exy" ID 3 "54"  0x00 // (577, 54) = exit position
+HEX  "easy" ID 3 "@@@:50 20 20 20 20 40 20 20 20 50 25 360:@@@" 0x00
+HEX  "_f1x" ID 3 "555" 0x00
+HEX  "_f1y" ID 3 "25"  0x00
+HEX  "_f2x" ID 3 "582" 0x00
+HEX  "_f2y" ID 3 "25" 0x00 // exit "fires" (555, 25) and (582, 25)
+
+/*
+ * level 4:
+ */
+HEX  "titl" ID 4 "Here's one I prepared earlier" 0x00
+PALETTE ID 4 "levels/\classic-tricky/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 4 "levels/\classic-tricky/level-04-data.cmp"
+DATA "mask" ID 4 "levels/\classic-tricky/level-04-mask.cmp"
+#else
+DATA "_gfx" ID 4 "levels/\classic-tricky/level-04-data.bin"
+DATA "mask" ID 4 "levels/\classic-tricky/level-04-mask.bin"
+#endif
+HEX  "xofs" ID 4 "39"  0x00
+HEX  "yofs" ID 4 "34"  0x00 // ( 39, 34) = start position
+HEX  "_exx" ID 4 "608" 0x00
+HEX  "_exy" ID 4 "98"  0x00 // (608, 98) = exit position
+HEX  "easy" ID 4 "@@@:45 40 40 40 40 40 40 40 40 50 10 480:@@@" 0x00
+HEX  "_f1x" ID 4 "586" 0x00
+HEX  "_f1y" ID 4 "69"  0x00
+HEX  "_f2x" ID 4 "613" 0x00
+HEX  "_f2y" ID 4 "69"  0x00 // exit "fires" (586, 69) and (613, 69)
+
+/*
+ * level 5:
+ */
+HEX  "titl" ID 5 "Careless clicking costs lives" 0x00
+PALETTE ID 5 "levels/\classic-tricky/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 5 "levels/\classic-tricky/level-05-data.cmp"
+DATA "mask" ID 5 "levels/\classic-tricky/level-05-mask.cmp"
+#else
+DATA "_gfx" ID 5 "levels/\classic-tricky/level-05-data.bin"
+DATA "mask" ID 5 "levels/\classic-tricky/level-05-mask.bin"
+#endif
+HEX  "xofs" ID 5 "35"  0x00
+HEX  "yofs" ID 5 "61"  0x00 // ( 35, 61) = start position
+HEX  "_exx" ID 5 "608" 0x00
+HEX  "_exy" ID 5 "69"  0x00 // (608, 69) = exit position
+HEX  "easy" ID 5 "@@@:20 20 20 20 20 20 20 20 20 50 10 360:@@@" 0x00
+HEX  "_f1x" ID 5 "587" 0x00
+HEX  "_f1y" ID 5 "40"  0x00
+HEX  "_f2x" ID 5 "615" 0x00
+HEX  "_f2y" ID 5 "40"  0x00 // exit "fires" (587, 40) and (615, 40)
+
+/*
+ * level 6
+ */
+HEX  "titl" ID 6 "Lemmingology" 0x00
+PALETTE ID 6 "levels/\classic-tricky/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 6 "levels/\classic-tricky/level-06-data.cmp"
+DATA "mask" ID 6 "levels/\classic-tricky/level-06-mask.cmp"
+#else
+DATA "_gfx" ID 6 "levels/\classic-tricky/level-06-data.bin"
+DATA "mask" ID 6 "levels/\classic-tricky/level-06-mask.bin"
+#endif
+HEX  "xofs" ID 6 "123" 0x00
+HEX  "yofs" ID 6 "26"  0x00 // (123, 26) = start position
+HEX  "_exx" ID 6 "442" 0x00
+HEX  "_exy" ID 6 "95"  0x00 // (442, 95) = exit position
+HEX  "easy" ID 6 "@@@:50 20 20 20 20 20 20 20 20 5  4  300:@@@" 0x00
+HEX  "_f1x" ID 6 "429" 0x00
+HEX  "_f1y" ID 6 "57"  0x00
+HEX  "_f2x" ID 6 "436" 0x00
+HEX  "_f2y" ID 6 "57"  0x00 // exit "fires" (429,57) and (426,57)
+
+/*
+ * level 7
+ */
+HEX  "titl" ID 7 "Been there, seen it, done it" 0x00
+PALETTE ID 7 "levels/\classic-tricky/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 7 "levels/\classic-tricky/level-07-data.cmp"
+DATA "mask" ID 7 "levels/\classic-tricky/level-07-mask.cmp"
+#else
+DATA "_gfx" ID 7 "levels/\classic-tricky/level-07-data.bin"
+DATA "mask" ID 7 "levels/\classic-tricky/level-07-mask.bin"
+#endif
+HEX  "xofs" ID 7 "565" 0x00
+HEX  "yofs" ID 7 "63"  0x00 // (565, 63) = start position
+HEX  "_exx" ID 7 "87"  0x00
+HEX  "_exy" ID 7 "111" 0x00 // ( 87,111) = exit position
+HEX  "easy" ID 7 "@@@:80 20 20 20 20 20 20 20 20 50 36 360:@@@" 0x00
+HEX  "_f1x" ID 7 "65"  0x00
+HEX  "_f1y" ID 7 "82"  0x00
+HEX  "_f2x" ID 7 "92"  0x00
+HEX  "_f2y" ID 7 "82"  0x00 // exit "fires" ( 65, 82) and ( 92, 82)
+
+/*
+ * level 8
+ */
+HEX  "titl" ID 8 "Lemming sanctuary in sight" 0x00
+PALETTE ID 8 "levels/\classic-tricky/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 8 "levels/\classic-tricky/level-08-data.cmp"
+DATA "mask" ID 8 "levels/\classic-tricky/level-08-mask.cmp"
+#else
+DATA "_gfx" ID 8 "levels/\classic-tricky/level-08-data.bin"
+DATA "mask" ID 8 "levels/\classic-tricky/level-08-mask.bin"
+#endif
+HEX  "xofs" ID 8 "434" 0x00
+HEX  "yofs" ID 8 "107" 0x00 // (434,107) = start position
+HEX  "_exx" ID 8 "178" 0x00
+HEX  "_exy" ID 8 "49"  0x00 // (178, 49) = exit position
+HEX  "easy" ID 8 "@@@:60 0  0  0  20 50 0  0  0  50 33 480:@@@" 0x00
+HEX  "_f1x" ID 8 "165" 0x00
+HEX  "_f1y" ID 8 "11"  0x00
+HEX  "_f2x" ID 8 "172" 0x00
+HEX  "_f2y" ID 8 "11"  0x00 // exit "fires" (165, 11) and (172, 11)
+
+/*
+ * level 9
+ */
+HEX  "titl" ID 9 "They just keep on coming" 0x00
+PALETTE ID 9 "levels/\classic-tricky/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 9 "levels/\classic-tricky/level-09-data.cmp"
+DATA "mask" ID 9 "levels/\classic-tricky/level-09-mask.cmp"
+#else
+DATA "_gfx" ID 9 "levels/\classic-tricky/level-09-data.bin"
+DATA "mask" ID 9 "levels/\classic-tricky/level-09-mask.bin"
+#endif
+HEX  "xofs" ID 9 "293" 0x00
+HEX  "yofs" ID 9 "20"  0x00 // (293, 20) = start position
+HEX  "_exx" ID 9 "381" 0x00
+HEX  "_exy" ID 9 "111" 0x00 // (381,111) = exit position
+HEX  "easy" ID 9 "@@@:50 20 20 20 20 20 20 20 20 50 46 300:@@@" 0x00
+HEX  "_f1x" ID 9 "359" 0x00
+HEX  "_f1y" ID 9 "82"  0x00
+HEX  "_f2x" ID 9 "386" 0x00
+HEX  "_f2y" ID 9 "82"  0x00 // exit "fires" (359, 82) and (386, 82)
+
+/*
+ * level 10
+ */
+HEX  "titl" ID 10 "There's a lot of them about" 0x00
+PALETTE ID 10 "levels/\classic-tricky/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 10 "levels/\classic-tricky/level-10-data.cmp"
+DATA "mask" ID 10 "levels/\classic-tricky/level-10-mask.cmp"
+#else
+DATA "_gfx" ID 10 "levels/\classic-tricky/level-10-data.bin"
+DATA "mask" ID 10 "levels/\classic-tricky/level-10-mask.bin"
+#endif
+HEX  "xofs" ID 10 "151" 0x00
+HEX  "yofs" ID 10 "61"  0x00 // (151, 61) = start position
+HEX  "_exx" ID 10 "454" 0x00
+HEX  "_exy" ID 10 "60"  0x00 // (454, 60) = exit position
+HEX  "easy" ID 10 "@@@:40 10 10 10 10 10 10 10 10 50 47 480:@@@" 0x00
+HEX  "_f1x" ID 10 "441" 0x00
+HEX  "_f1y" ID 10 "22"  0x00
+HEX  "_f2x" ID 10 "448" 0x00
+HEX  "_f2y" ID 10 "22"  0x00 // exit "fires" (441, 22) and (448, 22)
+
+/*
+ * level 11
+ */
+HEX  "titl" ID 11 "Lemmings in the attic" 0x00
+PALETTE ID 11 "levels/\classic-tricky/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 11 "levels/\classic-tricky/level-11-data.cmp"
+DATA "mask" ID 11 "levels/\classic-tricky/level-11-mask.cmp"
+#else
+DATA "_gfx" ID 11 "levels/\classic-tricky/level-11-data.bin"
+DATA "mask" ID 11 "levels/\classic-tricky/level-11-mask.bin"
+#endif
+HEX  "xofs" ID 11 "317" 0x00
+HEX  "yofs" ID 11 "90"  0x00 // (317, 90) = start position
+HEX  "_exx" ID 11 "496" 0x00
+HEX  "_exy" ID 11 "33"  0x00 // (496, 33) = exit position
+HEX  "easy" ID 11 "@@@:20 20 20 20 20 20 20 20 20 50 42 480:@@@" 0x00
+HEX  "_f1x" ID 11 "474" 0x00
+HEX  "_f1y" ID 11 "5"   0x00
+HEX  "_f2x" ID 11 "502" 0x00
+HEX  "_f2y" ID 11 "5"   0x00 // exit "fires" (474,  5) and (502,  5)
+
+/*
+ * level 12
+ */
+HEX  "titl" ID 12 "Bitter Lemming" 0x00
+PALETTE ID 12 "levels/classic-tricky/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 12 "levels/classic-tricky/level-12-data.cmp"
+DATA "mask" ID 12 "levels/classic-tricky/level-12-mask.cmp"
+#else
+DATA "_gfx" ID 12 "levels/classic-tricky/level-12-data.bin"
+DATA "mask" ID 12 "levels/classic-tricky/level-12-mask.bin"
+#endif
+HEX  "xofs" ID 12 "171" 0x00
+HEX  "yofs" ID 12 "14"  0x00 // (171, 14) = start position
+HEX  "_exx" ID 12 "430" 0x00
+HEX  "_exy" ID 12 "77"  0x00 // (430, 77) = exit position
+HEX  "easy" ID 12 "@@@:95 50 50 20 20 50 20 20 20 50 40 480:@@@" 0x00
+HEX  "_f1x" ID 12 "408" 0x00
+HEX  "_f1y" ID 12 "49"  0x00
+HEX  "_f2x" ID 12 "436" 0x00
+HEX  "_f2y" ID 12 "49"  0x00 // exit "fires" (408, 49) and (436, 49)
+
+/*
+ * level 13
+ */
+HEX  "titl" ID 13 "Lemming drops" 0x00
+PALETTE ID 13 "levels/classic-tricky/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 13 "levels/classic-tricky/level-13-data.cmp"
+DATA "mask" ID 13 "levels/classic-tricky/level-13-mask.cmp"
+#else
+DATA "_gfx" ID 13 "levels/classic-tricky/level-13-data.bin"
+DATA "mask" ID 13 "levels/classic-tricky/level-13-mask.bin"
+#endif
+HEX  "xofs" ID 13 "172" 0x00
+HEX  "yofs" ID 13 "22"  0x00 // (172, 22) = start position
+HEX  "_exx" ID 13 "446" 0x00
+HEX  "_exy" ID 13 "54"  0x00 // (446, 54) = exit position
+HEX  "easy" ID 13 "@@@:95 20 20 20 20 50 20 20 20 50 35 480:@@@" 0x00
+HEX  "_f1x" ID 13 "424" 0x00
+HEX  "_f1y" ID 13 "25"  0x00
+HEX  "_f2x" ID 13 "451" 0x00
+HEX  "_f2y" ID 13 "25"  0x00 // exit "fires" (424, 25) and (451, 25)
+
+/*
+ * level 14
+ */
+HEX  "titl" ID 14 "MANACING!" 0x00
+PALETTE ID 14 "levels/classic-tricky/palette-blood.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 14 "levels/classic-tricky/level-14-data.cmp"
+DATA "mask" ID 14 "levels/classic-tricky/level-14-mask.cmp"
+#else
+DATA "_gfx" ID 14 "levels/classic-tricky/level-14-data.bin"
+DATA "mask" ID 14 "levels/classic-tricky/level-14-mask.bin"
+#endif
+HEX  "xofs" ID 14 "48"  0x00
+HEX  "yofs" ID 14 "76"  0x00 // ( 48, 76) = start position
+HEX  "_exx" ID 14 "606" 0x00
+HEX  "_exy" ID 14 "48"  0x00 // (606, 48) = exit position
+HEX  "easy" ID 14 "@@@:50 10 10 15 10 15 15 15 15 45 43 360:@@@" 0x00
+HEX  "_f1x" ID 14 "584" 0x00
+HEX  "_f1y" ID 14 "19"  0x00
+HEX  "_f2x" ID 14 "611" 0x00
+HEX  "_f2y" ID 14 "19"  0x00 // exit "fires" (584, 19) and (611, 19)
+
+/*
+ * level 15
+ */
+HEX  "titl" ID 15 "Ozone friendly Lemmings" 0x00
+PALETTE ID 15 "levels/\classic-tricky/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 15 "levels/\classic-tricky/level-15-data.cmp"
+DATA "mask" ID 15 "levels/\classic-tricky/level-15-mask.cmp"
+#else
+DATA "_gfx" ID 15 "levels/\classic-tricky/level-15-data.bin"
+DATA "mask" ID 15 "levels/\classic-tricky/level-15-mask.bin"
+#endif
+HEX  "xofs" ID 15 "278" 0x00
+HEX  "yofs" ID 15 "25"  0x00 // (278,25) = start position
+HEX  "_exx" ID 15 "425" 0x00
+HEX  "_exy" ID 15 "105" 0x00 // (425,105) = exit position
+HEX  "easy" ID 15 "@@@:50 0  0  6  0  0  0  0  0  10 5  300:@@@" 0x00
+HEX  "_f1x" ID 15 "403" 0x00
+HEX  "_f1y" ID 15 "76"  0x00
+HEX  "_f2x" ID 15 "431" 0x00
+HEX  "_f2y" ID 15 "76"  0x00 // exit "fires" (403, 76) and (431, 76)
+
+/*
+ * level 16
+ */
+HEX  "titl" ID 16 "Luvly jubly" 0x00
+PALETTE ID 16 "levels/\classic-tricky/palette-blue.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 16 "levels/\classic-tricky/level-16-data.cmp"
+DATA "mask" ID 16 "levels/\classic-tricky/level-16-mask.cmp"
+#else
+DATA "_gfx" ID 16 "levels/\classic-tricky/level-16-data.bin"
+DATA "mask" ID 16 "levels/\classic-tricky/level-16-mask.bin"
+#endif
+HEX  "xofs" ID 16 "87"  0x00
+HEX  "yofs" ID 16 "32"  0x00 // (87,32) = start position
+HEX  "_exx" ID 16 "506" 0x00
+HEX  "_exy" ID 16 "120" 0x00 // (506,120) = exit position
+HEX  "easy" ID 16 "@@@:50 0  0  10 0  0  1  1  0  50 40 300:@@@" 0x00
+HEX  "_f1x" ID 16 "484" 0x00
+HEX  "_f1y" ID 16 "91"  0x00
+HEX  "_f2x" ID 16 "512" 0x00
+HEX  "_f2y" ID 16 "91"  0x00 // exit "fires" (484, 91) and (512, 91)
+
+/*
+ * level 17
+ */
+HEX  "titl" ID 17 "Diet Lemmingaid" 0x00
+PALETTE ID 17 "levels/\classic-tricky/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 17 "levels/\classic-tricky/level-17-data.cmp"
+DATA "mask" ID 17 "levels/\classic-tricky/level-17-mask.cmp"
+#else
+DATA "_gfx" ID 17 "levels/\classic-tricky/level-17-data.bin"
+DATA "mask" ID 17 "levels/\classic-tricky/level-17-mask.bin"
+#endif
+HEX  "xofs" ID 17 "204" 0x00
+HEX  "yofs" ID 17 "24"  0x00 // (204,24) = start position
+HEX  "_exx" ID 17 "443" 0x00
+HEX  "_exy" ID 17 "91"  0x00 // (443,91) = exit position
+HEX  "easy" ID 17 "@@@:50 0  0  2  0  0  0  0  0  50 48 300:@@@" 0x00
+HEX  "_f1x" ID 17 "431" 0x00
+HEX  "_f1y" ID 17 "52"  0x00
+HEX  "_f2x" ID 17 "438" 0x00
+HEX  "_f2y" ID 17 "52"  0x00 // exit "fires" (431, 52) and (438, 52)
+
+/*
+ * level 18
+ */
+HEX  "titl" ID 18 "It's Lemmingentry Watson" 0x00
+PALETTE ID 18 "levels/\classic-tricky/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 18 "levels/\classic-tricky/level-18-data.cmp"
+DATA "mask" ID 18 "levels/\classic-tricky/level-18-mask.cmp"
+#else
+DATA "_gfx" ID 18 "levels/\classic-tricky/level-18-data.bin"
+DATA "mask" ID 18 "levels/\classic-tricky/level-18-mask.bin"
+#endif
+HEX  "xofs" ID 18 "179" 0x00
+HEX  "yofs" ID 18 "16"  0x00 // (179,16) = start position
+HEX  "_exx" ID 18 "420" 0x00
+HEX  "_exy" ID 18 "116" 0x00 // (420,116) = exit position
+HEX  "easy" ID 18 "@@@:50 0  1  1  0  2  0  0  1  10 9  300:@@@" 0x00
+HEX  "_f1x" ID 18 "398" 0x00
+HEX  "_f1y" ID 18 "87"  0x00
+HEX  "_f2x" ID 18 "426" 0x00
+HEX  "_f2y" ID 18 "87"  0x00 // exit "fires" (398, 87) and (426, 87)
+
+/*
+ * level 19
+ */
+HEX  "titl" ID 19 "Postcard from Lemmingland" 0x00
+PALETTE ID 19 "levels/\classic-tricky/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 19 "levels/\classic-tricky/level-19-data.cmp"
+DATA "mask" ID 19 "levels/\classic-tricky/level-19-mask.cmp"
+#else
+DATA "_gfx" ID 19 "levels/\classic-tricky/level-19-data.bin"
+DATA "mask" ID 19 "levels/\classic-tricky/level-19-mask.bin"
+#endif
+HEX  "xofs" ID 19 "56"  0x00
+HEX  "yofs" ID 19 "76"  0x00 //  (56,76) = start position
+HEX  "_exx" ID 19 "603" 0x00
+HEX  "_exy" ID 19 "75"  0x00 // (603,75) = exit position
+HEX  "easy" ID 19 "@@@:50 10 10 0  0  1  1  1  1  50 50 300:@@@" 0x00
+HEX  "_f1x" ID 19 "581" 0x00
+HEX  "_f1y" ID 19 "47"  0x00
+HEX  "_f2x" ID 19 "609" 0x00
+HEX  "_f2y" ID 19 "47"  0x00 // exit "fires" (581, 47) and (609, 47)
+
+/*
+ * level 20
+ */
+HEX  "titl" ID 20 "One way digging to freedom" 0x00
+PALETTE ID 20 "levels/classic-tricky/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 20 "levels/classic-tricky/level-20-data.cmp"
+DATA "mask" ID 20 "levels/classic-tricky/level-20-mask.cmp"
+#else
+DATA "_gfx" ID 20 "levels/classic-tricky/level-20-data.bin"
+DATA "mask" ID 20 "levels/classic-tricky/level-20-mask.bin"
+#endif
+HEX  "xofs" ID 20 "151" 0x00
+HEX  "yofs" ID 20 "74"  0x00 // (151, 74) = start position
+HEX  "_exx" ID 20 "518" 0x00
+HEX  "_exy" ID 20 "113" 0x00 // (518,113) = exit position
+HEX  "easy" ID 20 "@@@:40 3  3  6  2  2  4  2  2  50 47 240:@@@" 0x00
+HEX  "_f1x" ID 20 "505" 0x00
+HEX  "_f1y" ID 20 "75" 0x00
+HEX  "_f2x" ID 20 "512" 0x00
+HEX  "_f2y" ID 20 "75" 0x00 // exit "fires" (505, 75) and (512, 75)
+
+/*
+ * level 21
+ */
+HEX  "titl" ID 21 "All the 6's" 0x00
+PALETTE ID 21 "levels/classic-tricky/palette-hell.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 21 "levels/classic-tricky/level-21-data.cmp"
+DATA "mask" ID 21 "levels/classic-tricky/level-21-mask.cmp"
+#else
+DATA "_gfx" ID 21 "levels/classic-tricky/level-21-data.bin"
+DATA "mask" ID 21 "levels/classic-tricky/level-21-mask.bin"
+#endif
+HEX  "xofs" ID 21 "192" 0x00
+HEX  "yofs" ID 21 "75"  0x00 // (192, 75) = start position
+HEX  "_exx" ID 21 "420" 0x00
+HEX  "_exy" ID 21 "92"  0x00 // (420, 92) = exit position
+HEX  "easy" ID 21 "@@@:35 66 66 66 66 66 66 66 66 50 33 360:@@@" 0x00
+HEX  "_f1x" ID 21 "407" 0x00
+HEX  "_f1y" ID 21 "55"  0x00
+HEX  "_f2x" ID 21 "414" 0x00
+HEX  "_f2y" ID 21 "55"  0x00 // exit "fires" (407, 55) and (414, 55)
+
+/*
+ * level 22
+ */
+HEX  "titl" ID 22 "Turn around young Lemmings!" 0x00
+PALETTE ID 22 "levels/\classic-tricky/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 22 "levels/\classic-tricky/level-22-data.cmp"
+DATA "mask" ID 22 "levels/\classic-tricky/level-22-mask.cmp"
+#else
+DATA "_gfx" ID 22 "levels/\classic-tricky/level-22-data.bin"
+DATA "mask" ID 22 "levels/\classic-tricky/level-22-mask.bin"
+#endif
+HEX  "xofs" ID 22 "241" 0x00
+HEX  "yofs" ID 22 "50"  0x00 // (241,50) = start position
+HEX  "_exx" ID 22 "211" 0x00
+HEX  "_exy" ID 22 "98"  0x00 // (211,98) = exit position
+HEX  "easy" ID 22 "@@@:20 0  1  15 0  20 1  0  0  50 45 300:@@@" 0x00
+HEX  "_f1x" ID 22 "189" 0x00
+HEX  "_f1y" ID 22 "69"  0x00
+HEX  "_f2x" ID 22 "216" 0x00
+HEX  "_f2y" ID 22 "69"  0x00 // exit "fires" (189, 69) and (216, 89)
+
+/*
+ * level 23
+ */
+HEX  "titl" ID 23 "From the boundary line" 0x00
+PALETTE ID 23 "levels/classic-tricky/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 23 "levels/classic-tricky/level-23-data.cmp"
+DATA "mask" ID 23 "levels/classic-tricky/level-23-mask.cmp"
+#else
+DATA "_gfx" ID 23 "levels/classic-tricky/level-23-data.bin"
+DATA "mask" ID 23 "levels/classic-tricky/level-23-mask.bin"
+#endif
+HEX  "xofs" ID 23 "180" 0x00
+HEX  "yofs" ID 23 "77"  0x00 // (180,77) = start position
+HEX  "_exx" ID 23 "454" 0x00
+HEX  "_exy" ID 23 "105" 0x00 // (454,105) = exit position
+HEX  "easy" ID 23 "@@@:5  10 10 0  1  1  2  1  1  50 48 300:@@@" 0x00
+HEX  "_f1x" ID 23 "432" 0x00
+HEX  "_f1y" ID 23 "76"  0x00
+HEX  "_f2x" ID 23 "459" 0x00
+HEX  "_f2y" ID 23 "76"  0x00 // exit "fires" (432, 76) and (459, 76)
+
+/*
+ * level 24
+ */
+HEX  "titl" ID 24 "Tightrope City" 0x00
+PALETTE ID 24 "levels/classic-tricky/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 24 "levels/classic-tricky/level-24-data.cmp"
+DATA "mask" ID 24 "levels/classic-tricky/level-24-mask.cmp"
+#else
+DATA "_gfx" ID 24 "levels/classic-tricky/level-24-data.bin"
+DATA "mask" ID 24 "levels/classic-tricky/level-24-mask.bin"
+#endif
+HEX  "xofs" ID 24 "55"  0x00
+HEX  "yofs" ID 24 "45"  0x00 // ( 55, 45) = start position
+HEX  "_exx" ID 24 "586" 0x00
+HEX  "_exy" ID 24 "59"  0x00 // (586, 59) = exit position
+HEX  "easy" ID 24 "@@@:15 5  5  5  5  3  5  5  5  50 46 180:@@@" 0x00
+HEX  "_f1x" ID 24 "564" 0x00
+HEX  "_f1y" ID 24 "32"  0x00
+HEX  "_f2x" ID 24 "592" 0x00
+HEX  "_f2y" ID 24 "32"  0x00 // exit "fires" (564, 32) and (592, 32)
+
+/*
+ * level 25
+ */
+HEX  "titl" ID 25 "Cascade" 0x00
+PALETTE ID 25 "levels/classic-tricky/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 25 "levels/classic-tricky/level-25-data.cmp"
+DATA "mask" ID 25 "levels/classic-tricky/level-25-mask.cmp"
+#else
+DATA "_gfx" ID 25 "levels/classic-tricky/level-25-data.bin"
+DATA "mask" ID 25 "levels/classic-tricky/level-25-mask.bin"
+#endif
+HEX  "xofs" ID 25 "133" 0x00
+HEX  "yofs" ID 25 "94"  0x00 // (133, 94) = start position
+HEX  "_exx" ID 25 "523" 0x00
+HEX  "_exy" ID 25 "70"  0x00 // (523, 70) = exit position
+HEX  "easy" ID 25 "@@@:15 1  10 5  0  10 1  1  5  50 5  300:@@@" 0x00
+HEX  "_f1x" ID 25 "501" 0x00
+HEX  "_f1y" ID 25 "41"  0x00
+HEX  "_f2x" ID 25 "528" 0x00
+HEX  "_f2y" ID 25 "41"  0x00 // exit "fires" (501, 41) and (528, 41)
+
+/*
+ * level 26
+ */
+HEX  "titl" ID 26 "I have a cunning plan" 0x00
+PALETTE ID 26 "levels/\classic-tricky/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 26 "levels/\classic-tricky/level-26-data.cmp"
+DATA "mask" ID 26 "levels/\classic-tricky/level-26-mask.cmp"
+#else
+DATA "_gfx" ID 26 "levels/\classic-tricky/level-26-data.bin"
+DATA "mask" ID 26 "levels/\classic-tricky/level-26-mask.bin"
+#endif
+HEX  "xofs" ID 26 "230" 0x00
+HEX  "yofs" ID 26 "75"  0x00 // (230, 75) = start position
+HEX  "_exx" ID 26 "377" 0x00
+HEX  "_exy" ID 26 "102" 0x00 // (377,102) = exit position
+HEX  "easy" ID 26 "@@@:25 2  0  5  10 20 2  2  2  50 50 300:@@@" 0x00
+HEX  "_f1x" ID 26 "355" 0x00
+HEX  "_f1y" ID 26 "74"  0x00
+HEX  "_f2x" ID 26 "383" 0x00
+HEX  "_f2y" ID 26 "74"  0x00 // exit "fires" (355, 74) and (383, 74)
+
+/*
+ * level 27
+ */
+HEX  "titl" ID 27 "The island of the Wicker people" 0x00
+PALETTE ID 27 "levels/classic-tricky/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 27 "levels/classic-tricky/level-27-data.cmp"
+DATA "mask" ID 27 "levels/classic-tricky/level-27-mask.cmp"
+#else
+DATA "_gfx" ID 27 "levels/classic-tricky/level-27-data.bin"
+DATA "mask" ID 27 "levels/classic-tricky/level-27-mask.bin"
+#endif
+HEX  "xofs" ID 27 "85"  0x00
+HEX  "yofs" ID 27 "14"  0x00 // ( 85, 14) = start position
+HEX  "_exx" ID 27 "424" 0x00
+HEX  "_exy" ID 27 "46"  0x00 // (424, 46) = exit position
+HEX  "easy" ID 27 "@@@:40 5  0  5  5  5  5  5  5  50 45 480:@@@" 0x00
+HEX  "_f1x" ID 27 "402" 0x00
+HEX  "_f1y" ID 27 "17"  0x00
+HEX  "_f2x" ID 27 "429" 0x00
+HEX  "_f2y" ID 27 "17"  0x00 // exit "fires" (402, 17) and (429, 17)
+
+/*
+ * level 28
+ */
+HEX  "titl" ID 28 "Lost something?" 0x00
+PALETTE ID 28 "levels/classic-tricky/palette-earth.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 28 "levels/classic-tricky/level-28-data.cmp"
+DATA "mask" ID 28 "levels/classic-tricky/level-28-mask.cmp"
+#else
+DATA "_gfx" ID 28 "levels/classic-tricky/level-28-data.bin"
+DATA "mask" ID 28 "levels/classic-tricky/level-28-mask.bin"
+#endif
+HEX  "xofs" ID 28 "220" 0x00
+HEX  "yofs" ID 28 "86"  0x00 // (220, 86) = start position
+HEX  "_exx" ID 28 "384" 0x00
+HEX  "_exy" ID 28 "66"  0x00 // (384, 66) = exit position
+HEX  "easy" ID 28 "@@@:30 10 10 10 10 10 10 10 10 50 45 300:@@@" 0x00
+HEX  "_f1x" ID 28 "640" 0x00
+HEX  "_f1y" ID 28 "128" 0x00
+HEX  "_f2x" ID 28 "640" 0x00
+HEX  "_f2y" ID 28 "128" 0x00 // exit "fires" (640,128) and (640,128)
+
+/*
+ * level 29
+ */
+HEX  "titl" ID 29 "Rainbow Island" 0x00
+PALETTE ID 29 "levels/classic-tricky/palette-pink.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 29 "levels/classic-tricky/level-29-data.cmp"
+DATA "mask" ID 29 "levels/classic-tricky/level-29-mask.cmp"
+#else
+DATA "_gfx" ID 29 "levels/classic-tricky/level-29-data.bin"
+DATA "mask" ID 29 "levels/classic-tricky/level-29-mask.bin"
+#endif
+HEX  "xofs" ID 29 "52"  0x00
+HEX  "yofs" ID 29 "59"  0x00 // ( 52, 59) = start position
+HEX  "_exx" ID 29 "600" 0x00
+HEX  "_exy" ID 29 "118" 0x00 // (600,118) = exit position
+HEX  "easy" ID 29 "@@@:30 0  0  0  1  0  5  0  0  50 49 240:@@@" 0x00
+HEX  "_f1x" ID 29 "578" 0x00
+HEX  "_f1y" ID 29 "90"  0x00
+HEX  "_f2x" ID 29 "606" 0x00
+HEX  "_f2y" ID 29 "90"  0x00 // exit "fires" (578, 90) and (606, 90)
+
+/*
+ * level 30
+ */
+HEX  "titl" ID 30 "The crankshaft" 0x00
+PALETTE ID 30 "levels/classic-tricky/palette-golden.pal"
+#ifdef USE_CHIP_COMPRESS
+DATA "_gfx" ID 30 "levels/classic-tricky/level-30-data.cmp"
+DATA "mask" ID 30 "levels/classic-tricky/level-30-mask.cmp"
+#else
+DATA "_gfx" ID 30 "levels/classic-tricky/level-30-data.bin"
+DATA "mask" ID 30 "levels/classic-tricky/level-30-mask.bin"
+#endif
+HEX  "xofs" ID 30 "62"  0x00
+HEX  "yofs" ID 30 "17"  0x00 // ( 62,17) = start position
+HEX  "_exx" ID 30 "561" 0x00
+HEX  "_exy" ID 30 "80"  0x00 // (561,80) = exit position
+HEX  "easy" ID 30 "@@@:80 10 10 10 10 10 0  10 10 50 45 240:@@@" 0x00
+HEX  "_f1x" ID 30 "539" 0x00
+HEX  "_f1y" ID 30 "52"  0x00
+HEX  "_f2x" ID 30 "566" 0x00
+HEX  "_f2y" ID 30 "52"  0x00 // exit "fires" (539, 52) and (566, 52)
