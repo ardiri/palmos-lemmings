@@ -504,19 +504,24 @@ pinsSetFormPolicy(FormType *frm, UInt16 formID)
  * Resize the game form to the display and align its objects.
  *
  * @param frm the game form.
+ * @return true if the display extent has changed, false otherwise.
  */
-static void
+static Boolean
 pinsGameFormResize(FormType *frm)
 {
   RectangleType bounds;
   Coord         x, y;
   Int16         toolX, titleX, oldWidth;
-  UInt16        i;
+  UInt16        i, state;
+  Boolean       changed;
 
-  // the player decides, the game only restores that choice
-  PINSetInputTriggerState(pinInputTriggerEnabled);
-  PINSetInputAreaState(globals.pins.inputAreaOpen
-                         ? pinInputAreaOpen : pinInputAreaClosed);
+  // the player decides, the game only restores that choice - the setters
+  // post a winDisplayChangedEvent, so only call them on a real change
+  if (PINGetInputTriggerState() != pinInputTriggerEnabled)
+    PINSetInputTriggerState(pinInputTriggerEnabled);
+  state = globals.pins.inputAreaOpen ? pinInputAreaOpen : pinInputAreaClosed;
+  if (PINGetInputAreaState() != state)
+    PINSetInputAreaState(state);
 
   // the form covers whatever the input area leaves us
   bounds.topLeft.x = 0;
@@ -548,11 +553,18 @@ pinsGameFormResize(FormType *frm)
   globals.pins.titleX = titleX;
 
   // adjust the view of the level to the new display
-  oldWidth = SCREEN_WIDTH;
-  globals.prefs->palmHD.width  = bounds.extent.x;
-  globals.prefs->palmHD.height = bounds.extent.y;
-  GameWideScreen(globals.prefs);
-  GameViewResized(globals.prefs, oldWidth);
+  changed = (globals.prefs->palmHD.width  != (UInt32)bounds.extent.x) ||
+            (globals.prefs->palmHD.height != (UInt32)bounds.extent.y);
+  if (changed)
+  {
+    oldWidth = SCREEN_WIDTH;
+    globals.prefs->palmHD.width  = bounds.extent.x;
+    globals.prefs->palmHD.height = bounds.extent.y;
+    GameWideScreen(globals.prefs);
+    GameViewResized(globals.prefs, oldWidth);
+  }
+
+  return changed;
 }
 
 /**
@@ -586,11 +598,14 @@ pinsDrawScroller()
   WinEraseRectangle(&rect, 0);
   WinDrawRectangleFrame(simpleFrame, &rect);
 
-  // 640 pixels of level map onto the 96 pixels of the scroller
+  // the level maps onto the inside of the frame (2 pixel margin)
   globals.pins.scrollerOffset = globals.prefs->game.cursor.screenOffset;
-  rect.topLeft.x = SCROLLER_X + ((globals.pins.scrollerOffset * 3) / 20);
+  rect.topLeft.x = SCROLLER_X + 2 +
+    (Coord)(((UInt32)globals.pins.scrollerOffset * (SCROLLER_WIDTH - 4)) /
+            OFFSCREEN_WIDTH);
   rect.topLeft.y = SCROLLER_Y + 2;
-  rect.extent.x  = (SCREEN_WIDTH * 3) / 20;
+  rect.extent.x  =
+    (Coord)(((UInt32)SCREEN_WIDTH * (SCROLLER_WIDTH - 4)) / OFFSCREEN_WIDTH);
   rect.extent.y  = SCROLLER_HEIGHT - 4;
   WinDrawRectangle(&rect, 0);
 
@@ -1330,9 +1345,13 @@ KEYDOWN_ABORT:
            globals.pins.inputAreaOpen =
              (PINGetInputAreaState() == pinInputAreaOpen);
 
-           MemSet(&newEvent, sizeof(EventType), 0);
-           newEvent.eType = appUpdateEvent;
-           EvtAddEventToQueue(&newEvent);
+           // only a new display extent needs a new layout + repaint
+           if (pinsGameFormResize(FrmGetActiveForm()))
+           {
+             MemSet(&newEvent, sizeof(EventType), 0);
+             newEvent.eType = appUpdateEvent;
+             EvtAddEventToQueue(&newEvent);
+           }
 
            processed = true;
          }
