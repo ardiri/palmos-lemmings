@@ -968,7 +968,8 @@ gameFormEventHandler(EventType *event)
            if (
                (globals.prefs->game.gamePlaying) &&
                (event->screenX > SCREEN_TOOL_START_X) &&
-               (event->screenX < SCREEN_WIDTH_STYLUS) &&
+               (event->screenX <                 // tool bar may be centered
+                 (SCREEN_TOOL_START_X + (TOOL_COUNT * SCREEN_TOOL_WIDTH))) &&
                (event->screenY > SCREEN_TOOL_START_Y) &&
                (event->screenY < (SCREEN_TOOL_START_Y+SCREEN_TOOL_HEIGHT))
               )
