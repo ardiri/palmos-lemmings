@@ -1104,31 +1104,41 @@ GameWideScreen(PreferencesType *prefs)
   else
 #endif
 #if PALM_HIDENSITY
-  if ((prefs->palmHD.device) &&
-      (prefs->config.widescreenDisplay))
+  if (prefs->palmHD.device)
   {
-    switch (prefs->palmHD.density)
-    {
-      case kDensityDouble:
-           SCREEN_WIDTH_STYLUS  = SCREEN_WIDTH_GENERIC;
-           SCREEN_START_STYLUS  = SCREEN_START_PALMHD >> 1;
-           SCREEN_HEIGHT_STYLUS = SCREEN_HEIGHT >> 1;
-           SCREEN_WIDTH         = SCREEN_WIDTH_PALMHD;
-           SCREEN_START         = SCREEN_START_PALMHD >> 1;
-           break;
+    Int16 width, toolX;
 
-      case kDensityLow:
-      default:
-           SCREEN_WIDTH_STYLUS  = SCREEN_WIDTH_GENERIC;
-           SCREEN_START_STYLUS  = SCREEN_START_GENERIC;
-           SCREEN_HEIGHT_STYLUS = SCREEN_HEIGHT;
-           SCREEN_WIDTH         = SCREEN_WIDTH_GENERIC;
-           SCREEN_START         = SCREEN_START_GENERIC;
-           break;
+    //
+    // HiRes+ devices (dynamic input area) can be wider than 160 once the
+    // input area is collapsed: the visible slice of the level grows with
+    // the display, the tool bar stays 160 wide and is centered below it.
+    //
+    // -- 320x480 / 480x320 support, 2026
+    //
+
+    width = (Int16)prefs->palmHD.width;
+    toolX = (width - SCREEN_WIDTH_GENERIC) >> 1;
+
+    if ((prefs->config.widescreenDisplay) &&
+        (prefs->palmHD.density == kDensityDouble))
+    {
+      SCREEN_WIDTH_STYLUS  = width;
+      SCREEN_START_STYLUS  = SCREEN_START_PALMHD >> 1;
+      SCREEN_HEIGHT_STYLUS = SCREEN_HEIGHT >> 1;
+      SCREEN_WIDTH         = width << 1;         // 1:1 hi-density pixels
+      SCREEN_START         = SCREEN_START_PALMHD >> 1;
     }
-    SCREEN_TOOL_SPEED_X  = 30;
-    SCREEN_TOOL_COUNT_X  = 44;
-    SCREEN_TOOL_START_X  = 60;
+    else
+    {
+      SCREEN_WIDTH_STYLUS  = width;
+      SCREEN_START_STYLUS  = SCREEN_START_GENERIC;
+      SCREEN_HEIGHT_STYLUS = SCREEN_HEIGHT;
+      SCREEN_WIDTH         = width;
+      SCREEN_START         = SCREEN_START_GENERIC;
+    }
+    SCREEN_TOOL_SPEED_X  = 30 + toolX;
+    SCREEN_TOOL_COUNT_X  = 44 + toolX;
+    SCREEN_TOOL_START_X  = 60 + toolX;
     SCREEN_TOOL_START_Y  = 146;
     SCREEN_TOOL_WIDTH    = 11;
     SCREEN_TOOL_HEIGHT   = 11;                   // palmHD pixel still 160x160
@@ -1148,6 +1158,36 @@ GameWideScreen(PreferencesType *prefs)
     SCREEN_TOOL_WIDTH    = 11;
     SCREEN_TOOL_HEIGHT   = 11;
   }
+}
+
+/**
+ * Keep the view centered on the same part of the level after the width
+ * of the visible area (SCREEN_WIDTH) has changed, ie: device rotation or
+ * collapsing/expanding the dynamic input area.
+ *
+ * @param prefs    the global preferences structure.
+ * @param oldWidth the SCREEN_WIDTH before the change.
+ */
+void
+GameViewResized(PreferencesType *prefs, Int16 oldWidth)
+{
+  Int16 levelX, pos;
+
+  // the cursor must stay over the same spot within the level
+  levelX = prefs->game.cursor.screenOffset + prefs->game.cursor.x;
+
+  pos = prefs->game.cursor.screenOffset - ((SCREEN_WIDTH - oldWidth) >> 1);
+  if (pos < 0) pos = 0; else
+  if (pos > (OFFSCREEN_WIDTH - SCREEN_WIDTH))
+    pos = (OFFSCREEN_WIDTH - SCREEN_WIDTH);
+  prefs->game.cursor.screenOffset = pos;
+
+  prefs->game.cursor.x = levelX - pos;
+  if (prefs->game.cursor.x < 0) prefs->game.cursor.x = 0; else
+  if (prefs->game.cursor.x > (SCREEN_WIDTH - 1))
+    prefs->game.cursor.x = SCREEN_WIDTH - 1;
+
+  GraphicsSetOffset(prefs->game.cursor.screenOffset);
 }
 
 /**

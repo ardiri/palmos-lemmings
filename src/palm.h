@@ -30,6 +30,7 @@
 #include "hardware/GamePad.h"
 #include "hardware/SonyHR.h"
 #include "hardware/PalmHDD.h"
+#include "hardware/PalmPINS.h"
 #include "hardware/HanderaVGA.h"
 #include "hardware/PalmChars.h"
 #include "hardware/HanderaChars.h"
@@ -336,8 +337,10 @@ typedef struct
     Boolean        device;              // are we running on palm hi-density device?
 
     UInt32         width;
-    UInt32         height;
+    UInt32         height;              // display extent (standard coordinates)
     UInt16         density;             // display properties
+
+    Boolean        pins;                // dynamic input area (HiRes+ 320x480)?
   } palmHD;
 #endif
 
