@@ -15,7 +15,8 @@
 // feature to detect the pen input manager
 #define pinCreator                      'pins'
 #define pinFtrAPIVersion                1
-#define pinAPIVersion1_1                0x01103000
+#define pinAPIVersion1_0                0x01000000   // Tungsten T3 (5.2.1)
+#define pinAPIVersion1_1                0x01103000   // + orientation API
 
 // input area states
 #define pinInputAreaOpen                0

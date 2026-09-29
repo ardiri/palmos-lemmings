@@ -341,6 +341,7 @@ typedef struct
     UInt16         density;             // display properties
 
     Boolean        pins;                // dynamic input area (HiRes+ 320x480)?
+    Boolean        pinsOrientation;     // orientation API (PINS 1.1+)?
   } palmHD;
 #endif
 

@@ -3620,17 +3620,23 @@ InitApplication()
     globals.prefs->palmHD.density =
       (density == kDensityDouble) ? kDensityDouble : kDensityLow;
 
-    // dynamic input area? (HiRes+ 320x480, Palm OS 5 SDK R3)
+    // dynamic input area? (HiRes+ 320x480: PINS 1.0 on the Tungsten T3,
+    // 1.1 - with the orientation API - from the Tungsten T5 on)
     globals.prefs->palmHD.pins =
       (FtrGet(pinCreator, pinFtrAPIVersion, &pinsVersion) == errNone) &&
-      (pinsVersion >= pinAPIVersion1_1);
+      (pinsVersion >= pinAPIVersion1_0);
+    globals.prefs->palmHD.pinsOrientation =
+      (globals.prefs->palmHD.pins) && (pinsVersion >= pinAPIVersion1_1);
 
     // the player may rotate the device (and the game with it)
-    if (globals.prefs->palmHD.pins)
+    if (globals.prefs->palmHD.pinsOrientation)
       SysSetOrientationTriggerState(sysOrientationTriggerEnabled);
   }
   else
-    globals.prefs->palmHD.pins = false;
+  {
+    globals.prefs->palmHD.pins            = false;
+    globals.prefs->palmHD.pinsOrientation = false;
+  }
 
   // until the game form resizes itself, everything is 160x160
   globals.prefs->palmHD.width  = SCREEN_WIDTH_GENERIC;
@@ -4387,7 +4393,7 @@ EndApplication()
 #endif
 
 #if PALM_HIDENSITY
-  if (globals.prefs->palmHD.pins)
+  if (globals.prefs->palmHD.pinsOrientation)
     SysSetOrientationTriggerState(sysOrientationTriggerDisabled);
 #endif
 
