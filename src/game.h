@@ -100,6 +100,12 @@ enum SoundType
 
 #define MSK_BASH_CNT   4
 
+// 5-way navigator directions (see GameProcessNavigator)
+#define NAV_LEFT   0x0001
+#define NAV_RIGHT  0x0002
+#define NAV_UP     0x0004
+#define NAV_DOWN   0x0008
+
 extern Boolean GameInitialize()                                       __GAME__;
 extern void    GamePause(PreferencesType *, Boolean)                  __GAME__;
 extern void    GameChangeTool(PreferencesType *, UInt16, UInt16)      __GAME__;
@@ -113,6 +119,7 @@ extern void    GameSaveLevel(PreferencesType *)                       __GAME__;
 extern void    GameResetPreferences(PreferencesType *)                __GAME__;
 extern void    _GameResetPreferences(PreferencesType *)            __PROTECT__;
 extern void    GameProcessKeyInput(PreferencesType *, UInt32)         __GAME__;
+extern void    GameProcessNavigator(PreferencesType *, UInt16)        __GAME__;
 extern void    GameProcessStylusInput(PreferencesType *,
                                       Coord, Coord, Boolean)          __GAME__;
 #if CHEAT_MODE
