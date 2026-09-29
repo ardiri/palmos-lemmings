@@ -3620,8 +3620,9 @@ InitApplication()
     globals.prefs->palmHD.density =
       (density == kDensityDouble) ? kDensityDouble : kDensityLow;
 
-    // dynamic input area? (HiRes+ 320x480: PINS 1.0 on the Tungsten T3,
-    // 1.1 - with the orientation API - from the Tungsten T5 on)
+    // dynamic input area? (HiRes+ 320x480: Tungsten T5/TX, LifeDrive, and
+    // the Tungsten T3 with the DIA compatibility update - see PalmPINS.h;
+    // the orientation API needs PINS 1.1)
     globals.prefs->palmHD.pins =
       (FtrGet(pinCreator, pinFtrAPIVersion, &pinsVersion) == errNone) &&
       (pinsVersion >= pinAPIVersion1_0);

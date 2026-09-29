@@ -2,7 +2,11 @@
  * @(#)PalmPINS.h
  *
  * Pen Input Manager (PINS) API of Palm OS 5 "HiRes+" devices with a
- * dynamic input area (320x480 / 480x320: Tungsten T3/T5/TX, LifeDrive).
+ * dynamic input area (320x480 / 480x320: Tungsten T5/TX, LifeDrive).
+ *
+ * The Tungsten T3 (Palm OS 5.2.1) has palmOne's own "Active Input Area"
+ * instead and no PINS; it gets this API with palmOne's "Tungsten T3 DIA
+ * Compatibility Update" (StatusBarLib + AppSlipRotate).
  *
  * The declarations follow PenInputMgr.h, Form.h, SystemMgr.h, Window.h
  * and NotifyMgr.h of the Palm OS 5 SDK (68K) R3; like PalmHDD.h they are
@@ -15,7 +19,7 @@
 // feature to detect the pen input manager
 #define pinCreator                      'pins'
 #define pinFtrAPIVersion                1
-#define pinAPIVersion1_0                0x01000000   // Tungsten T3 (5.2.1)
+#define pinAPIVersion1_0                0x01000000
 #define pinAPIVersion1_1                0x01103000   // + orientation API
 
 // input area states
