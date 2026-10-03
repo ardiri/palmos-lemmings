@@ -18,6 +18,9 @@
 # compiler commands
 PREFIX   =
 CC       = $(PREFIX)m68k-palmos-gcc
+MULTIGEN = $(PREFIX)m68k-palmos-multigen
+ARMCC    = arm-elf-gcc
+ARMCOPY  = arm-elf-objcopy
 PILRC    = $(PREFIX)pilrc
 BUILDPRC = $(PREFIX)build-prc
 PRC2BIN  = $(PREFIX)prc2bin
@@ -31,37 +34,65 @@ OBJS    = palm.o device.o graphics.o game.o help_$(LANG).o register.o levelpack.
 TEMP    = tmp.out
 
 # compiler flags
+CCTOOLS =
 CCFLAGS = -O2 -Wall -palmos4 -DLANG_$(LANG)
 ACFLAGS = -mshort-load-bytes -ffixed-r9 -nostartfiles -O2 -Wall \
 	  -Xlinker --script=callback.ld
 
+# optional: the palmdev-macos toolchain (macOS, Apple Silicon), which needs
+# no palmdev-prep - see tools/README.md
+#   make PALMDEV=$(HOME)/tools/palmdev-macos
+ifdef PALMDEV
+TOOLS    = $(PALMDEV)/toolchain
+SDK      = $(PALMDEV)/sdk/sdk-4
+PILRC_DIR ?= $(HOME)/tools/pilrc-3.2-64bit/bin
+export GCC_EXEC_PREFIX = $(TOOLS)/lib/gcc-lib/
+
+PREFIX   = $(TOOLS)/bin/
+ARMCC    = $(PREFIX)arm-palmos-gcc
+ARMCOPY  = $(PREFIX)arm-palmos-objcopy
+PILRC    = $(PILRC_DIR)/pilrc
+PRC2BIN  = python3 ../tools/prc2bin.py
+
+CCTOOLS  = -B$(TOOLS)/lib/gcc-lib/m68k-palmos/2.95.3-kgpd/ \
+	   -B$(TOOLS)/m68k-palmos/bin/ -B$(TOOLS)/m68k-palmos/lib/
+CCFLAGS  = -O2 -Wall -DLANG_$(LANG) $(CCTOOLS) \
+	   -nostdinc -I$(TOOLS)/lib/gcc-lib/m68k-palmos/2.95.3-kgpd/include \
+	   $(addprefix -I,$(shell find $(SDK)/include -type d)) -L$(SDK)/lib
+ACFLAGS := -B$(TOOLS)/lib/gcc-lib/arm-palmos/3.3.1/ -B$(TOOLS)/arm-palmos/bin/ \
+	   $(ACFLAGS)
+endif
+
 # compile requirements
 all:
-	LANG=en make lemmings
+	LANG=en $(MAKE) lemmings
 
-lemmings: $(EXEC) $(EXEC).def arm.midi.stamp arm.sfx.stamp bin.game.stamp
+lemmings: $(EXEC) $(EXEC).def arm.midi.stamp arm.sfx.stamp bin.game.stamp $(ENCRYPT)
 	$(BUILDPRC) $(EXEC).def $(BINFILE) *.bin
 	$(PRC2BIN) $(EXEC).prc > $(TEMP)
 	$(ENCRYPT) code0002.bin code0006.bin
 	$(BUILDPRC) $(EXEC).def *.bin
-	make clean
+	$(MAKE) clean
 	cp $(EXEC).prc ../$(EXEC).prc
+
+$(ENCRYPT): regcode/encrypt.c
+	cc -O2 -Wall -o $@ $<
 
 $(EXEC): $(OBJS)
 	$(CC) $(OBJS) $(CCFLAGS) -o $(BINFILE)
 
 $(MSEG): $(EXEC).def
 #	multigen $(EXEC).def                     # pre prc-tools 2.2
-	m68k-palmos-multigen $(EXEC).def
-	$(CC) -c -o $(EXEC)-sections.o $(EXEC)-sections.s
+	$(MULTIGEN) $(EXEC).def
+	$(CC) $(CCTOOLS) -c -o $(EXEC)-sections.o $(EXEC)-sections.s
 
 arm.sfx.stamp: sfx-callback.c
-	arm-elf-gcc -e callback -o sfx-callback.o $(ACFLAGS) sfx-callback.c
-	arm-elf-objcopy -j .text -O binary sfx-callback.o sfx-callback.arm
+	$(ARMCC) -e callback -o sfx-callback.o $(ACFLAGS) sfx-callback.c
+	$(ARMCOPY) -j .text -O binary sfx-callback.o sfx-callback.arm
 
 arm.midi.stamp: midi-callback.c
-	arm-elf-gcc -e callback -o midi-callback.o $(ACFLAGS) midi-callback.c
-	arm-elf-objcopy -O binary midi-callback.o midi-callback.arm
+	$(ARMCC) -e callback -o midi-callback.o $(ACFLAGS) midi-callback.c
+	$(ARMCOPY) -O binary midi-callback.o midi-callback.arm
 
 bin.levl.stamp: $(EXEC)_$(PACK).rcp arm.midi.stamp
 	$(PILRC) -q -ro -creator LEMM -type levl -name "LEMM_$(PACK)" \
