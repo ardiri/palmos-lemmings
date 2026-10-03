@@ -471,6 +471,10 @@ mainFormEventHandler(EventType *event)
 #define SCROLLER_WIDTH   96
 #define SCROLLER_HEIGHT  48
 
+// the tool bar bitmap of the game form (see lemmings_en.rcp)
+#define TOOLBAR_Y        147
+#define TOOLBAR_HEIGHT   13
+
 /**
  * Set the input area policy of a form that is about to be opened.
  *
@@ -578,6 +582,32 @@ pinsScrollerVisible()
   return (globals.prefs->palmHD.pins) &&
          (globals.prefs->config.graffitiScroll) &&
          (globals.prefs->palmHD.height >= (SCROLLER_Y + SCROLLER_HEIGHT));
+}
+
+/**
+ * Fill the space beside the centered tool bar black, like the tool bar.
+ */
+static void
+pinsDrawToolBarSides()
+{
+  RectangleType rect;
+  WinHandle     currWindow;
+
+  if (globals.pins.toolX <= 0) return;
+
+  currWindow = WinSetDrawWindow(WinGetDisplayWindow());
+
+  rect.topLeft.x = 0;
+  rect.topLeft.y = TOOLBAR_Y;
+  rect.extent.x  = globals.pins.toolX;
+  rect.extent.y  = TOOLBAR_HEIGHT;
+  WinDrawRectangle(&rect, 0);
+
+  rect.topLeft.x = globals.pins.toolX + SCREEN_WIDTH_GENERIC;
+  rect.extent.x  = (Coord)globals.prefs->palmHD.width - rect.topLeft.x;
+  WinDrawRectangle(&rect, 0);
+
+  WinSetDrawWindow(currWindow);
 }
 
 /**
@@ -839,6 +869,8 @@ gameFormEventHandler(EventType *event)
              WinInvertChars(str, StrLen(str), x, y);
            }
 
+           if (globals.prefs->palmHD.pins)
+             pinsDrawToolBarSides();
            if (pinsScrollerVisible())
              pinsDrawScroller();
          }
