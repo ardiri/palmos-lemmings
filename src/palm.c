@@ -70,10 +70,10 @@ typedef struct
 #if PALM_HIDENSITY
   struct
   {
-    Boolean       inputAreaOpen;   // input area during the game? (collapsed)
+    Boolean       inputAreaOpen;   // input area in landscape? (player's choice)
+    UInt8         orientation;     // last layout: pinsUnknown/Portrait/Landscape
     Int16         toolX;           // x-shift applied to the game tool bar
     Int16         titleX;          // x-shift applied to the title buttons
-    Int16         scrollerOffset;  // screen offset shown by the scroller
   } pins;
 #endif
 
@@ -465,12 +465,6 @@ mainFormEventHandler(EventType *event)
 // -- 320x480 / 480x320 support, 2026
 //
 
-// the portrait scroller covers the old graffiti area (see penDownEvent)
-#define SCROLLER_X       32
-#define SCROLLER_Y       170
-#define SCROLLER_WIDTH   96
-#define SCROLLER_HEIGHT  48
-
 // the tool bar bitmap of the game form (see lemmings_en.rcp)
 #define TOOLBAR_Y        147
 #define TOOLBAR_HEIGHT   13
@@ -479,8 +473,42 @@ mainFormEventHandler(EventType *event)
 #define TITLE_X          2
 #define TITLE_HEIGHT     (SCREEN_START_GENERIC - 1)
 
+// the orientation the game form was last laid out for
+#define pinsUnknown      0
+#define pinsPortrait     1
+#define pinsLandscape    2
+
 // the game menu item added on HiRes+ devices (see menuOpenEvent)
 static const Char strMenuInputArea[] = "Input Area";
+
+/**
+ * Is the screen turned to landscape? Only then the game may take the
+ * whole display; in portrait the input area and status bar stay.
+ *
+ * @return true if the screen is wider than high, false otherwise.
+ */
+static Boolean
+pinsIsLandscape()
+{
+  UInt32 width, height;
+
+  WinScreenGetAttribute(winScreenWidth,  &width);
+  WinScreenGetAttribute(winScreenHeight, &height);
+
+  return (width > height);
+}
+
+/**
+ * Show the "Input Area" item of the game menu in landscape only.
+ */
+static void
+pinsUpdateMenu()
+{
+  if (pinsIsLandscape())
+    MenuShowItem(gameMenuItemInputArea);
+  else
+    MenuHideItem(gameMenuItemInputArea);
+}
 
 /**
  * Set the input area policy of a form that is about to be opened.
@@ -524,26 +552,44 @@ pinsGameFormResize(FormType *frm)
   Coord         x, y;
   Int16         toolX, titleX, oldWidth;
   UInt16        i, state;
+  UInt8         orientation;
   UInt32        visible;
-  Boolean       changed;
+  Boolean       changed, open, bar;
 
-  // the player decides, the game only restores that choice - the setters
-  // post a winDisplayChangedEvent, so only call them on a real change
+  // the trigger also holds the rotate button of the Tungsten T3 status bar
+  // - the setters post a winDisplayChangedEvent, so only call them on a change
   if (PINGetInputTriggerState() != pinInputTriggerEnabled)
     PINSetInputTriggerState(pinInputTriggerEnabled);
-  state = globals.pins.inputAreaOpen ? pinInputAreaOpen : pinInputAreaClosed;
+
+  // landscape: the player's choice; portrait: open when turned to portrait,
+  // after that the player may still collapse it with the status bar button
+  orientation = pinsIsLandscape() ? pinsLandscape : pinsPortrait;
+  if (orientation == pinsLandscape)
+    open = globals.pins.inputAreaOpen;
+  else
+  if (orientation != globals.pins.orientation)
+    open = true;
+  else
+    open = (PINGetInputAreaState() == pinInputAreaOpen);
+  globals.pins.orientation = orientation;
+
+  state = open ? pinInputAreaOpen : pinInputAreaClosed;
   if (PINGetInputAreaState() != state)
     PINSetInputAreaState(state);
 
-  // the status bar goes with the input area (the game menu brings it back)
+  // the status bar goes with the input area in landscape (the game menu
+  // brings both back), in portrait it always stays
+  bar = open || (orientation == pinsPortrait);
   if (StatGetAttribute(statAttrBarVisible, &visible) == errNone)
   {
-    if (globals.pins.inputAreaOpen && !visible)
+    if (bar && !visible)
       StatShow();
     else
-    if (!globals.pins.inputAreaOpen && visible)
+    if (!bar && visible)
       StatHide();
   }
+  if (MenuGetActiveMenu() != NULL)
+    pinsUpdateMenu();
 
   // the form covers whatever the input area leaves us
   bounds.topLeft.x = 0;
@@ -590,20 +636,7 @@ pinsGameFormResize(FormType *frm)
 }
 
 /**
- * Is the portrait scroller (below the tool bar) available?
- *
- * @return true if the scroller is displayed, false otherwise.
- */
-static Boolean
-pinsScrollerVisible()
-{
-  return (globals.prefs->palmHD.pins) &&
-         (globals.prefs->config.graffitiScroll) &&
-         (globals.prefs->palmHD.height >= (SCROLLER_Y + SCROLLER_HEIGHT));
-}
-
-/**
- * Fill the space beside the centered tool bar black, like the tool bar.
+ * Fill the space beside and below the tool bar black, like the tool bar.
  */
 static void
 pinsDrawToolBarSides()
@@ -611,9 +644,15 @@ pinsDrawToolBarSides()
   RectangleType rect;
   WinHandle     currWindow;
 
-  if (globals.pins.toolX <= 0) return;
-
   currWindow = WinSetDrawWindow(WinGetDisplayWindow());
+
+  // portrait with the input area collapsed: below the tool bar
+  rect.topLeft.x = 0;
+  rect.topLeft.y = TOOLBAR_Y + TOOLBAR_HEIGHT;
+  rect.extent.x  = (Coord)globals.prefs->palmHD.width;
+  rect.extent.y  = (Coord)globals.prefs->palmHD.height - rect.topLeft.y;
+  if (rect.extent.y > 0)
+    WinDrawRectangle(&rect, 0);
 
   rect.topLeft.x = 0;
   rect.topLeft.y = TOOLBAR_Y;
@@ -682,38 +721,6 @@ pinsDrawTitle(FormType *frm)
 
   WinSetDrawWindow(currWindow);
 }
-
-/**
- * Draw the portrait scroller: the whole level, the visible part filled.
- */
-static void
-pinsDrawScroller()
-{
-  RectangleType rect;
-  WinHandle     currWindow;
-
-  currWindow = WinSetDrawWindow(WinGetDisplayWindow());
-
-  rect.topLeft.x = SCROLLER_X;
-  rect.topLeft.y = SCROLLER_Y;
-  rect.extent.x  = SCROLLER_WIDTH;
-  rect.extent.y  = SCROLLER_HEIGHT;
-  WinEraseRectangle(&rect, 0);
-  WinDrawRectangleFrame(simpleFrame, &rect);
-
-  // the level maps onto the inside of the frame (2 pixel margin)
-  globals.pins.scrollerOffset = globals.prefs->game.cursor.screenOffset;
-  rect.topLeft.x = SCROLLER_X + 2 +
-    (Coord)(((UInt32)globals.pins.scrollerOffset * (SCROLLER_WIDTH - 4)) /
-            OFFSCREEN_WIDTH);
-  rect.topLeft.y = SCROLLER_Y + 2;
-  rect.extent.x  =
-    (Coord)(((UInt32)SCREEN_WIDTH * (SCROLLER_WIDTH - 4)) / OFFSCREEN_WIDTH);
-  rect.extent.y  = SCROLLER_HEIGHT - 4;
-  WinDrawRectangle(&rect, 0);
-
-  WinSetDrawWindow(currWindow);
-}
 #endif
 
 /**
@@ -760,6 +767,7 @@ gameFormEventHandler(EventType *event)
          {
            globals.pins.toolX  = 0;
            globals.pins.titleX = 0;               // fresh form, fresh layout
+           globals.pins.orientation = pinsUnknown;
            pinsGameFormResize(frm);
 
            WinGetDisplayExtent(&rect.extent.x, &rect.extent.y);
@@ -947,8 +955,6 @@ gameFormEventHandler(EventType *event)
              pinsDrawTitle(FrmGetActiveForm());
              pinsDrawToolBarSides();
            }
-           if (pinsScrollerVisible())
-             pinsDrawScroller();
          }
          else
 #endif
@@ -1245,8 +1251,11 @@ KEYDOWN_ABORT:
          // without the status bar, the game menu toggles the input area
          // (menuErrSameId when the item is already there: nothing to do)
          if (globals.prefs->palmHD.pins)
+         {
            MenuAddItem(gameMenuItemExit, gameMenuItemInputArea, 0,
                        strMenuInputArea);
+           pinsUpdateMenu();
+         }
          break;
 #endif
 
@@ -1442,13 +1451,6 @@ KEYDOWN_ABORT:
              // draw the game
              GameDraw(globals.prefs);
 
-#if PALM_HIDENSITY
-             if ((pinsScrollerVisible()) &&
-                 (globals.pins.scrollerOffset !=
-                  globals.prefs->game.cursor.screenOffset))
-               pinsDrawScroller();
-#endif
-
              // is the pen being held down? if so, lets post event
              {
                Coord   x, y;
@@ -1476,10 +1478,12 @@ KEYDOWN_ABORT:
     case winDisplayChangedEvent:
 
          // rotated, or the input area was opened/collapsed by the player
+         // (the player's choice only counts in landscape)
          if (globals.prefs->palmHD.pins)
          {
-           globals.pins.inputAreaOpen =
-             (PINGetInputAreaState() == pinInputAreaOpen);
+           if (pinsIsLandscape())
+             globals.pins.inputAreaOpen =
+               (PINGetInputAreaState() == pinInputAreaOpen);
 
            // only a new display extent needs a new layout + repaint
            if (pinsGameFormResize(FrmGetActiveForm()))
