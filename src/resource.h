@@ -249,6 +249,7 @@
 #define gameMenuItemLevelPacks   3212
 #define gameMenuItemPause        3213
 #define gameMenuItemExit         3214
+#define gameMenuItemInputArea    3215   // HiRes+ only, see menuOpenEvent
 
 // palettes
 

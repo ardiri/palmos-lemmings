@@ -475,6 +475,13 @@ mainFormEventHandler(EventType *event)
 #define TOOLBAR_Y        147
 #define TOOLBAR_HEIGHT   13
 
+// the title bar of the game form (the game area starts below it)
+#define TITLE_X          2
+#define TITLE_HEIGHT     (SCREEN_START_GENERIC - 1)
+
+// the game menu item added on HiRes+ devices (see menuOpenEvent)
+static const Char strMenuInputArea[] = "Input Area";
+
 /**
  * Set the input area policy of a form that is about to be opened.
  *
@@ -517,6 +524,7 @@ pinsGameFormResize(FormType *frm)
   Coord         x, y;
   Int16         toolX, titleX, oldWidth;
   UInt16        i, state;
+  UInt32        visible;
   Boolean       changed;
 
   // the player decides, the game only restores that choice - the setters
@@ -526,6 +534,16 @@ pinsGameFormResize(FormType *frm)
   state = globals.pins.inputAreaOpen ? pinInputAreaOpen : pinInputAreaClosed;
   if (PINGetInputAreaState() != state)
     PINSetInputAreaState(state);
+
+  // the status bar goes with the input area (the game menu brings it back)
+  if (StatGetAttribute(statAttrBarVisible, &visible) == errNone)
+  {
+    if (globals.pins.inputAreaOpen && !visible)
+      StatShow();
+    else
+    if (!globals.pins.inputAreaOpen && visible)
+      StatHide();
+  }
 
   // the form covers whatever the input area leaves us
   bounds.topLeft.x = 0;
@@ -606,6 +624,61 @@ pinsDrawToolBarSides()
   rect.topLeft.x = globals.pins.toolX + SCREEN_WIDTH_GENERIC;
   rect.extent.x  = (Coord)globals.prefs->palmHD.width - rect.topLeft.x;
   WinDrawRectangle(&rect, 0);
+
+  WinSetDrawWindow(currWindow);
+}
+
+/**
+ * Draw a title bitmap in white on black, at the position of its button.
+ *
+ * @param frm      the game form.
+ * @param buttonID the title button the bitmap belongs to.
+ * @param bitmapID the bitmap resource.
+ */
+static void
+pinsDrawTitleBitmap(FormType *frm, UInt16 buttonID, UInt16 bitmapID)
+{
+  MemHandle memHandle;
+  Coord     x, y;
+
+  FrmGetObjectPosition(frm, FrmGetObjectIndex(frm, buttonID), &x, &y);
+
+  memHandle = DmGetResource(bitmapRsc, bitmapID);
+  WinPushDrawState();
+  WinSetDrawMode(winPaintInverse);
+  WinPaintBitmap((BitmapType *)MemHandleLock(memHandle), x, y);
+  WinPopDrawState();
+  MemHandleUnlock(memHandle);
+  DmReleaseResource(memHandle);
+}
+
+/**
+ * Draw the title bar black with white text, like the tool bar.
+ *
+ * @param frm the game form.
+ */
+static void
+pinsDrawTitle(FormType *frm)
+{
+  RectangleType rect;
+  WinHandle     currWindow;
+  const Char   *title;
+
+  currWindow = WinSetDrawWindow(WinGetDisplayWindow());
+
+  rect.topLeft.x = 0;
+  rect.topLeft.y = 0;
+  rect.extent.x  = (Coord)globals.prefs->palmHD.width;
+  rect.extent.y  = TITLE_HEIGHT;
+  WinDrawRectangle(&rect, 0);
+
+  title = FrmGetTitle(frm);
+  FntSetFont(boldFont);
+  WinDrawInvertedChars(title, StrLen(title), TITLE_X, 1);
+  FntSetFont(stdFont);
+
+  pinsDrawTitleBitmap(frm, globalFormHelpButton,  bitmapHelp);
+  pinsDrawTitleBitmap(frm, globalFormAboutButton, bitmapAbout);
 
   WinSetDrawWindow(currWindow);
 }
@@ -870,7 +943,10 @@ gameFormEventHandler(EventType *event)
            }
 
            if (globals.prefs->palmHD.pins)
+           {
+             pinsDrawTitle(FrmGetActiveForm());
              pinsDrawToolBarSides();
+           }
            if (pinsScrollerVisible())
              pinsDrawScroller();
          }
@@ -1163,6 +1239,17 @@ KEYDOWN_ABORT:
 
          break;
 
+#if PALM_HIDENSITY
+    case menuOpenEvent:
+
+         // without the status bar, the game menu toggles the input area
+         // (menuErrSameId when the item is already there: nothing to do)
+         if (globals.prefs->palmHD.pins)
+           MenuAddItem(gameMenuItemExit, gameMenuItemInputArea, 0,
+                       strMenuInputArea);
+         break;
+#endif
+
     case menuEvent:
 
          // what menu?
@@ -1243,6 +1330,22 @@ KEYDOWN_ABORT:
 
                 processed = true;
                 break;
+
+#if PALM_HIDENSITY
+           case gameMenuItemInputArea:
+
+                // the player opens/collapses the input area (and status bar)
+                globals.pins.inputAreaOpen = !globals.pins.inputAreaOpen;
+                if (pinsGameFormResize(FrmGetActiveForm()))
+                {
+                  MemSet(&newEvent, sizeof(EventType), 0);
+                  newEvent.eType = appUpdateEvent;
+                  EvtAddEventToQueue(&newEvent);
+                }
+
+                processed = true;
+                break;
+#endif
 
            case gameMenuItemExit:
 
@@ -1398,8 +1501,16 @@ KEYDOWN_ABORT:
          GameSaveLevel(globals.prefs);
 
 #if PALM_HIDENSITY
+         // the status bar is only hidden during the game
          if (globals.prefs->palmHD.pins)
+         {
+           UInt32 visible;
+
+           if ((StatGetAttribute(statAttrBarVisible, &visible) == errNone) &&
+               !visible)
+             StatShow();
            WinGetDisplayExtent(&rect.extent.x, &rect.extent.y);
+         }
 #endif
 
          if (DeviceSupportsColor())

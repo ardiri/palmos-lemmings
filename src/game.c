@@ -5656,6 +5656,12 @@ DRAW_LEMMING:
     else StrCat(str, "- ");
 
     FntSetFont(boldFont);
+#if PALM_HIDENSITY
+    // HiRes+: the title bar is black (see pinsDrawTitle)
+    if (prefs->palmHD.pins)
+      WinDrawInvertedChars(str, StrLen(str), 64, 1);
+    else
+#endif
     WinDrawChars(str, StrLen(str), 64, 1);
     FntSetFont(stdFont);
   }

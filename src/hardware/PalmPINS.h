@@ -32,6 +32,9 @@
 #define pinInputTriggerEnabled          0
 #define pinInputTriggerDisabled         1
 
+// status bar attributes (StatGetAttribute)
+#define statAttrBarVisible              0
+
 // form dynamic input area policies
 #define frmDIAPolicyStayOpen            0
 #define frmDIAPolicyCustom              1
@@ -64,6 +67,9 @@
 #define pinWinSetConstraintsSize        13
 #define pinFrmSetDIAPolicyAttr          14
 #define pinFrmGetDIAPolicyAttr          15
+#define pinStatHide                     16
+#define pinStatShow                     17
+#define pinStatGetAttribute             18
 #define pinSysGetOrientation            19
 #define pinSysSetOrientation            20
 #define pinSysGetOrientationTriggerState 21
@@ -94,6 +100,12 @@ extern Err    FrmSetDIAPolicyAttr(FormPtr formP, UInt16 diaPolicy)
                 PINS_TRAP(pinFrmSetDIAPolicyAttr);
 extern UInt16 FrmGetDIAPolicyAttr(FormPtr formP)
                 PINS_TRAP(pinFrmGetDIAPolicyAttr);
+extern Err    StatGetAttribute(UInt16 selector, UInt32 *dataP)
+                PINS_TRAP(pinStatGetAttribute);
+extern Err    StatHide(void)
+                PINS_TRAP(pinStatHide);
+extern Err    StatShow(void)
+                PINS_TRAP(pinStatShow);
 extern UInt16 SysGetOrientation(void)
                 PINS_TRAP(pinSysGetOrientation);
 extern Err    SysSetOrientation(UInt16 orientation)
