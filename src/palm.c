@@ -795,6 +795,18 @@ pinsDrawTitle(FormType *frm)
 #endif
 
 /**
+ * Display an alert while the game may be on screen (see pinsAlert).
+ *
+ * @param alertID the alert resource.
+ * @return the button the player tapped.
+ */
+UInt16
+ApplicationAlert(UInt16 alertID)
+{
+  return PINS_ALERT(alertID);
+}
+
+/**
  * The Form:gameForm event handling routine.
  *
  * @param event the event to process.

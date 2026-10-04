@@ -366,6 +366,7 @@ extern UInt32  PilotMain(UInt16, MemPtr, UInt16);
 extern void    InitApplication(void);
 extern Boolean ApplicationHandleEvent(EventType *);
 extern void    ApplicationDisplayDialog(UInt16);
+extern UInt16  ApplicationAlert(UInt16);
 extern void    EventLoop(void);
 extern void    EndApplication(void);
 
