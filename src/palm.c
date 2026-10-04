@@ -76,6 +76,7 @@ typedef struct
     UInt8         orientation;     // last layout: pinsUnknown/Portrait/Landscape
     Int16         toolX;           // x-shift applied to the game tool bar
     Int16         titleX;          // x-shift applied to the title buttons
+    UInt16        orientationTrigger; // the rotate button setting at start
   } pins;
 #endif
 
@@ -3878,9 +3879,13 @@ InitApplication()
     globals.prefs->palmHD.pinsOrientation =
       (globals.prefs->palmHD.pins) && (pinsVersion >= pinAPIVersion1_1);
 
-    // the player may rotate the device (and the game with it)
+    // the player may rotate the device (and the game with it); the trigger
+    // is a system setting, so the one we found is restored on exit
     if (globals.prefs->palmHD.pinsOrientation)
+    {
+      globals.pins.orientationTrigger = SysGetOrientationTriggerState();
       SysSetOrientationTriggerState(sysOrientationTriggerEnabled);
+    }
   }
   else
   {
@@ -4667,8 +4672,10 @@ EndApplication()
 #endif
 
 #if PALM_HIDENSITY
+  // leave the rotate button as we found it - switching it off locked the
+  // device in the orientation the game ended in, for every application
   if (globals.prefs->palmHD.pinsOrientation)
-    SysSetOrientationTriggerState(sysOrientationTriggerDisabled);
+    SysSetOrientationTriggerState(globals.pins.orientationTrigger);
 #endif
 
   // terminate the game environemnt
