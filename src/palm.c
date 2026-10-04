@@ -1602,16 +1602,9 @@ KEYDOWN_ABORT:
          GameSaveLevel(globals.prefs);
 
 #if PALM_HIDENSITY
-         // the status bar is only hidden during the game
+         // (the next form brings its own status bar and input area state)
          if (globals.prefs->palmHD.pins)
-         {
-           UInt32 visible;
-
-           if ((StatGetAttribute(statAttrBarVisible, &visible) == errNone) &&
-               !visible)
-             StatShow();
            WinGetDisplayExtent(&rect.extent.x, &rect.extent.y);
-         }
 #endif
 
          if (DeviceSupportsColor())
