@@ -1468,6 +1468,12 @@ KEYDOWN_ABORT:
              GameProcessKeyInput(globals.prefs, keyState);
              GameMovement(globals.prefs);
 
+             // a running level is play even without input (the lemmings
+             // walk on): keep the device from switching itself off, which
+             // pauses and ends the game (see notifySleepRequest)
+             if (!globals.prefs->game.gamePaused)
+               EvtResetAutoOffTimer();
+
              // draw the game
              GameDraw(globals.prefs);
 
