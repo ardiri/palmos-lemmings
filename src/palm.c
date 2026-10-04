@@ -1640,6 +1640,12 @@ KEYDOWN_ABORT:
                  GameMovement(globals.prefs);
              }
 
+             // the music plays on at its own pace, once per frame - with
+             // fast forward too (the simple engine moves on one note step
+             // per call; the MIDI stream of Palm OS 5 has its own clock)
+             if (!globals.prefs->game.gamePaused)
+               GameMusicPlayback(globals.prefs);
+
              // a running level is play even without input (the lemmings
              // walk on): keep the device from switching itself off, which
              // pauses and ends the game (see notifySleepRequest)
