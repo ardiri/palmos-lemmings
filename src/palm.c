@@ -3716,6 +3716,12 @@ notifySleepRequest(SysNotifyParamType *notifyParamsP)
   {
     EventType event;
 
+    // the game ends with the sleep: shut the sound down now, while the
+    // device is awake - deleting the sfx stream after the wakeup could
+    // hang the device (e.g. a HotSync started from sleep)
+    GameMusicTerminate();
+    GameSfxTerminate();
+
     // pause the game
     GamePause(globals.prefs, true);
 

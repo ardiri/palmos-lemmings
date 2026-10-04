@@ -2710,6 +2710,9 @@ GameSfxTerminate()
       MemPtrFree(globals.audio.palm_sfx_streaming.globals);
       globals.audio.palm_sfx_streaming.globals = NULL;
     }
+
+    // gone: a second call (or a sound to play) has nothing left to do
+    globals.audio.palm_sfx_streaming.device = false;
   }
 #endif
 
@@ -3746,6 +3749,9 @@ GameMusicTerminate()
 
     // the stream is no longer active, mark as so.
     globals.music.palm_midi_streaming.active = false;
+
+    // gone: a second call (or a pause) has nothing left to do
+    globals.music.palm_midi_streaming.device = false;
 
     // unprotect and zap the memory cache
     globals.music.dbID = DmFindDatabase(globals.music.dbCard, cacheMusicFileName);
