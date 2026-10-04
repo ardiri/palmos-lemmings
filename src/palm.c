@@ -1584,7 +1584,7 @@ KEYDOWN_ABORT:
            // update screen (animation) if possible
            if ((timeStamp - globals.timerLastFrameUpdate) >= globals.ticksPerFrame)
            {
-             UInt32  keyState;
+             UInt32  keyState, fastKey;
              UInt16  navState;
              Boolean fast;
 
@@ -1614,14 +1614,13 @@ KEYDOWN_ABORT:
              }
 
              // the level runs fast while the fast forward button is on, or
-             // on a 5-way navigator while the To Do key is held down (its
-             // default, cursor right, is not needed there)
-             fast = globals.fastForward;
-             if (globals.fiveWayNavigator)
-             {
-               if (keyState & keyBitHard3) fast = true;
-               keyState &= ~keyBitHard3;
-             }
+             // while the fast forward key is held down: To Do on a 5-way
+             // navigator (its default, cursor right, is not needed there),
+             // Memo on the other devices (select stays with the stylus)
+             fast    = globals.fastForward;
+             fastKey = globals.fiveWayNavigator ? keyBitHard3 : keyBitHard4;
+             if (keyState & fastKey) fast = true;
+             keyState &= ~fastKey;
 
              if (keyState & keyBitNavSelect)    keyState |= globals.prefs->config.ctlKeySelect;
              if (keyState & keyBitRockerSelect) keyState |= globals.prefs->config.ctlKeySelect;
