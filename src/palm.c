@@ -4516,6 +4516,15 @@ ApplicationDisplayDialog(UInt16 formID)
       }
     }
 
+    // on top of the game the application keys stay with the game, as in the
+    // game form: a key still held down from the game must not launch
+    // another application
+    if (gameActive && (event.eType == keyDownEvent) &&
+        (event.data.keyDown.modifiers & commandKeyMask) &&
+        (event.data.keyDown.chr >= vchrHard1) &&
+        (event.data.keyDown.chr <= vchrHard4))
+      continue;
+
     if (!SysHandleEvent(&event))
       if (!MenuHandleEvent(0, &event, &err))
         if (!ApplicationHandleEvent(&event))
