@@ -4684,7 +4684,7 @@ EndApplication()
     SysCurAppDatabase(&card, &dbID);
 
     // mmc insert/removal notification
-    SysNotifyUnregister(card, dbID, sysNotifyCardInsertedEvent, sysNotifyNormalPriority);
+    SysNotifyUnregister(card, dbID, sysNotifyVolumeMountedEvent, sysNotifyNormalPriority);
     SysNotifyUnregister(card, dbID, sysNotifyCardRemovedEvent, sysNotifyNormalPriority);
 
     // device sleep/wakeup notification
