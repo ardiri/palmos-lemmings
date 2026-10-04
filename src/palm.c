@@ -47,6 +47,7 @@ typedef struct
   UInt32          timerPoint;
 
   Boolean         fiveWayNavigator;  // up/down of the navigator = page up/down
+  Boolean         fastForward;       // fast forward button on (it latches)
 #if SHOW_FPS
   Int16           frameCount;
   UInt32          timerReference;
@@ -76,6 +77,7 @@ typedef struct
     UInt8         orientation;     // last layout: pinsUnknown/Portrait/Landscape
     Int16         toolX;           // x-shift applied to the game tool bar
     Int16         titleX;          // x-shift applied to the title buttons
+    RectangleType fastButton;      // the fast forward button (empty: none)
     UInt16        orientationTrigger; // the rotate button setting at start
   } pins;
 #endif
@@ -459,6 +461,11 @@ mainFormEventHandler(EventType *event)
   return processed;
 }
 
+// fast forward: steps of the game logic per frame
+#define FAST_FORWARD     4
+
+static void ApplicationFastForward(Boolean on);
+
 #if PALM_HIDENSITY
 //
 // HiRes+ (320x480) devices: the dynamic input area can be collapsed and
@@ -469,6 +476,7 @@ mainFormEventHandler(EventType *event)
 //
 
 static Boolean pinsGameFormResize(FormType *frm);
+static void    pinsDrawFastButton();
 
 // the tool bar bitmap of the game form (see lemmings_en.rcp)
 #define TOOLBAR_Y        147
@@ -727,6 +735,56 @@ pinsDrawToolBarSides()
   rect.topLeft.x = globals.pins.toolX + SCREEN_WIDTH_GENERIC;
   rect.extent.x  = (Coord)globals.prefs->palmHD.width - rect.topLeft.x;
   WinDrawRectangle(&rect, 0);
+
+  WinSetDrawWindow(currWindow);
+
+  pinsDrawFastButton();
+}
+
+/**
+ * Draw the fast forward button left of the tool bar, where landscape leaves
+ * room for it: a white "play fast" symbol like the tool icons, framed like
+ * the selected tool while fast forward is on.
+ */
+static void
+pinsDrawFastButton()
+{
+  RectangleType *button = &globals.pins.fastButton;
+  RectangleType frame;
+  WinHandle     currWindow;
+  Coord         x, y, i;
+
+  // the tap area: 12x12 like the sound and pause buttons, 1 pixel apart
+  button->topLeft.x = globals.pins.toolX - 13;
+  button->topLeft.y = TOOLBAR_Y;
+  button->extent.x  = 12;
+  button->extent.y  = 12;
+  if (button->topLeft.x < 0)
+  {
+    button->extent.x = 0;
+    return;
+  }
+
+  currWindow = WinSetDrawWindow(WinGetDisplayWindow());
+
+  // the frame sits where the one of the selected tool does
+  frame.topLeft.x = button->topLeft.x + 1;
+  frame.topLeft.y = button->topLeft.y + 1;
+  frame.extent.x  = 10;
+  frame.extent.y  = 10;
+  if (globals.fastForward)
+    WinEraseRectangleFrame(simpleFrame, &frame);
+  else
+    WinDrawRectangleFrame(simpleFrame, &frame);
+
+  // two triangles pointing right, 7 pixels high
+  x = frame.topLeft.x + 1;
+  y = frame.topLeft.y + 5;
+  for (i = 0; i < 4; i++)
+  {
+    WinEraseLine(x + i,     y - 3 + i, x + i,     y + 3 - i);
+    WinEraseLine(x + 4 + i, y - 3 + i, x + 4 + i, y + 3 - i);
+  }
 
   WinSetDrawWindow(currWindow);
 }
@@ -1070,6 +1128,19 @@ gameFormEventHandler(EventType *event)
 
            x = event->screenX;
            y = event->screenY;
+
+#if PALM_HIDENSITY
+           // the fast forward button left of the tool bar
+           if ((event->eType == penDownEvent) &&
+               (globals.prefs->palmHD.pins) &&
+               (globals.pins.fastButton.extent.x > 0) &&
+               RctPtInRectangle(x, y, &globals.pins.fastButton))
+           {
+             ApplicationFastForward(!globals.fastForward);
+             processed = true;
+             break;
+           }
+#endif
 
            // within the graffiti area?
            if (
@@ -1513,8 +1584,9 @@ KEYDOWN_ABORT:
            // update screen (animation) if possible
            if ((timeStamp - globals.timerLastFrameUpdate) >= globals.ticksPerFrame)
            {
-             UInt32 keyState;
-             UInt16 navState;
+             UInt32  keyState;
+             UInt16  navState;
+             Boolean fast;
 
              // animation requirement
              globals.timerLastFrameUpdate = timeStamp;
@@ -1541,6 +1613,16 @@ KEYDOWN_ABORT:
                keyState &= ~(keyBitPageUp | keyBitPageDown);
              }
 
+             // the level runs fast while the fast forward button is on, or
+             // on a 5-way navigator while the To Do key is held down (its
+             // default, cursor right, is not needed there)
+             fast = globals.fastForward;
+             if (globals.fiveWayNavigator)
+             {
+               if (keyState & keyBitHard3) fast = true;
+               keyState &= ~keyBitHard3;
+             }
+
              if (keyState & keyBitNavSelect)    keyState |= globals.prefs->config.ctlKeySelect;
              if (keyState & keyBitRockerSelect) keyState |= globals.prefs->config.ctlKeySelect;
 
@@ -1548,6 +1630,16 @@ KEYDOWN_ABORT:
              GameProcessNavigator(globals.prefs, navState);
              GameProcessKeyInput(globals.prefs, keyState);
              GameMovement(globals.prefs);
+
+             // fast forward: more steps of the game logic, drawn once
+             if (fast)
+             {
+               UInt16 step;
+
+               for (step = 1; (step < FAST_FORWARD) &&
+                              (globals.prefs->game.gameState == GAME_PLAY); step++)
+                 GameMovement(globals.prefs);
+             }
 
              // a running level is play even without input (the lemmings
              // walk on): keep the device from switching itself off, which
@@ -2913,6 +3005,7 @@ SKIP_PREVIEW:
                 EvtAddEventToQueue(&newEvent);
 
                 globals.prefs->game.gameState = GAME_PLAY;
+                ApplicationFastForward(false);
 
                 // 'lets go!' audio playback
                 GamePlaySound(globals.prefs, snd_letsgo);
@@ -4402,6 +4495,24 @@ ApplicationHandleEvent(EventType *event)
   }
 
   return processed;
+}
+
+/**
+ * Switch fast forward on or off.
+ *
+ * @param on true to run the level FAST_FORWARD times as fast.
+ */
+static void
+ApplicationFastForward(Boolean on)
+{
+  globals.fastForward = on;
+
+#if PALM_HIDENSITY
+  // the button left of the tool bar (landscape on HiRes+)
+  if ((globals.prefs->palmHD.pins) && (FrmGetActiveFormID() == gameForm) &&
+      (globals.pins.fastButton.extent.x > 0))
+    pinsDrawFastButton();
+#endif
 }
 
 /**
