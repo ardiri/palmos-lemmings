@@ -3015,8 +3015,192 @@ GameMusicInitialize()
 #endif
 }
 
+#if defined(PALM_MIDI_STREAMING) && defined(MIDI_IN_LEVELPACK)
+#define MIDI_MAX_TRACKS 16
+
 /**
- * Initialize the music playback engine.
+ * Read a variable length quantity of a MIDI file.
+ *
+ * @param p   the read position, moved past the value.
+ * @param end the end of the data.
+ * @return the value.
+ */
+static UInt32
+GameMidiReadVar(UInt8 **p, UInt8 *end)
+{
+  UInt32 value = 0;
+  UInt8  b;
+
+  do
+  {
+    if (*p >= end) break;
+    b = *(*p)++;
+    value = (value << 7) | (b & 0x7F);
+  }
+  while (b & 0x80);
+
+  return value;
+}
+
+/**
+ * Write a variable length quantity of a MIDI file.
+ *
+ * @param out   the write position.
+ * @param value the value.
+ * @return the write position after the value.
+ */
+static UInt8 *
+GameMidiWriteVar(UInt8 *out, UInt32 value)
+{
+  UInt8  bytes[5];
+  Int16  n = 0;
+
+  do
+  {
+    bytes[n++] = (UInt8)(value & 0x7F);
+    value >>= 7;
+  }
+  while (value);
+  while (n > 1) *out++ = bytes[--n] | 0x80;
+  *out++ = bytes[0];
+
+  return out;
+}
+
+/**
+ * Bring a standard MIDI file into the form the MIDI engine plays: a
+ * single track (format 0), every event with its own status byte, and only
+ * the events the engine understands - note off/on, key pressure,
+ * controller, program change and tempo. The music of the level packs is
+ * stored as format 1 with several tracks and running status, while the
+ * engine reads the first track only, which holds no notes there.
+ *
+ * @param src     the MIDI file.
+ * @param srcSize its size.
+ * @param dst     the result, at least 2 * srcSize bytes.
+ * @return the size of the result, 0 if src is no MIDI file.
+ */
+static UInt32
+GameMidiNormalize(UInt8 *src, UInt32 srcSize, UInt8 *dst)
+{
+  UInt8   *pos[MIDI_MAX_TRACKS], *end[MIDI_MAX_TRACKS], status[MIDI_MAX_TRACKS];
+  UInt32   next[MIDI_MAX_TRACKS];
+  UInt8   *p, *srcEnd, *out, *trackStart, *data;
+  UInt32   now, last, len, trackLen;
+  UInt16   tracks, t, i;
+  UInt8    st, type;
+
+  srcEnd = src + srcSize;
+  if ((srcSize < 14) || (StrNCompare((Char *)src, "MThd", 4) != 0)) return 0;
+
+  // the tracks of the file
+  tracks = ((UInt16)src[10] << 8) | src[11];
+  if (tracks > MIDI_MAX_TRACKS) tracks = MIDI_MAX_TRACKS;
+  p = src + 8 + (((UInt32)src[4] << 24) | ((UInt32)src[5] << 16) |
+                 ((UInt32)src[6] << 8)  | src[7]);
+  for (t = 0; t < tracks; t++)
+  {
+    if ((p + 8 > srcEnd) || (StrNCompare((Char *)p, "MTrk", 4) != 0)) break;
+    len    = ((UInt32)p[4] << 24) | ((UInt32)p[5] << 16) | ((UInt32)p[6] << 8) | p[7];
+    pos[t] = p + 8;
+    end[t] = (pos[t] + len > srcEnd) ? srcEnd : pos[t] + len;
+    status[t] = 0;
+    next[t]   = GameMidiReadVar(&pos[t], end[t]);
+    p = end[t];
+  }
+  tracks = t;
+
+  // header: format 0, one track, the same division
+  out = dst;
+  MemMove(out, "MThd\0\0\0\006\0\0\0\001", 12); out += 12;
+  *out++ = src[12];
+  *out++ = src[13];
+  MemMove(out, "MTrk\0\0\0\0", 8); out += 8;
+  trackStart = out;
+
+  // merge the events of all tracks in time order (last: the latest time
+  // of any event, also of those left out - the end of the piece)
+  now  = 0;
+  last = 0;
+  for (;;)
+  {
+    // the track with the next event
+    i = tracks;
+    for (t = 0; t < tracks; t++)
+      if ((pos[t] < end[t]) && ((i == tracks) || (next[t] < next[i]))) i = t;
+    if (i == tracks) break;
+    if (next[i] > last) last = next[i];
+
+    // the event (running status: the status byte of the one before)
+    if (*pos[i] & 0x80)
+    {
+      st = *pos[i]++;
+      if (st < 0xF0) status[i] = st;
+    }
+    else
+      st = status[i];
+
+    if (st == 0xFF)
+    {
+      type = *pos[i]++;
+      len  = GameMidiReadVar(&pos[i], end[i]);
+      data = pos[i];
+      pos[i] += len;
+
+      // of the meta events, the engine only follows the tempo
+      if ((type == 0x51) && (len == 3) && (pos[i] <= end[i]))
+      {
+        out = GameMidiWriteVar(out, next[i] - now); now = next[i];
+        *out++ = 0xFF; *out++ = 0x51; *out++ = 0x03;
+        *out++ = data[0]; *out++ = data[1]; *out++ = data[2];
+      }
+    }
+    else
+    if ((st == 0xF0) || (st == 0xF7))
+    {
+      len = GameMidiReadVar(&pos[i], end[i]);
+      pos[i] += len;
+    }
+    else
+    if (st & 0x80)
+    {
+      len  = (((st & 0xF0) == 0xC0) || ((st & 0xF0) == 0xD0)) ? 1 : 2;
+      data = pos[i];
+      pos[i] += len;
+
+      // note off/on, key pressure, controller, program change
+      if ((pos[i] <= end[i]) && ((st & 0xF0) != 0xD0) && ((st & 0xF0) != 0xE0))
+      {
+        out = GameMidiWriteVar(out, next[i] - now); now = next[i];
+        *out++ = st;
+        *out++ = data[0];
+        if (len == 2) *out++ = data[1];
+      }
+    }
+    else
+      pos[i] = end[i];  // a data byte without any status: broken track
+
+    // the time of the next event of this track
+    if (pos[i] < end[i])
+      next[i] += GameMidiReadVar(&pos[i], end[i]);
+  }
+
+  // end of track, at the end of the piece (the engine starts over there)
+  out = GameMidiWriteVar(out, last - now);
+  *out++ = 0xFF; *out++ = 0x2F; *out++ = 0x00;
+
+  trackLen = (UInt32)(out - trackStart);
+  trackStart[-4] = (UInt8)(trackLen >> 24);
+  trackStart[-3] = (UInt8)(trackLen >> 16);
+  trackStart[-2] = (UInt8)(trackLen >> 8);
+  trackStart[-1] = (UInt8)(trackLen);
+
+  return (UInt32)(out - dst);
+}
+#endif
+
+/**
+ * Load the music for the current level.
  *
  * @param prefs the global preference data.
  */
@@ -3125,13 +3309,27 @@ GameMusicLoad(PreferencesType *prefs)
         globals.music.dbMemoryStore =
           DmOpenDatabase(globals.music.dbCard, globals.music.dbID, dmModeReadWrite);
 
-        size = MemHandleSize(globals.music.palm_midi_streaming.midiH);
-        memHandle = DmNewResource(globals.music.dbMemoryStore, levlMidi, midiResource+1, size);
-        if (memHandle)
+        // the local copy is in the form the engine plays (format 0)
         {
-          DmWrite(MemHandleLock(memHandle), 0, MemHandleLock(globals.music.palm_midi_streaming.midiH), size);
-          MemHandleUnlock(globals.music.palm_midi_streaming.midiH);
-          MemHandleUnlock(memHandle);
+          UInt8  *midi;
+          UInt32  midiSize;
+
+          size     = MemHandleSize(globals.music.palm_midi_streaming.midiH);
+          midi     = (UInt8 *)MemPtrNew((UInt32)size * 2);
+          midiSize = (midi == NULL) ? 0 :
+            GameMidiNormalize((UInt8 *)MemHandleLock(globals.music.palm_midi_streaming.midiH),
+                              size, midi);
+          if (midi != NULL)
+            MemHandleUnlock(globals.music.palm_midi_streaming.midiH);
+
+          memHandle = (midiSize == 0) ? NULL :
+            DmNewResource(globals.music.dbMemoryStore, levlMidi, midiResource+1, midiSize);
+          if (memHandle)
+          {
+            DmWrite(MemHandleLock(memHandle), 0, midi, midiSize);
+            MemHandleUnlock(memHandle);
+          }
+          if (midi != NULL) MemPtrFree(midi);
         }
         LevelPackReleaseResource(globals.music.palm_midi_streaming.midiH);
 

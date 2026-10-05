@@ -34,7 +34,7 @@
    #define PALM_MIDI_YAMAHAPA1     1   // yamaha PA1 midi support (beatplus)
    #define MIDI_SIMPLE_SAMPLES     1   // simple samples -> PALM_MIDI_STREAMING
 // #define MIDI_PAUSE_ON_DIALOG    1   // pause music on dialog pop-up?
-// #define MIDI_IN_LEVELPACK       1   // midi support for level packs
+   #define MIDI_IN_LEVELPACK       1   // midi support for level packs
    #define MUSIC_ENGINE            1   // we have music :)
 
    #define USE_CHIP_COMPRESS       1   // use chip's mega compression algo :P
