@@ -498,11 +498,15 @@ static const Char strMenuInputArea[] = "Input Area";
  * Is the screen turned to landscape? Only then the game may take the
  * whole display; in portrait the input area and status bar stay.
  *
- * The status bar runs along the long side of the screen and turns with it:
- * upright in landscape, flat in portrait - its size is reported even while
- * it is hidden. The screen size does not tell on the Tungsten T3 (320x320
- * with the slider closed or the input area open), and SysGetOrientation
- * did not report landscape there in every state either.
+ * No single source tells on every device:
+ * - SysGetOrientation (PINS 1.1) is right on the LifeDrive, but on the
+ *   Tungsten T3 it did not report landscape while the input area was open
+ * - the status bar runs along the long side of the screen and turns with
+ *   it on the T3 (also while hidden), but the LifeDrive reports its size
+ *   unturned
+ * - the screen size does not turn on the LifeDrive, and the T3 reports
+ *   320x320 with its slider closed or its input area open
+ * So it is landscape when the orientation API or the status bar says so.
  *
  * @return true if the screen is turned to landscape, false otherwise.
  */
@@ -510,6 +514,15 @@ static Boolean
 pinsIsLandscape()
 {
   UInt32 dimension, width, height;
+  UInt16 orientation;
+
+  if (globals.prefs->palmHD.pinsOrientation)
+  {
+    orientation = SysGetOrientation();
+    if ((orientation == sysOrientationLandscape) ||
+        (orientation == sysOrientationReverseLandscape))
+      return true;
+  }
 
   if (StatGetAttribute(statAttrDimension, &dimension) == errNone)
     return ((dimension >> 16) < (dimension & 0xFFFF));
