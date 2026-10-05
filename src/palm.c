@@ -76,6 +76,7 @@ typedef struct
     UInt8         orientation;     // last layout: pinsUnknown/Portrait/Landscape
     Int16         toolX;           // x-shift applied to the game tool bar
     Int16         titleX;          // x-shift applied to the title buttons
+    UInt16        orientationTrigger; // the rotate button setting at start
   } pins;
 #endif
 
@@ -467,6 +468,8 @@ mainFormEventHandler(EventType *event)
 // -- 320x480 / 480x320 support, 2026
 //
 
+static Boolean pinsGameFormResize(FormType *frm);
+
 // the tool bar bitmap of the game form (see lemmings_en.rcp)
 #define TOOLBAR_Y        147
 #define TOOLBAR_HEIGHT   13
@@ -487,12 +490,21 @@ static const Char strMenuInputArea[] = "Input Area";
  * Is the screen turned to landscape? Only then the game may take the
  * whole display; in portrait the input area and status bar stay.
  *
- * @return true if the screen is wider than high, false otherwise.
+ * The status bar runs along the long side of the screen and turns with it:
+ * upright in landscape, flat in portrait - its size is reported even while
+ * it is hidden. The screen size does not tell on the Tungsten T3 (320x320
+ * with the slider closed or the input area open), and SysGetOrientation
+ * did not report landscape there in every state either.
+ *
+ * @return true if the screen is turned to landscape, false otherwise.
  */
 static Boolean
 pinsIsLandscape()
 {
-  UInt32 width, height;
+  UInt32 dimension, width, height;
+
+  if (StatGetAttribute(statAttrDimension, &dimension) == errNone)
+    return ((dimension >> 16) < (dimension & 0xFFFF));
 
   WinScreenGetAttribute(winScreenWidth,  &width);
   WinScreenGetAttribute(winScreenHeight, &height);
@@ -532,13 +544,58 @@ pinsSetFormPolicy(FormType *frm, UInt16 formID)
                           pinMaxConstraintSize);
   }
 
-  // dialogs on top of the game leave the input area alone
+  // dialogs on top of the game (verdict, next mission, ...) show the input
+  // area and the status bar: every form has its own state of both, and the
+  // game form gets its full screen back when it is active again
   else
   if (FrmGetFormPtr(gameForm) != NULL)
   {
+    UInt32 visible;
+
     FrmSetDIAPolicyAttr(frm, frmDIAPolicyCustom);
     PINSetInputTriggerState(pinInputTriggerDisabled);
+    if (PINGetInputAreaState() != pinInputAreaOpen)
+      PINSetInputAreaState(pinInputAreaOpen);
+    if ((StatGetAttribute(statAttrBarVisible, &visible) == errNone) &&
+        !visible)
+      StatShow();
   }
+}
+
+/**
+ * Display a system alert on top of the game form. An alert is no form of
+ * ours, so it always comes with the status bar; showing the bar first lets
+ * the alert lay itself out in the space that is left. The game restores its
+ * own state afterwards.
+ *
+ * @param alertID the alert resource.
+ * @return the button the player tapped.
+ */
+static UInt16
+pinsAlert(UInt16 alertID)
+{
+  EventType event;
+  UInt32    visible;
+  UInt16    button;
+
+  if (!globals.prefs->palmHD.pins ||
+      (StatGetAttribute(statAttrBarVisible, &visible) != errNone) || visible)
+    return FrmAlert(alertID);
+
+  StatShow();
+  button = FrmAlert(alertID);
+
+  // the game form may be gone (quit), otherwise hide the bar again and
+  // repaint the area it covered
+  if (FrmGetActiveFormID() == gameForm)
+  {
+    pinsGameFormResize(FrmGetActiveForm());
+    MemSet(&event, sizeof(EventType), 0);
+    event.eType = appUpdateEvent;
+    EvtAddEventToQueue(&event);
+  }
+
+  return button;
 }
 
 /**
@@ -556,7 +613,7 @@ pinsGameFormResize(FormType *frm)
   UInt16        i, state;
   UInt8         orientation;
   UInt32        visible;
-  Boolean       changed, open, bar;
+  Boolean       changed, open, bar, turned;
 
   // the trigger also holds the rotate button of the Tungsten T3 status bar
   // - the setters post a winDisplayChangedEvent, so only call them on a change
@@ -566,10 +623,11 @@ pinsGameFormResize(FormType *frm)
   // landscape: the player's choice; portrait: open when turned to portrait,
   // after that the player may still collapse it with the status bar button
   orientation = pinsIsLandscape() ? pinsLandscape : pinsPortrait;
+  turned      = (orientation != globals.pins.orientation);
   if (orientation == pinsLandscape)
     open = globals.pins.inputAreaOpen;
   else
-  if (orientation != globals.pins.orientation)
+  if (turned)
     open = true;
   else
     open = (PINGetInputAreaState() == pinInputAreaOpen);
@@ -579,9 +637,11 @@ pinsGameFormResize(FormType *frm)
   if (PINGetInputAreaState() != state)
     PINSetInputAreaState(state);
 
-  // the status bar goes with the input area in landscape (the game menu
-  // brings both back), in portrait it always stays
-  bar = open || (orientation == pinsPortrait);
+  // the status bar goes with the input area in landscape - the one that is
+  // really there: with the slider closed it stays collapsed (the game menu
+  // brings both back); in portrait the status bar always stays
+  bar = (PINGetInputAreaState() == pinInputAreaOpen) ||
+        (orientation == pinsPortrait);
   if (StatGetAttribute(statAttrBarVisible, &visible) == errNone)
   {
     if (bar && !visible)
@@ -590,8 +650,10 @@ pinsGameFormResize(FormType *frm)
     if (!bar && visible)
       StatHide();
   }
-  if (MenuGetActiveMenu() != NULL)
-    pinsUpdateMenu();
+  // the menu is built once (menuOpenEvent adds "Input Area" in landscape
+  // only): a new orientation needs a new one
+  if (turned)
+    FrmSetMenu(frm, DeviceSupportsGrayscale() ? gameMenu_gray : gameMenu_nogray);
 
   // the form covers whatever the input area leaves us
   bounds.topLeft.x = 0;
@@ -724,6 +786,25 @@ pinsDrawTitle(FormType *frm)
   WinSetDrawWindow(currWindow);
 }
 #endif
+
+// alerts on top of the game form (see pinsAlert)
+#if PALM_HIDENSITY
+#define PINS_ALERT(alertID) pinsAlert(alertID)
+#else
+#define PINS_ALERT(alertID) FrmAlert(alertID)
+#endif
+
+/**
+ * Display an alert while the game may be on screen (see pinsAlert).
+ *
+ * @param alertID the alert resource.
+ * @return the button the player tapped.
+ */
+UInt16
+ApplicationAlert(UInt16 alertID)
+{
+  return PINS_ALERT(alertID);
+}
 
 /**
  * The Form:gameForm event handling routine.
@@ -1272,7 +1353,7 @@ KEYDOWN_ABORT:
 #if MIDI_PAUSE_ON_DIALOG
                 GameMusicPause(globals.prefs, true);
 #endif
-                if (FrmAlert(restartLevelAlert) == 0)
+                if (PINS_ALERT(restartLevelAlert) == 0)
                 {
                   LevelPackOpen(globals.prefs->levelPack.type, globals.prefs->levelPack.strLevelPack);
                   GameResetPreferences(globals.prefs);
@@ -1291,7 +1372,7 @@ KEYDOWN_ABORT:
 #if MIDI_PAUSE_ON_DIALOG
                 GameMusicPause(globals.prefs, true);
 #endif
-                if (FrmAlert(skipLevelAlert) == 0)
+                if (PINS_ALERT(skipLevelAlert) == 0)
                 {
                   // completed all the levels?
                   if (globals.prefs->game.gameLevel == GameGetLevelCount())
@@ -1326,7 +1407,7 @@ KEYDOWN_ABORT:
 #if MIDI_PAUSE_ON_DIALOG
                 GameMusicPause(globals.prefs, true);
 #endif
-                FrmAlert(exitGameAlert);
+                PINS_ALERT(exitGameAlert);
 #if MIDI_PAUSE_ON_DIALOG
                 GameMusicPause(globals.prefs, globals.prefs->game.gamePaused);
 #endif
@@ -1364,7 +1445,7 @@ KEYDOWN_ABORT:
                 GameMusicPause(globals.prefs, true);
 #endif
                 if ((!globals.prefs->game.gamePlaying) ||
-                    (FrmAlert(quitGameAlert) == 0))
+                    (PINS_ALERT(quitGameAlert) == 0))
                 {
                   globals.prefs->game.gamePaused  = true;
                   globals.prefs->game.gamePlaying = false;
@@ -1468,6 +1549,12 @@ KEYDOWN_ABORT:
              GameProcessKeyInput(globals.prefs, keyState);
              GameMovement(globals.prefs);
 
+             // a running level is play even without input (the lemmings
+             // walk on): keep the device from switching itself off, which
+             // pauses and ends the game (see notifySleepRequest)
+             if (!globals.prefs->game.gamePaused)
+               EvtResetAutoOffTimer();
+
              // draw the game
              GameDraw(globals.prefs);
 
@@ -1498,10 +1585,12 @@ KEYDOWN_ABORT:
     case winDisplayChangedEvent:
 
          // rotated, or the input area was opened/collapsed by the player
-         // (the player's choice only counts in landscape)
+         // (the player's choice only counts in landscape, in the game form;
+         // after a dialog the game has already restored it, see
+         // ApplicationDisplayDialog)
          if (globals.prefs->palmHD.pins)
          {
-           if (pinsIsLandscape())
+           if (pinsIsLandscape() && (FrmGetActiveFormID() == gameForm))
              globals.pins.inputAreaOpen =
                (PINGetInputAreaState() == pinInputAreaOpen);
 
@@ -1525,16 +1614,9 @@ KEYDOWN_ABORT:
          GameSaveLevel(globals.prefs);
 
 #if PALM_HIDENSITY
-         // the status bar is only hidden during the game
+         // (the next form brings its own status bar and input area state)
          if (globals.prefs->palmHD.pins)
-         {
-           UInt32 visible;
-
-           if ((StatGetAttribute(statAttrBarVisible, &visible) == errNone) &&
-               !visible)
-             StatShow();
            WinGetDisplayExtent(&rect.extent.x, &rect.extent.y);
-         }
 #endif
 
          if (DeviceSupportsColor())
@@ -3640,6 +3722,12 @@ notifySleepRequest(SysNotifyParamType *notifyParamsP)
   {
     EventType event;
 
+    // the game ends with the sleep: shut the sound down now, while the
+    // device is awake - deleting the sfx stream after the wakeup could
+    // hang the device (e.g. a HotSync started from sleep)
+    GameMusicTerminate();
+    GameSfxTerminate();
+
     // pause the game
     GamePause(globals.prefs, true);
 
@@ -3796,9 +3884,13 @@ InitApplication()
     globals.prefs->palmHD.pinsOrientation =
       (globals.prefs->palmHD.pins) && (pinsVersion >= pinAPIVersion1_1);
 
-    // the player may rotate the device (and the game with it)
+    // the player may rotate the device (and the game with it); the trigger
+    // is a system setting, so the one we found is restored on exit
     if (globals.prefs->palmHD.pinsOrientation)
+    {
+      globals.pins.orientationTrigger = SysGetOrientationTriggerState();
       SysSetOrientationTriggerState(sysOrientationTriggerEnabled);
+    }
   }
   else
   {
@@ -4429,6 +4521,15 @@ ApplicationDisplayDialog(UInt16 formID)
       }
     }
 
+    // on top of the game the application keys stay with the game, as in the
+    // game form: a key still held down from the game must not launch
+    // another application
+    if (gameActive && (event.eType == keyDownEvent) &&
+        (event.data.keyDown.modifiers & commandKeyMask) &&
+        (event.data.keyDown.chr >= vchrHard1) &&
+        (event.data.keyDown.chr <= vchrHard4))
+      continue;
+
     if (!SysHandleEvent(&event))
       if (!MenuHandleEvent(0, &event, &err))
         if (!ApplicationHandleEvent(&event))
@@ -4456,6 +4557,22 @@ ApplicationDisplayDialog(UInt16 formID)
   if ((formID != xmemForm) &&
       (globals.prefs->handera.device) && (gameActive))
     VgaSetScreenMode(screenMode1To1, rotateModeNone);
+#endif
+
+#if PALM_HIDENSITY
+  // back in the game: the dialog had the input area open - restore the
+  // player's choice before the game form handles anything, so that no
+  // display change of the dialog is taken for the player's choice
+  if ((globals.prefs->palmHD.pins) && (gameActive) &&
+      (FrmGetActiveFormID() == gameForm))
+  {
+    if (pinsGameFormResize(FrmGetActiveForm()) && (formID == verdForm))
+    {
+      MemSet(&event, sizeof(EventType), 0);
+      event.eType = appUpdateEvent;
+      EvtAddEventToQueue(&event);
+    }
+  }
 #endif
 
   // post an "update" event for the currently active form
@@ -4569,8 +4686,10 @@ EndApplication()
 #endif
 
 #if PALM_HIDENSITY
+  // leave the rotate button as we found it - switching it off locked the
+  // device in the orientation the game ended in, for every application
   if (globals.prefs->palmHD.pinsOrientation)
-    SysSetOrientationTriggerState(sysOrientationTriggerDisabled);
+    SysSetOrientationTriggerState(globals.pins.orientationTrigger);
 #endif
 
   // terminate the game environemnt
@@ -4586,7 +4705,7 @@ EndApplication()
     SysCurAppDatabase(&card, &dbID);
 
     // mmc insert/removal notification
-    SysNotifyUnregister(card, dbID, sysNotifyCardInsertedEvent, sysNotifyNormalPriority);
+    SysNotifyUnregister(card, dbID, sysNotifyVolumeMountedEvent, sysNotifyNormalPriority);
     SysNotifyUnregister(card, dbID, sysNotifyCardRemovedEvent, sysNotifyNormalPriority);
 
     // device sleep/wakeup notification

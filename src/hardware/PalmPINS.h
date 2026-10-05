@@ -34,6 +34,7 @@
 
 // status bar attributes (StatGetAttribute)
 #define statAttrBarVisible              0
+#define statAttrDimension               1   // width << 16 | height
 
 // form dynamic input area policies
 #define frmDIAPolicyStayOpen            0

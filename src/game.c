@@ -1362,7 +1362,7 @@ LOAD_FAIL:
     // something bad happened, oh well, reset
     if (!loadOk)
     {
-      FrmAlert(loadGameAlert);
+      ApplicationAlert(loadGameAlert);
 
       // reset the level, everything is screwed up
       GameResetPreferences(prefs);
@@ -1573,7 +1573,7 @@ GameSaveLevel(PreferencesType *prefs)
       // something went wrong?
       if (!saveOk)
       {
-        FrmAlert(saveGameAlert);
+        ApplicationAlert(saveGameAlert);
         DmDeleteDatabase(card, dbID);
       }
     }
@@ -2710,6 +2710,9 @@ GameSfxTerminate()
       MemPtrFree(globals.audio.palm_sfx_streaming.globals);
       globals.audio.palm_sfx_streaming.globals = NULL;
     }
+
+    // gone: a second call (or a sound to play) has nothing left to do
+    globals.audio.palm_sfx_streaming.device = false;
   }
 #endif
 
@@ -3746,6 +3749,9 @@ GameMusicTerminate()
 
     // the stream is no longer active, mark as so.
     globals.music.palm_midi_streaming.active = false;
+
+    // gone: a second call (or a pause) has nothing left to do
+    globals.music.palm_midi_streaming.device = false;
 
     // unprotect and zap the memory cache
     globals.music.dbID = DmFindDatabase(globals.music.dbCard, cacheMusicFileName);
@@ -6153,7 +6159,7 @@ GameAssignLemmingTask(PreferencesType *prefs)
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, true);
 #endif
-               FrmAlert(toolNotAvailable);
+               ApplicationAlert(toolNotAvailable);
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, prefs->game.gamePaused);
 #endif
@@ -6189,7 +6195,7 @@ GameAssignLemmingTask(PreferencesType *prefs)
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, true);
 #endif
-               FrmAlert(toolNotAvailable);
+               ApplicationAlert(toolNotAvailable);
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, prefs->game.gamePaused);
 #endif
@@ -6229,7 +6235,7 @@ GameAssignLemmingTask(PreferencesType *prefs)
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, true);
 #endif
-               FrmAlert(toolNotAvailable);
+               ApplicationAlert(toolNotAvailable);
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, prefs->game.gamePaused);
 #endif
@@ -6282,7 +6288,7 @@ GameAssignLemmingTask(PreferencesType *prefs)
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, true);
 #endif
-               FrmAlert(toolNotAvailable);
+               ApplicationAlert(toolNotAvailable);
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, prefs->game.gamePaused);
 #endif
@@ -6345,7 +6351,7 @@ GameAssignLemmingTask(PreferencesType *prefs)
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, true);
 #endif
-               FrmAlert(toolNotAvailable);
+               ApplicationAlert(toolNotAvailable);
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, prefs->game.gamePaused);
 #endif
@@ -6400,7 +6406,7 @@ GameAssignLemmingTask(PreferencesType *prefs)
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, true);
 #endif
-               FrmAlert(toolNotAvailable);
+               ApplicationAlert(toolNotAvailable);
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, prefs->game.gamePaused);
 #endif
@@ -6456,7 +6462,7 @@ GameAssignLemmingTask(PreferencesType *prefs)
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, true);
 #endif
-               FrmAlert(toolNotAvailable);
+               ApplicationAlert(toolNotAvailable);
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, prefs->game.gamePaused);
 #endif
@@ -6506,7 +6512,7 @@ GameAssignLemmingTask(PreferencesType *prefs)
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, true);
 #endif
-               FrmAlert(toolNotAvailable);
+               ApplicationAlert(toolNotAvailable);
 #if MIDI_PAUSE_ON_DIALOG
                GameMusicPause(prefs, prefs->game.gamePaused);
 #endif

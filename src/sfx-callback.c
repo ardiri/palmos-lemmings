@@ -57,6 +57,9 @@ callback(void *userData, SndStreamRef stream, void *buffer, UInt32 frameCount)
   UInt32  currentFrame;
   Int16  *tempBuff, mixValue;
 
+  // nothing to fill: the do/while below would run 2^32 times
+  if (frameCount == 0) return errNone;
+
   // init new callback
   waveData     = userData;
   tempBuff     = buffer;

@@ -84,6 +84,9 @@ callback(void *userData, SndStreamRef stream, void *buffer, UInt32 frameCount)
   q = (MoogResonance * (255 + ((128 * q * (255 - q + ((1000 * q * q) >> 16))) >> 16))) >> 8;
 #endif
 
+  // nothing to fill: the do/while below would run 2^32 times
+  if (frameCount == 0) return errNone;
+
   // init new callback
   engineData =  userData;
   voiceData  =  userData;
