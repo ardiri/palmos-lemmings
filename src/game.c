@@ -3923,6 +3923,69 @@ GameMovement(PreferencesType *prefs)
 
   // (the music is played once per frame, not per step - see EventLoop)
 
+  // count down the nuke of the lemmings - here, once per step of the
+  // game logic, so it keeps pace with fast forward (the drawing of
+  // the 5..4..3..2..1 stays in GameDraw)
+  for (i = 0; i < prefs->game.lemmingCount; i++)
+  {
+    lemmingPtr = &prefs->game.lemming[i];
+
+    if (lemmingPtr->nuke)
+    {
+      if (lemmingPtr->nukeInTicks != 0)
+        lemmingPtr->nukeInTicks--;
+      else
+        lemmingPtr->nukeCounter++;
+
+      // timer has expired? time to convert to "exploder"
+      if (lemmingPtr->nukeCounter == (5 * GAME_FPS))
+      {
+        if ((lemmingPtr->spriteType != spr_exploder) &&
+            (lemmingPtr->spriteType != spr_splatter))
+        {
+          // did we just nuke a blocker?
+          if (lemmingPtr->spriteType == spr_blocker)
+          {
+            // find it..
+            j = prefs->game.blockerCount-1;
+            while (prefs->game.blckID[j] != i) { j--; }
+
+            // not from end? (gotta shift the elements down)
+            if (j != prefs->game.blockerCount-1)
+            {
+              MemMove(&prefs->game.blckID[j],   // dest
+                      &prefs->game.blckID[j+1], // source
+                      (prefs->game.blockerCount-j) * sizeof(UInt8));
+            }
+            prefs->game.blockerCount--;
+          }
+
+          if ((lemmingPtr->spriteType == spr_homer)      ||
+              (lemmingPtr->spriteType == spr_climbLeft)  ||
+              (lemmingPtr->spriteType == spr_climbRight) ||
+              (lemmingPtr->spriteType == spr_fallLeft)   ||
+              (lemmingPtr->spriteType == spr_fallRight)  ||
+              (lemmingPtr->spriteType == spr_floatLeft)  ||
+              (lemmingPtr->spriteType == spr_floatRight))
+            lemmingPtr->spritePos  = 16;
+          else
+            lemmingPtr->spritePos  = 0;
+
+          lemmingPtr->spriteType   = spr_exploder;
+          lemmingPtr->animCounter  = lemmingPtr->spritePos;
+          lemmingPtr->fallDistance = 0;
+
+          // 'oh no!' audio playback
+          GamePlaySound(prefs, snd_ohno);
+        }
+
+        // no longer being nuked *g*
+        lemmingPtr->nuke         = false;
+        lemmingPtr->nukeCounter  = 0;
+      }
+    }
+  }
+
   // move the lemmings
   count = 0;
   for (i = 0; i < prefs->game.lemmingCount; i++)
@@ -5204,7 +5267,7 @@ GameDraw(PreferencesType *prefs)
   Lemming       *lemmingPtr;
   Boolean       clockShown, statusShown;
   Coord         x, y;
-  Int16         i, j;
+  Int16         i;
 #if !FULL_SCREEN_BLIT
   Coord         y1, y2;
 #endif
@@ -5882,62 +5945,6 @@ ERASE_LEMMING:
       // restore the area behind the lemming
       globals.fnGameSpriteRestore(globals.ptrLemmingsBackup[i], x, y);
 #endif
-    }
-
-    // lemming being nuked?
-    if ((lemmingPtr->nuke) && (!prefs->game.gamePaused))
-    {
-      if (lemmingPtr->nukeInTicks != 0)
-        lemmingPtr->nukeInTicks--;
-      else
-        lemmingPtr->nukeCounter++;
-
-      // timer has expired? time to convert to "exploder"
-      if (lemmingPtr->nukeCounter == (5 * GAME_FPS))
-      {
-        if ((lemmingPtr->spriteType != spr_exploder) &&
-            (lemmingPtr->spriteType != spr_splatter))
-        {
-          // did we just nuke a blocker?
-          if (lemmingPtr->spriteType == spr_blocker)
-          {
-            // find it..
-            j = prefs->game.blockerCount-1;
-            while (prefs->game.blckID[j] != i) { j--; }
-
-            // not from end? (gotta shift the elements down)
-            if (j != prefs->game.blockerCount-1)
-            {
-              MemMove(&prefs->game.blckID[j],   // dest
-                      &prefs->game.blckID[j+1], // source
-                      (prefs->game.blockerCount-j) * sizeof(UInt8));
-            }
-            prefs->game.blockerCount--;
-          }
-
-          if ((lemmingPtr->spriteType == spr_homer)      ||
-              (lemmingPtr->spriteType == spr_climbLeft)  ||
-              (lemmingPtr->spriteType == spr_climbRight) ||
-              (lemmingPtr->spriteType == spr_fallLeft)   ||
-              (lemmingPtr->spriteType == spr_fallRight)  ||
-              (lemmingPtr->spriteType == spr_floatLeft)  ||
-              (lemmingPtr->spriteType == spr_floatRight))
-            lemmingPtr->spritePos  = 16;
-          else
-            lemmingPtr->spritePos  = 0;
-
-          lemmingPtr->spriteType   = spr_exploder;
-          lemmingPtr->animCounter  = lemmingPtr->spritePos;
-          lemmingPtr->fallDistance = 0;
-
-          // 'oh no!' audio playback
-          GamePlaySound(prefs, snd_ohno);
-        }
-
-        // no longer being nuked *g*
-        lemmingPtr->nuke         = false;
-        lemmingPtr->nukeCounter  = 0;
-      }
     }
   }
 

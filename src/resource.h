@@ -44,6 +44,7 @@
 
    #define CHEAT_MODE              1   // are we going to allow cheating :)
 // #define PROTECTION_ON           1   // encrypted level info (release ver) :P
+   #define REGISTERED_BUILD        1   // full version: no demo notice, no registration
 
 // #define USE_PALMOS_WINAPI       1   // use the Win* API for sprites
 // #define PORTABLE                1   // do not use any m68k asm
