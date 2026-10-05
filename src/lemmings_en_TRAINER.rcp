@@ -35,8 +35,17 @@ HEX  "levl" ID 0 "7" 0x00
 // music
 //
 
-HEX  "musc" ID 0 "1" 0x00
-DATA "musc" ID 1 "music/lemm_cancan.mus"
+HEX  "musc" ID 0 "3" 0x00
+DATA "musc" ID 1 "music/lemm_mountain.mus"
+DATA "musc" ID 2 "music/lemm_tenbottles.mus"
+DATA "musc" ID 3 "music/lemm_cancan.mus"
+
+#ifdef MIDI_IN_LEVELPACK
+HEX  "midi" ID 0 "3" 0x00
+DATA "midi" ID 1 "music/midi/high_quality/lemm_mountain.mid"
+DATA "midi" ID 2 "music/midi/high_quality/lemm_tenbottles.mid"
+DATA "midi" ID 3 "music/midi/high_quality/lemm_cancan.mid"
+#endif
 
 //
 // level information
