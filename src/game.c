@@ -132,6 +132,12 @@ typedef struct
 
   struct
   {
+    UInt16     last;                        // navigator state of last frame
+    UInt16     count;                       // frames it has been held down
+  } nav;
+
+  struct
+  {
     Coord      oldCursorX;
     Coord      oldCursorY;                  // the old cursor position
     UInt16     oldSpriteID;                 // cursor sprite indicator?
@@ -2081,6 +2087,64 @@ GameProcessKeyInput(PreferencesType *prefs, UInt32 keyStatus)
 
   if (globals.lastKeyDelayCount != 0)
     globals.lastKeyDelayCount--;
+}
+
+/**
+ * Process the 5-way navigator: left/right scroll the view over the level,
+ * up/down select the previous/next tool. The cursor is left to the stylus.
+ *
+ * @param prefs     the global preference data.
+ * @param navStatus the navigator state (NAV_* bits).
+ */
+void
+GameProcessNavigator(PreferencesType *prefs, UInt16 navStatus)
+{
+  Int16  pos, step;
+  UInt16 tool;
+
+  // how long has the navigator been held this way?
+  if ((navStatus != 0) && (navStatus == globals.nav.last))
+    globals.nav.count++;
+  else
+    globals.nav.count = 0;
+  globals.nav.last = navStatus;
+
+  if (navStatus == 0) return;
+
+  // did they press the navigator? continue the game
+  if (prefs->game.gamePaused)
+    GamePause(prefs, false);
+
+  // scroll the view - faster the longer it is held
+  if (navStatus & (NAV_LEFT | NAV_RIGHT))
+  {
+    step = (globals.nav.count < 8)  ?  8 :
+           (globals.nav.count < 16) ? 16 : 32;
+
+    pos  = prefs->game.cursor.screenOffset;
+    pos += (navStatus & NAV_LEFT) ? -step : step;
+    pos  = pos & ~0x07; // bind to 8 pixel boundary
+
+    // make sure we dont go off scale here
+    if (pos < 0) pos = 0; else
+    if (pos > (OFFSCREEN_WIDTH - SCREEN_WIDTH))
+      pos = (OFFSCREEN_WIDTH - SCREEN_WIDTH);
+
+    // jump to location
+    prefs->game.cursor.screenOffset = pos;
+    GraphicsSetOffset(prefs->game.cursor.screenOffset);
+  }
+
+  // change the tool - once per press, repeating while held
+  if ((navStatus & (NAV_UP | NAV_DOWN)) &&
+      ((globals.nav.count == 0) ||
+       ((globals.nav.count >= 6) && ((globals.nav.count % 3) == 0))))
+  {
+    tool = (navStatus & NAV_UP)
+             ? (prefs->game.activeTool + TOOL_COUNT - 1) % TOOL_COUNT
+             : (prefs->game.activeTool + 1) % TOOL_COUNT;
+    GameChangeTool(prefs, tool, prefs->game.tools[prefs->game.activeTool]);
+  }
 }
 
 /**

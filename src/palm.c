@@ -45,6 +45,8 @@ typedef struct
 
   UInt32          timerLastFrameUpdate;
   UInt32          timerPoint;
+
+  Boolean         fiveWayNavigator;  // up/down of the navigator = page up/down
 #if SHOW_FPS
   Int16           frameCount;
   UInt32          timerReference;
@@ -1431,20 +1433,38 @@ KEYDOWN_ABORT:
            if ((timeStamp - globals.timerLastFrameUpdate) >= globals.ticksPerFrame)
            {
              UInt32 keyState;
+             UInt16 navState;
 
              // animation requirement
              globals.timerLastFrameUpdate = timeStamp;
 
              keyState = KeyCurrentState();
 
-             if (keyState & keyBitNavLeft)      keyState |= globals.prefs->config.ctlKeyLeft;
-             if (keyState & keyBitNavRight)     keyState |= globals.prefs->config.ctlKeyRight;
+             // the navigator scrolls the view and picks the tool, the
+             // cursor is moved with the stylus (or the configured keys)
+             //
+             // no need to turn it with the screen: Palm OS already reports
+             // the directions as seen on a rotated screen (Tungsten T3 at
+             // 270 degrees: the physical "up" button reads keyBitNavRight)
+             navState = 0;
+             if (keyState & (keyBitNavLeft  | keyBitRockerLeft))  navState |= NAV_LEFT;
+             if (keyState & (keyBitNavRight | keyBitRockerRight)) navState |= NAV_RIGHT;
+             if (keyState & keyBitRockerUp)                       navState |= NAV_UP;
+             if (keyState & keyBitRockerDown)                     navState |= NAV_DOWN;
+
+             // on a 5-way navigator, up/down are the page up/down keys
+             if (globals.fiveWayNavigator)
+             {
+               if (keyState & keyBitPageUp)   navState |= NAV_UP;
+               if (keyState & keyBitPageDown) navState |= NAV_DOWN;
+               keyState &= ~(keyBitPageUp | keyBitPageDown);
+             }
+
              if (keyState & keyBitNavSelect)    keyState |= globals.prefs->config.ctlKeySelect;
-             if (keyState & keyBitRockerLeft)   keyState |= globals.prefs->config.ctlKeyLeft;
-             if (keyState & keyBitRockerRight)  keyState |= globals.prefs->config.ctlKeyRight;
              if (keyState & keyBitRockerSelect) keyState |= globals.prefs->config.ctlKeySelect;
 
              // play the game!
+             GameProcessNavigator(globals.prefs, navState);
              GameProcessKeyInput(globals.prefs, keyState);
              GameMovement(globals.prefs);
 
@@ -3866,6 +3886,14 @@ InitApplication()
 
   globals.evtTimeOut     = evtWaitForever;
   globals.ticksPerSecond = SysTicksPerSecond();
+
+  // palmOne 5-way navigator? (Tungsten T3/T5/TX, Zire 72, Treo 650, ...)
+  {
+    UInt32 navFtrValue;
+
+    globals.fiveWayNavigator =
+      (FtrGet(navFtrCreator, navFtrVersion, &navFtrValue) == errNone);
+  }
   globals.ticksPerFrame  = (globals.ticksPerSecond * 10) / GAME_FPS_x10;
 
 #ifndef MDM_DISTRIBUTION
