@@ -4099,7 +4099,7 @@ InitApplication()
   }
   globals.ticksPerFrame  = (globals.ticksPerSecond * 10) / GAME_FPS_x10;
 
-#ifndef MDM_DISTRIBUTION
+#if !defined(MDM_DISTRIBUTION) && !defined(REGISTERED_BUILD)
   // must we show that this application is for demo purposes
   if (globals.prefs->system.showNotice)
     ApplicationDisplayDialog(demoForm);

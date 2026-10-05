@@ -498,12 +498,16 @@ BEGIN
     MENUITEM "Level Packs"   mainMenuItemLevelPacks   "L"
     MENUITEM SEPARATOR
     MENUITEM "Configuration" menuItemConfig           "C"
+#ifndef REGISTERED_BUILD
     MENUITEM "Register"      menuItemRegister         "R"
+#endif
   END
   PULLDOWN "Help"
   BEGIN
+#ifndef REGISTERED_BUILD
     MENUITEM "Demo Notice"   menuItemDemo             "D"
     MENUITEM SEPARATOR
+#endif
     MENUITEM "Instructions"  menuItemHelp             "I"
     MENUITEM SEPARATOR
     MENUITEM "Developers"    menuItemDeveloper        "A"
@@ -521,12 +525,16 @@ BEGIN
     MENUITEM "Grayscale"     menuItemGrayscale        "G"
     MENUITEM SEPARATOR
     MENUITEM "Configuration" menuItemConfig           "C"
+#ifndef REGISTERED_BUILD
     MENUITEM "Register"      menuItemRegister         "R"
+#endif
   END
   PULLDOWN "Help"
   BEGIN
+#ifndef REGISTERED_BUILD
     MENUITEM "Demo Notice"   menuItemDemo             "D"
     MENUITEM SEPARATOR
+#endif
     MENUITEM "Instructions"  menuItemHelp             "I"
     MENUITEM SEPARATOR
     MENUITEM "Developers"    menuItemDeveloper        "A"
@@ -613,12 +621,16 @@ BEGIN
     MENUITEM "Exit"          gameMenuItemExit      "X"
     MENUITEM SEPARATOR
     MENUITEM "Configuration" menuItemConfig        "C"
+#ifndef REGISTERED_BUILD
     MENUITEM "Register"      menuItemRegister      "R"
+#endif
   END
   PULLDOWN "Help"
   BEGIN
+#ifndef REGISTERED_BUILD
     MENUITEM "Demo Notice"   menuItemDemo          "D"
     MENUITEM SEPARATOR
+#endif
     MENUITEM "Instructions"  menuItemHelp          "I"
     MENUITEM SEPARATOR
     MENUITEM "Developers"    menuItemDeveloper     "A"
@@ -641,12 +653,16 @@ BEGIN
     MENUITEM "Grayscale"     menuItemGrayscale     "G"
     MENUITEM SEPARATOR
     MENUITEM "Configuration" menuItemConfig        "C"
+#ifndef REGISTERED_BUILD
     MENUITEM "Register"      menuItemRegister      "R"
+#endif
   END
   PULLDOWN "Help"
   BEGIN
+#ifndef REGISTERED_BUILD
     MENUITEM "Demo Notice"   menuItemDemo          "D"
     MENUITEM SEPARATOR
+#endif
     MENUITEM "Instructions"  menuItemHelp          "I"
     MENUITEM SEPARATOR
     MENUITEM "Developers"    menuItemDeveloper     "A"
@@ -723,7 +739,11 @@ PALETTE ID paletteVGA16       "images/palette/vga16.pal"
 PALETTE ID paletteGameBase    "images/palette/gamebase.pal"
 
 // strings
+#ifdef REGISTERED_BUILD
+STRING ID stringDemo            "- BUILT-IN LEVEL PACK -"
+#else
 STRING ID stringDemo            "- DEMONSTRATION VERSION -"
+#endif
 STRING ID stringDemoMainPage    "- PRESS FOR LEVEL PACKS -"
 STRING ID stringRegisteredPack  "- REGISTERED LEVEL PACK -"
 STRING ID stringCopyrightNotice "\251 2001-2003 ardiri.com"
