@@ -3015,7 +3015,7 @@ GameMusicInitialize()
 #endif
 }
 
-#if defined(PALM_MIDI_STREAMING) && defined(MIDI_IN_LEVELPACK)
+#if defined(PALM_MIDI_ANY) && defined(MIDI_IN_LEVELPACK)
 #define MIDI_MAX_TRACKS 16
 
 /**
@@ -3446,13 +3446,27 @@ GameMusicLoad(PreferencesType *prefs)
         globals.music.dbMemoryStore =
           DmOpenDatabase(globals.music.dbCard, globals.music.dbID, dmModeReadWrite);
 
-        size = MemHandleSize(globals.music.yamaha_midi.midiH);
-        memHandle = DmNewResource(globals.music.dbMemoryStore, levlMidi, midiResource+1, size);
-        if (memHandle)
+        // the local copy is in the form the engine plays (format 0)
         {
-          DmWrite(MemHandleLock(memHandle), 0, MemHandleLock(globals.music.yamaha_midi.midiH), size);
-          MemHandleUnlock(globals.music.yamaha_midi.midiH);
-          MemHandleUnlock(memHandle);
+          UInt8  *midi;
+          UInt32  midiSize;
+
+          size     = MemHandleSize(globals.music.yamaha_midi.midiH);
+          midi     = (UInt8 *)MemPtrNew((UInt32)size * 2);
+          midiSize = (midi == NULL) ? 0 :
+            GameMidiNormalize((UInt8 *)MemHandleLock(globals.music.yamaha_midi.midiH),
+                              size, midi);
+          if (midi != NULL)
+            MemHandleUnlock(globals.music.yamaha_midi.midiH);
+
+          memHandle = (midiSize == 0) ? NULL :
+            DmNewResource(globals.music.dbMemoryStore, levlMidi, midiResource+1, midiSize);
+          if (memHandle)
+          {
+            DmWrite(MemHandleLock(memHandle), 0, midi, midiSize);
+            MemHandleUnlock(memHandle);
+          }
+          if (midi != NULL) MemPtrFree(midi);
         }
         LevelPackReleaseResource(globals.music.yamaha_midi.midiH);
 
