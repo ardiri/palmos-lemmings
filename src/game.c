@@ -3921,8 +3921,7 @@ GameMovement(PreferencesType *prefs)
   // if the game is paused, no point moving anyone :P
   if (prefs->game.gamePaused) goto MOVEMENT_DONE;
 
-  // playback music! :)
-  GameMusicPlayback(prefs);
+  // (the music is played once per frame, not per step - see EventLoop)
 
   // move the lemmings
   count = 0;
