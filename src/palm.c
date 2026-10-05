@@ -1627,11 +1627,11 @@ KEYDOWN_ABORT:
              }
 
              // the level runs fast while the fast forward button is on, or
-             // while the fast forward key is held down: To Do on a 5-way
-             // navigator (its default, cursor right, is not needed there),
-             // Memo on the other devices (select stays with the stylus)
+             // while the fast forward key is held down: Memo on all devices
+             // (its default, select, stays with the stylus and the center
+             // of the navigator, added below)
              fast    = globals.fastForward;
-             fastKey = globals.fiveWayNavigator ? keyBitHard3 : keyBitHard4;
+             fastKey = keyBitHard4;
              if (keyState & fastKey) fast = true;
              keyState &= ~fastKey;
 
