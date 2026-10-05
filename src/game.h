@@ -105,6 +105,7 @@ extern void    GamePause(PreferencesType *, Boolean)                  __GAME__;
 extern void    GameChangeTool(PreferencesType *, UInt16, UInt16)      __GAME__;
 extern void    GamePlaySound(PreferencesType *, UInt8 sound)          __GAME__;
 extern void    GameWideScreen(PreferencesType *)                      __GAME__;
+extern void    GameViewResized(PreferencesType *, Int16)              __GAME__;
 extern UInt16  GameGetLevelCount()                                    __GAME__;
 extern void    GameAdjustLemmingRate(PreferencesType *, Boolean)      __GAME__;
 extern void    GameLoadLevel(PreferencesType *)                       __GAME__;

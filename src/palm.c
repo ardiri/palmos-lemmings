@@ -67,6 +67,16 @@ typedef struct
     UInt16        packCount;       // used for selecting the level pack
   } pack;
 
+#if PALM_HIDENSITY
+  struct
+  {
+    Boolean       inputAreaOpen;   // input area in landscape? (player's choice)
+    UInt8         orientation;     // last layout: pinsUnknown/Portrait/Landscape
+    Int16         toolX;           // x-shift applied to the game tool bar
+    Int16         titleX;          // x-shift applied to the title buttons
+  } pins;
+#endif
+
 } Globals;
 
 static Globals globals;
@@ -446,6 +456,273 @@ mainFormEventHandler(EventType *event)
   return processed;
 }
 
+#if PALM_HIDENSITY
+//
+// HiRes+ (320x480) devices: the dynamic input area can be collapsed and
+// the device rotated. The game form then covers the whole display (minus
+// the status bar) - every other form stays 160x160 as before.
+//
+// -- 320x480 / 480x320 support, 2026
+//
+
+// the tool bar bitmap of the game form (see lemmings_en.rcp)
+#define TOOLBAR_Y        147
+#define TOOLBAR_HEIGHT   13
+
+// the title bar of the game form (the game area starts below it)
+#define TITLE_X          2
+#define TITLE_HEIGHT     (SCREEN_START_GENERIC - 1)
+
+// the orientation the game form was last laid out for
+#define pinsUnknown      0
+#define pinsPortrait     1
+#define pinsLandscape    2
+
+// the game menu item added on HiRes+ devices (see menuOpenEvent)
+static const Char strMenuInputArea[] = "Input Area";
+
+/**
+ * Is the screen turned to landscape? Only then the game may take the
+ * whole display; in portrait the input area and status bar stay.
+ *
+ * @return true if the screen is wider than high, false otherwise.
+ */
+static Boolean
+pinsIsLandscape()
+{
+  UInt32 width, height;
+
+  WinScreenGetAttribute(winScreenWidth,  &width);
+  WinScreenGetAttribute(winScreenHeight, &height);
+
+  return (width > height);
+}
+
+/**
+ * Show the "Input Area" item of the game menu in landscape only.
+ */
+static void
+pinsUpdateMenu()
+{
+  if (pinsIsLandscape())
+    MenuShowItem(gameMenuItemInputArea);
+  else
+    MenuHideItem(gameMenuItemInputArea);
+}
+
+/**
+ * Set the input area policy of a form that is about to be opened.
+ *
+ * @param frm    the form being loaded.
+ * @param formID the ID of the form being loaded.
+ */
+static void
+pinsSetFormPolicy(FormType *frm, UInt16 formID)
+{
+  // the game resizes itself, the player chooses the input area
+  if (formID == gameForm)
+  {
+    FrmSetDIAPolicyAttr(frm, frmDIAPolicyCustom);
+    WinSetConstraintsSize(FrmGetWindowHandle(frm),
+                          SCREEN_WIDTH_GENERIC, pinMaxConstraintSize,
+                          pinMaxConstraintSize,
+                          SCREEN_WIDTH_GENERIC, pinMaxConstraintSize,
+                          pinMaxConstraintSize);
+  }
+
+  // dialogs on top of the game leave the input area alone
+  else
+  if (FrmGetFormPtr(gameForm) != NULL)
+  {
+    FrmSetDIAPolicyAttr(frm, frmDIAPolicyCustom);
+    PINSetInputTriggerState(pinInputTriggerDisabled);
+  }
+}
+
+/**
+ * Resize the game form to the display and align its objects.
+ *
+ * @param frm the game form.
+ * @return true if the display extent has changed, false otherwise.
+ */
+static Boolean
+pinsGameFormResize(FormType *frm)
+{
+  RectangleType bounds;
+  Coord         x, y;
+  Int16         toolX, titleX, oldWidth;
+  UInt16        i, state;
+  UInt8         orientation;
+  UInt32        visible;
+  Boolean       changed, open, bar;
+
+  // the trigger also holds the rotate button of the Tungsten T3 status bar
+  // - the setters post a winDisplayChangedEvent, so only call them on a change
+  if (PINGetInputTriggerState() != pinInputTriggerEnabled)
+    PINSetInputTriggerState(pinInputTriggerEnabled);
+
+  // landscape: the player's choice; portrait: open when turned to portrait,
+  // after that the player may still collapse it with the status bar button
+  orientation = pinsIsLandscape() ? pinsLandscape : pinsPortrait;
+  if (orientation == pinsLandscape)
+    open = globals.pins.inputAreaOpen;
+  else
+  if (orientation != globals.pins.orientation)
+    open = true;
+  else
+    open = (PINGetInputAreaState() == pinInputAreaOpen);
+  globals.pins.orientation = orientation;
+
+  state = open ? pinInputAreaOpen : pinInputAreaClosed;
+  if (PINGetInputAreaState() != state)
+    PINSetInputAreaState(state);
+
+  // the status bar goes with the input area in landscape (the game menu
+  // brings both back), in portrait it always stays
+  bar = open || (orientation == pinsPortrait);
+  if (StatGetAttribute(statAttrBarVisible, &visible) == errNone)
+  {
+    if (bar && !visible)
+      StatShow();
+    else
+    if (!bar && visible)
+      StatHide();
+  }
+  if (MenuGetActiveMenu() != NULL)
+    pinsUpdateMenu();
+
+  // the form covers whatever the input area leaves us
+  bounds.topLeft.x = 0;
+  bounds.topLeft.y = 0;
+  WinGetDisplayExtent(&bounds.extent.x, &bounds.extent.y);
+  WinSetBounds(FrmGetWindowHandle(frm), &bounds);
+
+  // title bar buttons stay right aligned, the tool bar is centered
+  toolX  = (bounds.extent.x - SCREEN_WIDTH_GENERIC) >> 1;
+  titleX =  bounds.extent.x - SCREEN_WIDTH_GENERIC;
+  for (i=0; i<FrmGetNumberOfObjects(frm); i++)
+  {
+    switch (FrmGetObjectType(frm, i))
+    {
+      case frmControlObj:
+      case frmBitmapObj:
+           FrmGetObjectPosition(frm, i, &x, &y);
+           if (y < SCREEN_START_GENERIC)
+             FrmSetObjectPosition(frm, i, x + titleX - globals.pins.titleX, y);
+           else
+             FrmSetObjectPosition(frm, i, x + toolX - globals.pins.toolX, y);
+           break;
+
+      default:
+           break;
+    }
+  }
+  globals.pins.toolX  = toolX;
+  globals.pins.titleX = titleX;
+
+  // adjust the view of the level to the new display
+  changed = (globals.prefs->palmHD.width  != (UInt32)bounds.extent.x) ||
+            (globals.prefs->palmHD.height != (UInt32)bounds.extent.y);
+  if (changed)
+  {
+    oldWidth = SCREEN_WIDTH;
+    globals.prefs->palmHD.width  = bounds.extent.x;
+    globals.prefs->palmHD.height = bounds.extent.y;
+    GameWideScreen(globals.prefs);
+    GameViewResized(globals.prefs, oldWidth);
+  }
+
+  return changed;
+}
+
+/**
+ * Fill the space beside and below the tool bar black, like the tool bar.
+ */
+static void
+pinsDrawToolBarSides()
+{
+  RectangleType rect;
+  WinHandle     currWindow;
+
+  currWindow = WinSetDrawWindow(WinGetDisplayWindow());
+
+  // portrait with the input area collapsed: below the tool bar
+  rect.topLeft.x = 0;
+  rect.topLeft.y = TOOLBAR_Y + TOOLBAR_HEIGHT;
+  rect.extent.x  = (Coord)globals.prefs->palmHD.width;
+  rect.extent.y  = (Coord)globals.prefs->palmHD.height - rect.topLeft.y;
+  if (rect.extent.y > 0)
+    WinDrawRectangle(&rect, 0);
+
+  rect.topLeft.x = 0;
+  rect.topLeft.y = TOOLBAR_Y;
+  rect.extent.x  = globals.pins.toolX;
+  rect.extent.y  = TOOLBAR_HEIGHT;
+  WinDrawRectangle(&rect, 0);
+
+  rect.topLeft.x = globals.pins.toolX + SCREEN_WIDTH_GENERIC;
+  rect.extent.x  = (Coord)globals.prefs->palmHD.width - rect.topLeft.x;
+  WinDrawRectangle(&rect, 0);
+
+  WinSetDrawWindow(currWindow);
+}
+
+/**
+ * Draw a title bitmap in white on black, at the position of its button.
+ *
+ * @param frm      the game form.
+ * @param buttonID the title button the bitmap belongs to.
+ * @param bitmapID the bitmap resource.
+ */
+static void
+pinsDrawTitleBitmap(FormType *frm, UInt16 buttonID, UInt16 bitmapID)
+{
+  MemHandle memHandle;
+  Coord     x, y;
+
+  FrmGetObjectPosition(frm, FrmGetObjectIndex(frm, buttonID), &x, &y);
+
+  memHandle = DmGetResource(bitmapRsc, bitmapID);
+  WinPushDrawState();
+  WinSetDrawMode(winPaintInverse);
+  WinPaintBitmap((BitmapType *)MemHandleLock(memHandle), x, y);
+  WinPopDrawState();
+  MemHandleUnlock(memHandle);
+  DmReleaseResource(memHandle);
+}
+
+/**
+ * Draw the title bar black with white text, like the tool bar.
+ *
+ * @param frm the game form.
+ */
+static void
+pinsDrawTitle(FormType *frm)
+{
+  RectangleType rect;
+  WinHandle     currWindow;
+  const Char   *title;
+
+  currWindow = WinSetDrawWindow(WinGetDisplayWindow());
+
+  rect.topLeft.x = 0;
+  rect.topLeft.y = 0;
+  rect.extent.x  = (Coord)globals.prefs->palmHD.width;
+  rect.extent.y  = TITLE_HEIGHT;
+  WinDrawRectangle(&rect, 0);
+
+  title = FrmGetTitle(frm);
+  FntSetFont(boldFont);
+  WinDrawInvertedChars(title, StrLen(title), TITLE_X, 1);
+  FntSetFont(stdFont);
+
+  pinsDrawTitleBitmap(frm, globalFormHelpButton,  bitmapHelp);
+  pinsDrawTitleBitmap(frm, globalFormAboutButton, bitmapAbout);
+
+  WinSetDrawWindow(currWindow);
+}
+#endif
+
 /**
  * The Form:gameForm event handling routine.
  *
@@ -484,6 +761,18 @@ gameFormEventHandler(EventType *event)
            rect.extent.y = 240;
          }
 #endif
+#if PALM_HIDENSITY
+         // HiRes+: take the display, as large as the input area allows
+         if (globals.prefs->palmHD.pins)
+         {
+           globals.pins.toolX  = 0;
+           globals.pins.titleX = 0;               // fresh form, fresh layout
+           globals.pins.orientation = pinsUnknown;
+           pinsGameFormResize(frm);
+
+           WinGetDisplayExtent(&rect.extent.x, &rect.extent.y);
+         }
+#endif
 
          // clear the LCD screen (dont want palette flash)
          WinSetDrawWindow(WinGetDisplayWindow());
@@ -499,6 +788,12 @@ gameFormEventHandler(EventType *event)
          LevelPackOpen(globals.prefs->levelPack.type, globals.prefs->levelPack.strLevelPack);
          GameLoadLevel(globals.prefs);
          LevelPackClose();
+
+#if PALM_HIDENSITY
+         // a saved game may come from another orientation
+         if (globals.prefs->palmHD.pins)
+           GameViewResized(globals.prefs, SCREEN_WIDTH);
+#endif
 
 #if CHEAT_MODE
          // reset the search :)
@@ -531,6 +826,11 @@ gameFormEventHandler(EventType *event)
          break;
 
     case appUpdateEvent:
+#if PALM_HIDENSITY
+         // dialogs may have left the input area in another state
+         if (globals.prefs->palmHD.pins)
+           pinsGameFormResize(FrmGetActiveForm());
+#endif
          FrmDrawForm(FrmGetActiveForm());
 
          // draw seperators
@@ -615,12 +915,14 @@ gameFormEventHandler(EventType *event)
 #if PALM_HIDENSITY
          if (globals.prefs->palmHD.device)
          {
-           WinDrawLine(   0, 145, 159, 145);
-           WinDrawLine(   0, 146, 159, 146);
+           Coord width = (Coord)globals.prefs->palmHD.width;
+
+           WinDrawLine(   0, 145, width-1, 145);
+           WinDrawLine(   0, 146, width-1, 146);
 
            rect.topLeft.x = 0;
            rect.topLeft.y = SCREEN_START_GENERIC;
-           rect.extent.x  = SCREEN_WIDTH_GENERIC;
+           rect.extent.x  = width;
            rect.extent.y  = SCREEN_HEIGHT;
 
            WinSetPattern(&erase);
@@ -639,13 +941,19 @@ gameFormEventHandler(EventType *event)
              else
                SysCopyStringResource(str, stringRegisteredPack); // special = level pack
              y = 26;
-             x = (SCREEN_WIDTH_GENERIC - FntCharsWidth(str, StrLen(str))) >> 1;
+             x = (width - FntCharsWidth(str, StrLen(str))) >> 1;
              WinInvertChars(str, StrLen(str), x, y);
 
              SysCopyStringResource(str, stringCopyrightNotice);
              y = 122;
-             x = (SCREEN_WIDTH_GENERIC - FntCharsWidth(str, StrLen(str))) >> 1;
+             x = (width - FntCharsWidth(str, StrLen(str))) >> 1;
              WinInvertChars(str, StrLen(str), x, y);
+           }
+
+           if (globals.prefs->palmHD.pins)
+           {
+             pinsDrawTitle(FrmGetActiveForm());
+             pinsDrawToolBarSides();
            }
          }
          else
@@ -711,7 +1019,7 @@ gameFormEventHandler(EventType *event)
              {
                x   = x - 32;
 //             pos = (((UInt32)OFFSCREEN_WIDTH * x) / 96) - (SCREEN_WIDTH >> 1);
-               pos = ((20 * x) / 3) - 80;                       // optimized :P
+               pos = ((20 * x) / 3) - (SCREEN_WIDTH >> 1);      // optimized :P
              }
              pos = pos & ~0x07; // bind to 8 pixel boundary
 
@@ -774,7 +1082,8 @@ gameFormEventHandler(EventType *event)
            if (
                (globals.prefs->game.gamePlaying) &&
                (event->screenX > SCREEN_TOOL_START_X) &&
-               (event->screenX < SCREEN_WIDTH_STYLUS) &&
+               (event->screenX <                 // tool bar may be centered
+                 (SCREEN_TOOL_START_X + (TOOL_COUNT * SCREEN_TOOL_WIDTH))) &&
                (event->screenY > SCREEN_TOOL_START_Y) &&
                (event->screenY < (SCREEN_TOOL_START_Y+SCREEN_TOOL_HEIGHT))
               )
@@ -936,6 +1245,20 @@ KEYDOWN_ABORT:
 
          break;
 
+#if PALM_HIDENSITY
+    case menuOpenEvent:
+
+         // without the status bar, the game menu toggles the input area
+         // (menuErrSameId when the item is already there: nothing to do)
+         if (globals.prefs->palmHD.pins)
+         {
+           MenuAddItem(gameMenuItemExit, gameMenuItemInputArea, 0,
+                       strMenuInputArea);
+           pinsUpdateMenu();
+         }
+         break;
+#endif
+
     case menuEvent:
 
          // what menu?
@@ -1016,6 +1339,22 @@ KEYDOWN_ABORT:
 
                 processed = true;
                 break;
+
+#if PALM_HIDENSITY
+           case gameMenuItemInputArea:
+
+                // the player opens/collapses the input area (and status bar)
+                globals.pins.inputAreaOpen = !globals.pins.inputAreaOpen;
+                if (pinsGameFormResize(FrmGetActiveForm()))
+                {
+                  MemSet(&newEvent, sizeof(EventType), 0);
+                  newEvent.eType = appUpdateEvent;
+                  EvtAddEventToQueue(&newEvent);
+                }
+
+                processed = true;
+                break;
+#endif
 
            case gameMenuItemExit:
 
@@ -1135,11 +1474,48 @@ KEYDOWN_ABORT:
          processed = true;
          break;
 
+#if PALM_HIDENSITY
+    case winDisplayChangedEvent:
+
+         // rotated, or the input area was opened/collapsed by the player
+         // (the player's choice only counts in landscape)
+         if (globals.prefs->palmHD.pins)
+         {
+           if (pinsIsLandscape())
+             globals.pins.inputAreaOpen =
+               (PINGetInputAreaState() == pinInputAreaOpen);
+
+           // only a new display extent needs a new layout + repaint
+           if (pinsGameFormResize(FrmGetActiveForm()))
+           {
+             MemSet(&newEvent, sizeof(EventType), 0);
+             newEvent.eType = appUpdateEvent;
+             EvtAddEventToQueue(&newEvent);
+           }
+
+           processed = true;
+         }
+         break;
+#endif
+
     case frmCloseEvent:
 
          // save the level if it is possible
          GamePause(globals.prefs, true);
          GameSaveLevel(globals.prefs);
+
+#if PALM_HIDENSITY
+         // the status bar is only hidden during the game
+         if (globals.prefs->palmHD.pins)
+         {
+           UInt32 visible;
+
+           if ((StatGetAttribute(statAttrBarVisible, &visible) == errNone) &&
+               !visible)
+             StatShow();
+           WinGetDisplayExtent(&rect.extent.x, &rect.extent.y);
+         }
+#endif
 
          if (DeviceSupportsColor())
          {
@@ -3269,7 +3645,7 @@ InitApplication()
   UInt32  trgVersion;
 #endif
 #if PALM_HIDENSITY
-  UInt32  winVersion;
+  UInt32  winVersion, density, pinsVersion;
 #endif
 
   // load preferences
@@ -3386,20 +3762,33 @@ InitApplication()
     globals.prefs->sony.device    = false;
 #endif
 
-    // get the current display information
-    WinScreenGetAttribute(winScreenWidth,  &globals.prefs->palmHD.width);
-    WinScreenGetAttribute(winScreenHeight, &globals.prefs->palmHD.height);
+    // which density do we have? (the width is 480 on a rotated HiRes+)
+    WinScreenGetAttribute(winScreenDensity, &density);
+    globals.prefs->palmHD.density =
+      (density == kDensityDouble) ? kDensityDouble : kDensityLow;
 
-    // which depth do we have?
-    switch (globals.prefs->palmHD.width)
-    {
-      case 160: globals.prefs->palmHD.density = kDensityLow;         break;
-      case 320: globals.prefs->palmHD.density = kDensityDouble;      break;
-      default:  globals.prefs->palmHD.width   = 160;
-                globals.prefs->palmHD.height  = 160;
-                globals.prefs->palmHD.density = kDensityLow;         break;
-    }
+    // dynamic input area? (HiRes+ 320x480: Tungsten T5/TX, LifeDrive, and
+    // the Tungsten T3 with the DIA compatibility update - see PalmPINS.h;
+    // the orientation API needs PINS 1.1)
+    globals.prefs->palmHD.pins =
+      (FtrGet(pinCreator, pinFtrAPIVersion, &pinsVersion) == errNone) &&
+      (pinsVersion >= pinAPIVersion1_0);
+    globals.prefs->palmHD.pinsOrientation =
+      (globals.prefs->palmHD.pins) && (pinsVersion >= pinAPIVersion1_1);
+
+    // the player may rotate the device (and the game with it)
+    if (globals.prefs->palmHD.pinsOrientation)
+      SysSetOrientationTriggerState(sysOrientationTriggerEnabled);
   }
+  else
+  {
+    globals.prefs->palmHD.pins            = false;
+    globals.prefs->palmHD.pinsOrientation = false;
+  }
+
+  // until the game form resizes itself, everything is 160x160
+  globals.prefs->palmHD.width  = SCREEN_WIDTH_GENERIC;
+  globals.prefs->palmHD.height = SCREEN_WIDTH_GENERIC;
 #endif
 
   // lets adjust the widescreen display mode
@@ -3642,6 +4031,10 @@ ApplicationHandleEvent(EventType *event)
            FormType *frm   = FrmInitForm(formID);
 
            FrmSetActiveForm(frm);
+#if PALM_HIDENSITY
+           if (globals.prefs->palmHD.pins)
+             pinsSetFormPolicy(frm, formID);
+#endif
            switch (formID)
            {
              case mainForm:
@@ -3900,7 +4293,7 @@ void
 ApplicationDisplayDialog(UInt16 formID)
 {
   const CustomPatternType erase = {0,0,0,0,0,0,0,0};
-  const RectangleType     rect  = {{0,0},{160,160}};
+        RectangleType     rect  = {{0,0},{160,160}};
   FormActiveStateType frmCurrState;
   FormType            *frmActive      = NULL;
   WinHandle           winDrawWindow   = NULL;
@@ -3916,6 +4309,12 @@ ApplicationDisplayDialog(UInt16 formID)
 
   activeFormID = FrmGetActiveFormID();
   gameActive   = (activeFormID == gameForm);
+
+#if PALM_HIDENSITY
+  // the game form may be larger than 160x160 on HiRes+
+  if (globals.prefs->palmHD.pins)
+    WinGetDisplayExtent(&rect.extent.x, &rect.extent.y);
+#endif
 
 #if HANDERA_NATIVE
   // force handera into 160 -> 240 stretch and 1to1 for bitmaps
@@ -4139,6 +4538,11 @@ EndApplication()
 #if SET_KEYMASK
   // restore the key state
   KeySetMask(keyBitsAll);
+#endif
+
+#if PALM_HIDENSITY
+  if (globals.prefs->palmHD.pinsOrientation)
+    SysSetOrientationTriggerState(sysOrientationTriggerDisabled);
 #endif
 
   // terminate the game environemnt

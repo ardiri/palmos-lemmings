@@ -70,8 +70,6 @@ typedef struct
     Boolean    device;              // are we running on palm hi-density device?
 
     UInt32     winVersion;    
-    UInt32     width;
-    UInt32     height;
     UInt16     density;             // display properties
   } palmHD;
 #endif
@@ -93,6 +91,9 @@ GraphicsInitialize()
 {
   Boolean result = true;
   UInt16  err;
+#if PALM_HIDENSITY
+  UInt32  density;
+#endif
 
   // clear the globals object
   MemSet(&globals, sizeof(GraphicsGlobals), 0);
@@ -132,19 +133,10 @@ GraphicsInitialize()
     globals.sony.device    = false;
 #endif
 
-    // get the current display information
-    WinScreenGetAttribute(winScreenWidth,  &globals.palmHD.width);
-    WinScreenGetAttribute(winScreenHeight, &globals.palmHD.height);
-
-    // which depth do we have?
-    switch (globals.palmHD.width)
-    {
-      case 160: globals.palmHD.density = kDensityLow;         break;
-      case 320: globals.palmHD.density = kDensityDouble;      break;
-      default:  globals.palmHD.width   = 160;
-                globals.palmHD.height  = 160; 
-                globals.palmHD.density = kDensityLow;         break;
-    }
+    // which density do we have? (the width is 480 on a rotated HiRes+)
+    WinScreenGetAttribute(winScreenDensity, &density);
+    globals.palmHD.density =
+      (density == kDensityDouble) ? kDensityDouble : kDensityLow;
   }
 #endif  
 
