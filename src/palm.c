@@ -516,14 +516,25 @@ pinsIsLandscape()
   UInt32 dimension, width, height;
   UInt16 orientation;
 
+  // the orientation API (PINS 1.1) knows the real rotation. Trust it for
+  // both portrait and landscape where we have it - it is right on the
+  // LifeDrive, whose status bar below reports a plain bottom bar
+  // (14 x 160) that the heuristic would misread as landscape. Only a
+  // reading of "no orientation" falls through.
   if (globals.prefs->palmHD.pinsOrientation)
   {
     orientation = SysGetOrientation();
     if ((orientation == sysOrientationLandscape) ||
         (orientation == sysOrientationReverseLandscape))
       return true;
+    if ((orientation == sysOrientationPortrait) ||
+        (orientation == sysOrientationReversePortrait))
+      return false;
   }
 
+  // older HiRes+ without the orientation API: the status bar runs along the
+  // long side and turns with the screen, so it is taller than wide in
+  // landscape
   if (StatGetAttribute(statAttrDimension, &dimension) == errNone)
     return ((dimension >> 16) < (dimension & 0xFFFF));
 
@@ -641,17 +652,16 @@ pinsGameFormResize(FormType *frm)
   if (PINGetInputTriggerState() != pinInputTriggerEnabled)
     PINSetInputTriggerState(pinInputTriggerEnabled);
 
-  // landscape: the player's choice; portrait: open when turned to portrait,
-  // after that the player may still collapse it with the status bar button
+  // landscape: the player's choice. Portrait: always open. The game form is
+  // 320x320; on a 320x480 HiRes+ screen (LifeDrive, T5, TX, ...) the input
+  // area fills the 160 rows below it, so the display is used whole. Were it
+  // collapsed, those rows would only be drawn black (pinsDrawToolBarSides),
+  // never more of the level - so the input area stays open and snaps back
+  // open if the player collapses it with the status bar trigger.
   orientation = pinsIsLandscape() ? pinsLandscape : pinsPortrait;
   turned      = (orientation != globals.pins.orientation);
-  if (orientation == pinsLandscape)
-    open = globals.pins.inputAreaOpen;
-  else
-  if (turned)
-    open = true;
-  else
-    open = (PINGetInputAreaState() == pinInputAreaOpen);
+  open        = (orientation == pinsLandscape) ? globals.pins.inputAreaOpen
+                                               : true;
   globals.pins.orientation = orientation;
 
   state = open ? pinInputAreaOpen : pinInputAreaClosed;
